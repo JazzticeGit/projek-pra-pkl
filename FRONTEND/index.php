@@ -31,8 +31,12 @@
             </form>
 
             <!-- ICON LINK -->
-             
+             <ul>
+                <li><a href="http://" class="fa-solid fa-cart-shopping"></a></li> <!-- CART SHOPING LINK -->
+                <li><a href="http://" class="fa-solid fa-user"></a></li> <!-- ACCOUNT LINK -->
+             </ul>
         </div>
     </nav>
 </body>
+<script src="https://kit.fontawesome.com/2de2a0ed8e.js" crossorigin="anonymous"></script>
 </html>
