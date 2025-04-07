@@ -1,6 +1,7 @@
 body{
     margin :0;
     padding: 0;
+    font-family: 'poppins', sans-serif;
 }
 
 ul{
@@ -23,28 +24,45 @@ nav{
 
 .iconLink{
     position: relative;
-    left: 665px;
+    left: 350px;
     letter-spacing: 20px;
     text-decoration: none;
+    
 }
 
 a{
     text-decoration: none;
+    color: black;
 }
 
 .searchBar{
     position: relative;
-    left: 100px;
-    padding-top: 8px;
-    padding-bottom: 2px;
+    left: 300px;
     display: flex;
+    align-items: center;
+    background-color: #f5f5f5;
+    border-radius: 25px;
+    padding: 8px 15px;
+    width: 600px;
+    border: 1px solid #ccc;
+    height: 17px;
+    top: 8px;
+}
+
+.searchBar i {
+    color: gray;
+    margin-right: 10px;
+    font-size: 16px;
+    position: relative;
+    left: 360px;
 }
 
 input[type=text] {
-    border: 2px solid rgb(57, 57, 57);
-    border-radius: 10px;
-    width: 500px;
-    height: 26px;
+     border: none;
+    outline: none;
+    background: transparent;
+    font-size: 16px;
+    flex: 1;
 }
 
 button{
@@ -52,3 +70,80 @@ button{
     border-radius: 5px;
     height: px;
 }
+
+.navbg img{
+    width: 50px;
+    height: 50px;
+    position: relative;
+    left: 20px;
+    top: 4px;
+}
+
+.navlink ul li{
+    text-indent: 35px;
+    position: relative;
+    left: 70px;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration-line: underline;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+
+  .grid-container > div {
+    border-radius: 20px;
+    padding: 20px;
+    background-color: #f2f2f2;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  
+
+  .grid_1 {
+    grid-column: span 2;
+    grid-row: span 2;
+    background-color: #efe0d2;
+  }
+  
+  .grid_2 {
+    grid-column: 3;
+    grid-row: 1;
+  }
+  
+  .grid_3 {
+    grid-column: 4;
+    grid-row: 1;
+  }
+  
+  .grid_4 {
+    grid-column: 3 / span 2;
+    grid-row: 2;
+    background-color: #e3e3e3;
+  }
+  
+
+  .grid_1 h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+  }
+  
+  .grid_4 h2 span {
+    color: red;
+  }
+  
+  button {
+    border: none;
+    padding: 10px 20px;
+    border-radius: 999px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+  }
+  
