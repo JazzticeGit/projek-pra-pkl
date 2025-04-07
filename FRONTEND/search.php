@@ -7,7 +7,7 @@ $query = $koneksi->real_escape_string($query);
 $sql = "SELECT * FROM produk WHERE name LIKE '%$query%'";
 $result = $koneksi->query($sql);
 
-// Tampilkan hasil
+// hasil
 if ($result->num_rows > 0) {
     echo "<h3>Hasil pencarian:</h3>";
     while ($row = $result->fetch_assoc()) {
@@ -19,3 +19,5 @@ if ($result->num_rows > 0) {
 
 $koneksi->close();
 ?>
+
+<!-- FITUR SEARCH BELUM DALAM TAHAP PERCOBAAN -->
