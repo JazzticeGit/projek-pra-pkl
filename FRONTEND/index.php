@@ -13,6 +13,8 @@
         <div class="navbg">
             <!-- GAMBAR NAVIGASI -->
              <a href="index.php"><img src="" alt="" srcset=""></a>
+
+
              <!-- LINK NAVIGASI -->
             <div class="navlink">
                 <ul>
@@ -22,17 +24,24 @@
                     <li><a href="http://">Comtack</a></li>
                 </ul>
             </div>
+
+
             <!-- SEARCH BAR -->
-            <form action="search.php" method="GET">
-            <input type="text" name="query" placeholder="SEARCH  " required>
-            <button type="submit">Cari</button>
-            </form>
+            <div class="searchBar">
+                <form action="search.php" method="GET">
+                <input type="text" name="query" placeholder="   Search  " required>
+                <button type="submit">Cari</button>
+                </form>
+            </div>
+
 
             <!-- ICON LINK -->
+             <div class="iconLink">
              <ul>
                 <li><a href="http://" class="fa-solid fa-cart-shopping"></a></li> <!-- CART SHOPING LINK -->
                 <li><a href="http://" class="fa-solid fa-user"></a></li> <!-- ACCOUNT LINK -->
              </ul>
+             </div>
         </div>
     </nav>
 </body>
