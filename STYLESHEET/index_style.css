@@ -3,6 +3,10 @@ body{
     padding: 0;
 }
 
+nav{
+    display: flex;
+}
+
 .navbg{
     border: 1px black;
     border-radius: 5px;
