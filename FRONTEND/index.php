@@ -52,43 +52,38 @@
 
     <!-- FIRST MAIN LAYOUT -->
 
-    <main class="grid-container">
-        
-    <!-- ========== GRID SATU KIRI ATAS  =========== -->
-    <div class="grid_1">
-  <div class="grid_1-content">
-    <h1>SEMUA ORANG BERHAK KECE!!</h1>
-    <p>Dari outfit kasual hingga busana elegan, kami menyediakan beragam pilihan dengan bahan berkualitas dan desain terkini. Belanja mudah, nyaman, dan pastinya bikin penampilan makin kece.</p>
-    <button><a href="http://">View All</a></button>
-  </div>
-</div>
-
-
-    <!-- ==========  GRID DUA BEST SELLER  ========== -->
-    <div class="grid_2">
-    <h3>#BEST SELLER</h3>
-    <img src="baju1.jpg" alt="Best Seller">
-    <button><a href="http://">Learn More</a></button>
-    </div>
-
-    <!-- =========  GRID EMPAT NEW ARRIVAL  ========== -->
-    <div class="grid_3">
-    <h3>#NEW ARRIVAL</h3>
-    <img src="topi1.jpg" alt="New Arrival">
-    <button><a href="http://">Learn More</a></button>
-    </div>
-
-    <!-- ===========  GRID EMPAT KANAN PALING BESAR  ========== -->
-    <div class="grid_4">
+    <div class="grid-container">
+  <!-- Grid 1: Diskon -->
+  <div class="grid_1">
     <h2>#Discount Up To <span>50%</span></h2>
-    <img src="jaket1.jpg" alt="Discount Item">
+    <img src="img/diskon.jpg" alt="Discount Item">
     <h4>Oversized Boxy Work Jacket</h4>
     <p>Tetap hangat dan stylish...</p>
     <p class="price">Rp. 800.000,00</p>
-    <button><a href="http://">Discount</a></button>
-    </div>
+    <button>Hot Discount</button>
+  </div>
 
-    </main>
+  <!-- Grid 2: Semua Orang Berhak Kece -->
+  <div class="grid_2">
+    <h1>SEMUA ORANG BERHAK KECE!!</h1>
+    <p>Dari outfit kasual hingga busana elegan...</p>
+    <button>View All</button>
+  </div>
+
+  <!-- Grid 3: New Arrival -->
+  <div class="grid_3">
+    <h3>#NEW ARRIVAL</h3>
+    <img src="img/topi1.jpg" alt="New Arrival">
+    <button>Learn More</button>
+  </div>
+
+  <!-- Grid 4: Best Seller -->
+  <div class="grid_4">
+    <h3>#BEST SELLER</h3>
+    <img src="img/baju1.jpg" alt="Best Seller">
+    <button>Learn More</button>
+  </div>
+</div>
 
 </body>
 <script src="https://kit.fontawesome.com/2de2a0ed8e.js" crossorigin="anonymous"></script>
