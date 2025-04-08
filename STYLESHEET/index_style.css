@@ -103,12 +103,46 @@ button{
     background-color: #f2f2f2;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   }
+
+  .grid-container a{
+    color: #f2f2f2;
+  }
   
 
-  .grid_1 {
+  /* .grid_1 { 
     grid-column: span 2;
     grid-row: span 2;
     background-color: #efe0d2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+    gap: 20px;
+  }
+  
+  .grid_1-text {
+    flex: 1;
+  }
+  
+  .grid_1-text h1 {
+    font-size: 2em;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+  }
+  
+  .grid_1-text p {
+    font-size: 1em;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  
+  .grid_1-text button {
+    background-color: black;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
   }
   
   .grid_2 {
@@ -127,13 +161,6 @@ button{
     background-color: #e3e3e3;
   }
   
-
-  .grid_1 h1 {
-    font-size: 2em;
-    margin-bottom: 10px;
-    letter-spacing: 2px;
-  }
-  
   .grid_4 h2 span {
     color: red;
   }
@@ -147,3 +174,68 @@ button{
     cursor: pointer;
   }
   
+  .grid_1 {
+    grid-column: span 2;
+    grid-row: span 2;
+    background-image: url('../image/Untitled design (4).png'); 
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end; 
+    padding: 30px;
+    color: white;
+  }
+  
+  .grid_1::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5); 
+    z-index: 1;
+    border-radius: 20px;
+  }
+  
+  .grid_1-content {
+    position: relative;
+    z-index: 2;
+    max-width: 80%;
+  }
+  
+  .grid_1-content h1 {
+    font-size: 2.2em;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+  }
+  
+  .grid_1-content p {
+    line-height: 1.5;
+    margin-bottom: 15px;
+  }
+  
+  .grid_1-content button {
+    background-color: white;
+    color: black;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+      
+  .grid_1-content button:hover{
+    background-color: rgb(192, 192, 192);
+    color: black;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: bold;
+  }*/
+
+  .grid_1{
+
+  }
+      

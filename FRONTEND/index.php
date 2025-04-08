@@ -56,23 +56,26 @@
         
     <!-- ========== GRID SATU KIRI ATAS  =========== -->
     <div class="grid_1">
+  <div class="grid_1-content">
     <h1>SEMUA ORANG BERHAK KECE!!</h1>
-    <p>Dari outfit kasual hingga busana elegan...</p>
-    <button>View All</button>
-    </div>
+    <p>Dari outfit kasual hingga busana elegan, kami menyediakan beragam pilihan dengan bahan berkualitas dan desain terkini. Belanja mudah, nyaman, dan pastinya bikin penampilan makin kece.</p>
+    <button><a href="http://">View All</a></button>
+  </div>
+</div>
+
 
     <!-- ==========  GRID DUA BEST SELLER  ========== -->
     <div class="grid_2">
     <h3>#BEST SELLER</h3>
     <img src="baju1.jpg" alt="Best Seller">
-    <button>Learn More</button>
+    <button><a href="http://">Learn More</a></button>
     </div>
 
     <!-- =========  GRID EMPAT NEW ARRIVAL  ========== -->
     <div class="grid_3">
     <h3>#NEW ARRIVAL</h3>
     <img src="topi1.jpg" alt="New Arrival">
-    <button>Learn More</button>
+    <button><a href="http://">Learn More</a></button>
     </div>
 
     <!-- ===========  GRID EMPAT KANAN PALING BESAR  ========== -->
@@ -82,7 +85,7 @@
     <h4>Oversized Boxy Work Jacket</h4>
     <p>Tetap hangat dan stylish...</p>
     <p class="price">Rp. 800.000,00</p>
-    <button>Hot Discount</button>
+    <button><a href="http://">Discount</a></button>
     </div>
 
     </main>
