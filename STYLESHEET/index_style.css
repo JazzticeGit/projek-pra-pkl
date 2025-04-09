@@ -104,35 +104,67 @@ input[type=text] {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    color: white;
   }
   
   /* Grid 1: Diskon, persegi besar */
   .grid_1 {
     grid-column: 3 / span 2;
     grid-row: span 3; /* 4x200px = 800px tinggi */
-    background-color: #4f4f4f;
+    background-color: #b7b7b7;
     background-image: url('../image/Untitled design (4).png');
     background-position: right;
     background-repeat: no-repeat;
   }
   
+.grid_1 h2{
+  font-size: 50px;
+  position: relative;
+  top: -50px;
+}
+
+.grid_1 h4{
+  position: relative;
+  top: 140px;
+}
+
+.grid_1 p{
+  -webkit-line-clamp: 5;
+}
+
   /* Grid 2: "Berhak Kece", besar kiri atas */
   .grid_2 {
     grid-column: 1 / span 2;
     grid-row: 1 / span 2; /* Tinggi 400px */
     background-color: #efe0d2;
   }
+
+  .grid_2 .round {
+    position: relative;
+    left: 75%;
+  }
   
   /* Grid 3: New Arrival */
   .grid_3 {
     grid-column: 1;
     grid-row: 3 / span 1; /* Tinggi 200px */
+    background-color: #b7b7b7;
+  }
+
+  .grid_3 .round {
+    position: relative;
+    left: 40%;
+  }
+  .grid_4 .round {
+    position: relative;
+    left: 40%;
   }
   
   /* Grid 4: Best Seller */
   .grid_4 {
     grid-column: 2;
     grid-row: 3 / span 1;
+    background-color: #b7b7b7;
   }
   
   .grid_1 h2 span {
@@ -153,5 +185,25 @@ input[type=text] {
     border-radius: 999px;
     border: none;
     cursor: pointer;
+    display: flex;
+    text-align: center;
+    font-size: 16px;
+  }
+
+  button a{
+    position: relative;
+    top: 5px;
   }
   
+.round{
+    background-color: #171717;
+    width: 30px;
+    height: 30px;
+    border-radius: 100px;
+    color: rgb(255, 255, 255);
+    display: grid;
+    place-items: center;
+    position: relative;
+    left: 65%;
+    font-weight: bold;
+  }

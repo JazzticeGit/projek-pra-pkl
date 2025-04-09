@@ -56,32 +56,43 @@
   <!-- Grid 1: Diskon -->
   <div class="grid_1">
     <h2>#Discount Up To <span>50%</span></h2>
-    <img src="img/diskon.jpg" alt="Discount Item">
     <h4>Oversized Boxy Work Jacket</h4>
-    <p>Tetap hangat dan stylish...</p>
+    <p>Tetap hangat dan stylish dengan jaket berkualitas tinggi! Dibuat dari bahan premium yang nyaman dipakai, desain modern yang cocok untuk segala suasana</p>
     <p class="price">Rp. 800.000,00</p>
-    <button>a:L</button>
+    <button>
+      <a href="http://">Hot Discount</a>
+      <div class="round"><i class="fa-solid fa-arrow-right"></i></div>
+    </button>
   </div>
 
   <!-- Grid 2: Semua Orang Berhak Kece -->
   <div class="grid_2">
     <h1>SEMUA ORANG BERHAK KECE!!</h1>
     <p>Dari outfit kasual hingga busana elegan...</p>
-    <button>View All</button>
+    <button>
+      <a href="http://">View All</a>
+      <div class="round"><i class="fa-solid fa-arrow-right"></i></div>
+    </button>
   </div>
 
   <!-- Grid 3: New Arrival -->
   <div class="grid_3">
     <h3>#NEW ARRIVAL</h3>
     <img src="img/topi1.jpg" alt="New Arrival">
-    <button>Learn More</button>
+    <button>
+    <a href="http://">View All</a>
+    <div class="round"><i class="fa-solid fa-arrow-right"></i></div>
+  </button>
   </div>
 
   <!-- Grid 4: Best Seller -->
   <div class="grid_4">
     <h3>#BEST SELLER</h3>
     <img src="img/baju1.jpg" alt="Best Seller">
-    <button>Learn More</button>
+    <button>
+      <a href="http://">View All</a>
+      <div class="round"><i class="fa-solid fa-arrow-right"></i></div>
+    </button>
   </div>
 </div>
 
