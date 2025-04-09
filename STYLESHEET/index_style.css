@@ -111,6 +111,9 @@ input[type=text] {
     grid-column: 3 / span 2;
     grid-row: span 3; /* 4x200px = 800px tinggi */
     background-color: #4f4f4f;
+    background-image: url('../image/Untitled design (4).png');
+    background-position: right;
+    background-repeat: no-repeat;
   }
   
   /* Grid 2: "Berhak Kece", besar kiri atas */
@@ -142,9 +145,11 @@ input[type=text] {
   }
   
   button {
-    background-color: black;
-    color: white;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    text-align: left;
     padding: 10px 20px;
+    width: 50%;
     border-radius: 999px;
     border: none;
     cursor: pointer;

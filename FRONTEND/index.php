@@ -60,7 +60,7 @@
     <h4>Oversized Boxy Work Jacket</h4>
     <p>Tetap hangat dan stylish...</p>
     <p class="price">Rp. 800.000,00</p>
-    <button>Hot Discount</button>
+    <button>a:L</button>
   </div>
 
   <!-- Grid 2: Semua Orang Berhak Kece -->
