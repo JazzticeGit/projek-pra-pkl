@@ -125,11 +125,15 @@ input[type=text] {
 
 .grid_1 h4{
   position: relative;
-  top: 140px;
+  top: 210px;
+  left: 20px;
 }
 
 .grid_1 p{
-  -webkit-line-clamp: 5;
+  line-height: 1;
+  position: relative;
+  top: 130px;
+  left: 20px;
 }
 
   /* Grid 2: "Berhak Kece", besar kiri atas */

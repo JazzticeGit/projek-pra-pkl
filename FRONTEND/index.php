@@ -57,7 +57,7 @@
   <div class="grid_1">
     <h2>#Discount Up To <span>50%</span></h2>
     <h4>Oversized Boxy Work Jacket</h4>
-    <p>Tetap hangat dan stylish dengan jaket berkualitas tinggi! Dibuat dari bahan premium yang nyaman dipakai, desain modern yang cocok untuk segala suasana</p>
+    <p>Tetap hangat dan stylish dengan jaket berkualitas tinggi! <br>Dibuat dari bahan premium yang nyaman dipakai, desain modern<br> yang cocok  untuk segala suasana</p>
     <p class="price">Rp. 800.000,00</p>
     <button>
       <a href="http://">Hot Discount</a>
