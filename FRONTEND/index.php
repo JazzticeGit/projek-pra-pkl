@@ -77,7 +77,7 @@
   <!-- Grid 2: Semua Orang Berhak Kece -->
   <div class="grid_2">
     <h1>SEMUA ORANG <br>BERHAK KECE!!</h1>
-    <p>Dari outfit kasual hingga busana elegan...</p>
+    <p>Dari outfit kasual hingga busana elegan, kami menyediakan beragam pilihan dengan <br> bahan berkualitas dan desain terkini. Belanja mudah, nyaman, dan pastinya bikin <br> penampilan makin kece.</p>
     <button>
       <a href="http://">View All</a>
       <div class="round"><i class="fa-solid fa-arrow-right"></i></div>
@@ -87,7 +87,6 @@
   <!-- Grid 3: New Arrival -->
   <div class="grid_3">
     <h3>#NEW ARRIVAL</h3>
-    <img src="img/topi1.jpg" alt="New Arrival">
     <button>
     <a href="http://">View All</a>
     <div class="round"><i class="fa-solid fa-arrow-right"></i></div>
@@ -97,7 +96,6 @@
   <!-- Grid 4: Best Seller -->
   <div class="grid_4">
     <h3>#BEST SELLER</h3>
-    <img src="img/baju1.jpg" alt="Best Seller">
     <button>
       <a href="http://">View All</a>
       <div class="round"><i class="fa-solid fa-arrow-right"></i></div>

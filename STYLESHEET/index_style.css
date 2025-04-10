@@ -113,8 +113,9 @@ input[type=text] {
     grid-row: span 3; /* 4x200px = 800px tinggi */
     background-color: #b7b7b7;
     background-image: url('../image/Untitled design (4).png');
-    background-position: right;
+    background-position-x: 80px;
     background-repeat: no-repeat;
+    background-size: 660px;
   }
   
 .grid_1 h2{
@@ -141,7 +142,7 @@ input[type=text] {
   .grid_2 {
     grid-column: 1 / span 2;
     grid-row: 1 / span 2; /* Tinggi 400px */
-    background-color: #efe0d2;
+    background-color: #f1d7bf;
   }
 
   .grid_2 .round {
@@ -153,7 +154,11 @@ input[type=text] {
   .grid_3 {
     grid-column: 1;
     grid-row: 3 / span 1; /* Tinggi 200px */
-    background-color: #b7b7b7;
+    background-color: #f1d7bf;
+    background-image: url('../image/gambar1.png');
+    background-position-x: 150px;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 
   .grid_3 .round {
@@ -170,6 +175,11 @@ input[type=text] {
     grid-column: 2;
     grid-row: 3 / span 1;
     background-color: #b7b7b7;
+    background-image: url('../image/gambar (1).png');
+    background-position-x: 80px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
   }
   
   .grid_1 h2 span {
@@ -177,12 +187,12 @@ input[type=text] {
   }
   
   .grid_2 h1 {
-    font-size: 96px;
+    font-size: 140px;
     font-family: 'bebas neue';
     font-weight: 300;
-    line-height: 75px;
+    line-height: 110px;
     position: relative;
-    bottom: 50px;
+    bottom: 80px;
   }
   
   button {
@@ -256,3 +266,85 @@ input[type=text] {
   left: 10px;
 }
 
+.grid_2 p{
+  position: relative;
+  bottom: 190px;
+  left: 5px;
+}
+
+.grid_2 button{
+  position: relative;
+  bottom: 180px;
+}
+
+.grid_3 button{
+  width: 100%;
+  background: rgba(0, 0, 0, 0.416);
+  border-radius: 100px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(7.8px);
+  -webkit-backdrop-filter: blur(7.8px);
+  border: 0px solid rgba(0, 0, 0, 0.345);
+  position: relative;
+  top: 10px;
+}
+
+.grid_3 button a{
+  color: white;
+}
+
+.grid_3 .round{
+  background-color: #ffffff;
+    width: 30px;
+    height: 30px;
+    border-radius: 100px;
+    color: rgb(0, 0, 0);
+    display: grid;
+    place-items: center;
+    position: relative;
+    left: 73%;
+    font-weight: bold;
+}
+
+.grid_3 h3{
+  font-size: 30px;
+  position: relative;
+  bottom: 40px;
+  color: #ffffff;
+}
+
+.grid_4 button{
+  width: 100%;
+  background: rgba(0, 0, 0, 0.416);
+  border-radius: 100px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(7.8px);
+  -webkit-backdrop-filter: blur(7.8px);
+  border: 0px solid rgba(0, 0, 0, 0.345);
+  position: relative;
+  top: 10px;
+}
+
+.grid_4 button a{
+  color: white;
+}
+
+.grid_4 .round{
+  background-color: #ffffff;
+    width: 30px;
+    height: 30px;
+    border-radius: 100px;
+    color: rgb(0, 0, 0);
+    display: grid;
+    place-items: center;
+    position: relative;
+    left: 73%;
+    font-weight: bold;
+}
+
+.grid_4 h3{
+  font-size: 30px;
+  position: relative;
+  bottom: 40px;
+  color: #ffffff;
+}
