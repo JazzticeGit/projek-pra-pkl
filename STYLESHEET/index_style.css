@@ -126,26 +126,15 @@ input[type=text] {
 .grid_1 h4{
   position: relative;
   top: 200px;
-  left: 20px;
+  left: 10px;
   font-size: 20px;
 }
 
 .grid_1 p{
   line-height: 1;
   position: relative;
-  top: 115px;
-  left: 20px;
-}
-
-.grid_1 .price{
-  position: relative;
-  top: 53px;
-  font-weight: bold;
-}
-
-.grid_1 button {
-    box-shadow: inset 0 0 2000px rgba(255, 255, 255, .5);
-    filter: blur(10px);
+  top: 80px;
+  left: 10px;
 }
 
   /* Grid 2: "Berhak Kece", besar kiri atas */
@@ -204,6 +193,7 @@ input[type=text] {
     display: flex;
     text-align: center;
     font-size: 16px;
+    
   }
 
   button a{
@@ -223,3 +213,31 @@ input[type=text] {
     left: 65%;
     font-weight: bold;
   }
+
+  .tbl-harga{
+    width: 50%;
+  }
+
+  .container-tbl{
+    display: flex;
+    padding: 7px;
+    padding-right: 10px;
+  }
+
+.round-2{
+  background-color: #171717;
+    width: 30px;
+    height: 30px;
+    border-radius: 100px;
+    color: rgb(255, 255, 255);
+    display: grid;
+    place-items: center;
+    position: relative;
+    left: 60%;
+    font-weight: bold;
+}
+
+.tbl-harga-2{
+  position: relative;
+  left: 10px;
+}
