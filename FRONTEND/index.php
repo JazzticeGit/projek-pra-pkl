@@ -115,7 +115,7 @@
         diskonnya dan buruan ambil item favoritmu sekarang juga hanya di agesa shop
       </p>
       <a href="#" class="promo-button">
-        Learn More <span class="arrow">↗</span>
+        Learn More <span class="arrow"><i class="fa-solid fa-arrow-right"></i></span>
       </a>
     </div>
     <div class="promo-image">
@@ -126,42 +126,44 @@
  <!-- KETIGA, 3 CARD BERSEBELAHAN -->
 
  <div class="collection-section">
-  <p>Agesa Shop Collection</p>
-  <h2>Collection 2025</h2>
+  <p class="subheading">Agesa Shop Collection</p>
+  <h2 class="main-heading">Collection 2025</h2>
+
   <div class="collection-grid">
-    
-    <!-- CARD 1 -->
-    <div class="collection-card" style="background-color: #260000">
-      <img src="../image/agesa putih.png" class="logo-img" alt="Agesa Logo" />
-      <div class="card-content">
+
+    <!-- Card 1 -->
+    <div class="collection-card" style="background-color: #260000;">
+      <img src="../image/agesa putih.png" alt="Agesa Logo" class="logo-img">
+      <div class="card-text">
         <h3>ITEM BEST SELLER TERBAIK</h3>
         <p>Klik menu best seller dan temukan item favoritmu sekarang juga hanya di agesa shop</p>
       </div>
-      <div class="arrow-icon"><i class="fa-solid fa-arrow-right"></i></div>
+      <div class="arrow-icon-1"><i class="fa-solid fa-arrow-right"></i></div>
     </div>
 
-    <!-- CARD 2 -->
-    <div class="collection-card" style="background-color: #000">
-      <img src="../image/agesa putih.png" class="logo-img" alt="Agesa Logo" />
-      <div class="card-content">
+    <!-- Card 2 -->
+    <div class="collection-card" style="background-color: #000000;">
+      <img src="../image/agesa putih.png" alt="Agesa Logo" class="logo-img">
+      <div class="card-text">
         <h3>ITEM NEW ARRIVAL SESUAI ZAMAN</h3>
         <p>Brand new arrival yang lebih keren dan trend sesuai perkembangan zaman yang tak kalah oke, hanya di agesa shop</p>
       </div>
-      <div class="arrow-icon"><i class="fa-solid fa-arrow-right"></i></div>
-    </div>
+      <div class="arrow-icon-1"><i class="fa-solid fa-arrow-right"></i></div>
+        </div>
 
-    <!-- CARD 3 -->
-    <div class="collection-card" style="background-color: #999">
-      <img src="../image/agesa putih.png" class="logo-img" alt="Agesa Logo" />
-      <div class="card-content">
+    <!-- Card 3 -->
+    <div class="collection-card" style="background-color: #999999;">
+      <img src="../image/agesa putih.png" alt="Agesa Logo" class="logo-img">
+      <div class="card-text">
         <h3>ALL ITEM AGESA SHOP</h3>
         <p>Koleksi trend agesa shop dan pilihan sesuai selera dan best sellingnya juga hanya di agesa shop</p>
       </div>
-      <div class="arrow-icon"><i class="fa-solid fa-arrow-right"></i></div>
+      <div class="arrow-icon-1"><i class="fa-solid fa-arrow-right"></i></div>
     </div>
 
   </div>
 </div>
+
 
 
 </body>

@@ -358,7 +358,7 @@ input[type=text] {
   max-width: 1500px; /* atau sesuai kebutuhan */
   width: 100%;
   margin: 30px ; /* jarak atas dan bawah antar kotak */
-  margin-left: 40px;
+  margin-left: 90px;
   display: flex;
   background-color: #d8a85f;
   border-radius: 20px;
@@ -450,10 +450,21 @@ input[type=text] {
 }
 
 .collection-section {
-  padding: 30px;
+  padding: 40px 30px;
+  max-width: 1400px;
+  width: 100%;
+  border-radius: 20px;
+  margin: auto;
+  background-color: #f7f7f7;
 }
 
-.collection-section h2 {
+.subheading {
+  font-size: 12px;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.main-heading {
   font-size: 24px;
   font-weight: 800;
   margin-bottom: 20px;
@@ -461,62 +472,60 @@ input[type=text] {
 
 .collection-grid {
   display: flex;
-  gap: 10px; /* ✅ Jarak antar card */
-  justify-content: center;
+  gap: 10px; /* Jarak antar card */
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .collection-card {
-  flex: 1 1 calc(33.333% - 10px); /* Biar 3 card sejajar dengan jarak */
-  padding: 10px; /* ✅ Padding dalam card */
+  flex: 1 1 calc(33.333% - 6.7px); /* 3 cards in a row with 10px gap */
+  padding: 10px;
   border-radius: 12px;
   color: white;
   position: relative;
+  min-height: 240px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 230px;
   box-sizing: border-box;
 }
 
 .logo-img {
   width: 50px;
   height: auto;
-  margin-bottom: 10px;
 }
 
-.card-content h3 {
+.card-text h3 {
   font-size: 14px;
   font-weight: bold;
-  margin-bottom: 5px;
+  margin-top: 20px;
+  margin-bottom: 6px;
 }
 
-.card-content p {
+.card-text p {
   font-size: 12px;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
-.arrow-icon {
+.arrow-icon-1 {
   background-color: #ffffff;
-    width: 40px;
-    height: 40px;
-    border-radius: 100px;
-    color: rgb(0, 0, 0);
-    display: grid;
-    place-items: center;
-    position: relative;
-    bottom: 170px;
-    right: 74px;
-    font-weight: bold;
-    padding: 5px 7x;
-    cursor: pointer;
-}
-
-.arrow-icon i{
+  width: 28px;
+  height: 30px;
+  border-radius: 990px;
+  color: rgb(0, 0, 0);
+  display: grid;
   place-items: center;
-  align-items: center;
+  position: absolute; /* ganti relative jadi absolute untuk bebas atur */
+  top: 15px;
+  right: 15px;
+  font-weight: bold;
+  padding: 5px 7px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
+
+/* Responsif untuk layar kecil */
 @media (max-width: 768px) {
   .collection-card {
     flex: 1 1 100%;
