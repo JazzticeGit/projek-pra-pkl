@@ -164,7 +164,79 @@
   </div>
 </div>
 
+<!-- MAIN KE EMPAT -->
 
+<div class="about-container">
+
+  <!-- TULISAN H1 FONT POPPINS -->
+   <h1>“Website ini dikembangkan oleh Asad Tevy Ramadhan (Tevy) <br>
+    dan Jonathan Aridansyah (Nathan), yang merupakan <br>
+     seorang siswa kelas 11 di SMKN 1 Purbalingga. ini adalah <br>
+      website brand fashion pria  Dengan visi menghadirkan <br>
+       pakaian yang nyaman, stylish, dan cocok untuk berbagai <br>
+        kesempatan”</h1>
+
+  <!-- GAMBAR DAN ABOUT -->
+
+  <div class="image-bg">
+    <h1>AGESA SHOP <br>OFFICIAL WEBSITE</h1>
+    <h2>ABOUT DEVELOPER</h2>
+
+    <!-- tombol -->
+    <button>
+      <a href="about.html">About Page</a>
+      <div class="round-about"><i class="fa-solid fa-arrow-right"></i></div>
+    </button>
+  </div>
+</div>
+
+<div class="checkout-container">
+  <!-- GAMBAR -->
+   <img src="../image/cara checkout 1.png" alt="eror" srcset="">
+</div>
+
+
+<!-- FOOTER -->
+
+<footer class="footer-container">
+  <div class="footer-content">
+    <!-- Kiri: Logo dan ikon sosial -->
+    <div class="footer-left">
+      <img src="../image/AGESA.png" alt="Agesa Shop Logo" class="footer-logo">
+      <p><strong>clothing and accessories</strong></p>
+      <div class="social-icons">
+        <i class="fa-brands fa-instagram"></i>
+        <i class="fa-brands fa-youtube"></i>
+        <i class="fa-brands fa-tiktok"></i>
+        <i class="fa-solid fa-bag-shopping"></i>
+      </div>
+    </div>
+
+    <!-- Tengah: Navigasi dan teks -->
+    <div class="footer-center">
+      <nav class="footer-nav">
+        <a href="#">Home</a>
+        <a href="#">Review</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+      </nav>
+      <p class="footer-text">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget dolor tempus, convallis odio id, pulvinar risus. Lorem ipsum dolor sit amet,
+      </p>
+    </div>
+
+    <!-- Kanan: Maps -->
+    <div class="footer-right">
+      <h4>Maps Store</h4>
+      <img src="map.png" alt="Maps" class="map-img">
+    </div>
+  </div>
+
+  <!-- Bawah: Copyright -->
+  <div class="footer-bottom">
+    <p>&copy; hak cipta dilindungi undang undang</p>
+  </div>
+</footer>
 
 </body>
 <script src="https://kit.fontawesome.com/2de2a0ed8e.js" crossorigin="anonymous"></script>
