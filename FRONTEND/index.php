@@ -228,7 +228,7 @@
     <!-- Kanan: Maps -->
     <div class="footer-right">
       <h4>Maps Store</h4>
-      <img src="map.png" alt="Maps" class="map-img">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.5542083109262!2d109.34410847400319!3d-7.4037412926063295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6559b9ff8d3795%3A0xa58daaef273f4e44!2sSMKN%201%20Purbalingga!5e0!3m2!1sen!2sid!4v1744776124049!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
   </div>
 

@@ -507,7 +507,7 @@ input[type=text] {
   line-height: 1.5;
 }
 
-.arrow-icon-1 {
+.arrow-icon-1 { 
   background-color: #ffffff;
   width: 28px;
   height: 30px;
@@ -604,9 +604,10 @@ button .round-about{
 
 .footer-container {
   background-color: #fff;
-  padding: 40px 30px 10px;
+  padding: 40px 10px;
   font-family: sans-serif;
   color: #000;
+
 }
 
 .footer-content {
@@ -650,10 +651,10 @@ button .round-about{
   max-width: 350px;
 }
 
-.map-img {
-  width: 100%;
-  max-width: 200px;
+iframe{
+  width: 400px;
   border-radius: 10px;
+  height: 300px;
 }
 
 .footer-bottom {
@@ -663,4 +664,7 @@ button .round-about{
   padding: 10px;
   font-size: 14px;
   margin-top: 20px;
+  width: 100%;
+  position: relative;
+  left: -10px;
 }
