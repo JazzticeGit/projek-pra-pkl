@@ -119,7 +119,7 @@
       </a>
     </div>
     <div class="promo-image">
-      <img src="../image/gambar.png" alt="Pakaian Kekinian" />
+      <img src="../image/Untitled design (6).png" alt="Pakaian Kekinian" />
     </div>
   </section>
 

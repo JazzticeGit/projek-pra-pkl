@@ -668,3 +668,189 @@ iframe{
   position: relative;
   left: -10px;
 }
+
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .navbg {
+    flex-wrap: wrap;
+    padding: 10px;
+  }
+
+  .searchBar {
+    left: 0;
+    width: 90%;
+    margin: 10px auto;
+    order: 3;
+  }
+
+  .iconLink {
+    left: 0;
+    margin: 10px 0;
+    order: 2;
+  }
+
+  .navlink ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px 0;
+  }
+
+  .navlink ul li {
+    left: 0;
+    margin: 5px;
+  }
+}
+
+@media (max-width: 992px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid_1 {
+    grid-column: 1 / span 2;
+    grid-row: span 2;
+  }
+
+  .grid_2 {
+    grid-column: 1 / span 2;
+  }
+
+  .promo-box {
+    flex-direction: column;
+    margin: 20px;
+  }
+
+  .promo-image img {
+    right: 0;
+    max-width: 100%;
+  }
+
+  .collection-card {
+    flex: 1 1 calc(50% - 10px);
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+
+  .grid_1,
+  .grid_2,
+  .grid_3,
+  .grid_4 {
+    grid-column: 1 / span 1 !important;
+    grid-row: auto !important;
+  }
+
+  .searchBar {
+    width: 100%;
+    position: static;
+  }
+
+  .searchBar i {
+    left: 0;
+  }
+
+  .navbg img {
+    left: 0;
+  }
+
+  .promo-content h1 {
+    font-size: 30px;
+  }
+
+  .about-container .image-bg h1 {
+    font-size: 80px;
+  }
+
+  .checkout-container img {
+    width: 100%;
+    height: auto;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  iframe {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid_1 h2 {
+    font-size: 30px;
+  }
+
+  .grid_2 h1 {
+    font-size: 80px;
+    line-height: 70px;
+  }
+
+  .promo-content {
+    padding: 20px;
+  }
+
+  .promo-content h1 {
+    font-size: 24px;
+  }
+
+  .promo-button {
+    width: 70%;
+  }
+
+  .collection-card {
+    flex: 1 1 100%;
+  }
+
+  .about-container .image-bg {
+    height: 400px;
+  }
+
+  .about-container .image-bg h1 {
+    font-size: 50px;
+  }
+
+  button {
+    width: 70%;
+  }
+
+  .round {
+    left: 50% !important;
+  }
+}
+
+/* mobile navigasi */
+@media (max-width: 600px) {
+  nav {
+    position: relative;
+  }
+
+  .navlink ul {
+    flex-direction: column;
+    text-align: center;
+    padding: 10px;
+  }
+
+  .navlink ul li {
+    padding: 5px 0;
+  }
+
+  .searchBar input[type="text"] {
+    font-size: 14px;
+  }
+}

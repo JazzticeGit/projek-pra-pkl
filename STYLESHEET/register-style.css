@@ -1,0 +1,113 @@
+/* /* Reset dan layout dasar */
+* {
+    box-sizing: border-box;
+  }
+  
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  /* Flex container fullscreen */
+  .flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    height: 100vh;
+    background: url('../image/Rectangle 147.png') no-repeat center center;
+    background-size: cover;
+  }
+  
+  /* Box register */
+  .register-box {
+    padding: 40px;
+    width: 100%;
+    max-width: 600px;
+    color: #fff;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.38);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(7.1px);
+    -webkit-backdrop-filter: blur(7.1px);
+  }
+  
+  .register-box h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    text-align: left;
+  }
+  
+  .register-box p {
+    color: #ccc;
+    margin-bottom: 20px;
+    font-size: 14px;
+    text-align: left;
+  }
+  
+  .register-box input[type="email"] {
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 20px;
+    font-size: 16px;
+    background: #f5f5f500;
+    border: 1px solid rgba(255, 255, 255, 0.721);
+    color: white;
+  }
+  
+  .buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .google-btn {
+    background: #fff;
+    flex: 1;
+    padding: 10px 0;
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .google-btn img {
+    height: 24px;
+  }
+  
+  .enter-btn {
+    flex: 1;
+    padding: 10px 0;
+    background-color: #5d5fef;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+  }
+  
+  .enter-btn:hover {
+    background-color: #4a4ce3;
+  }
+  
+  .login-text {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #ccc;
+  }
+  
+  .login-text a {
+    color: #5d5fef;
+    text-decoration: none;
+  }
+
+  input::placeholder {
+    color: #ffffff92;
+    font-size: 12px;
+  }
