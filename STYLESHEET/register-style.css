@@ -1,4 +1,3 @@
-/* /* Reset dan layout dasar */
 * {
     box-sizing: border-box;
   }
@@ -9,8 +8,7 @@
     height: 100%;
     font-family: 'Segoe UI', sans-serif;
   }
-  
-  /* Flex container fullscreen */
+
   .flex-container {
     display: flex;
     justify-content: center;
@@ -21,7 +19,6 @@
     background-size: cover;
   }
   
-  /* Box register */
   .register-box {
     padding: 40px;
     width: 100%;
@@ -116,4 +113,38 @@
   input::placeholder {
     color: #ffffff92;
     font-size: 12px;
+  }
+
+  .register-box input[type="password"] {
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 20px;
+    font-size: 16px;
+    background: #f5f5f500;
+    border: 1px solid rgba(255, 255, 255, 0.721);
+    color: white;
+  }
+
+  .enter-btn_1 {
+    width: 100%;
+    padding: 10px 0;
+    background-color: #5d5fef;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+  }
+
+  .enter-btn_1 a {
+    text-decoration: none;
+    background-color: rgba(245, 222, 179, 0);
+    color: white;
+  }
+  
+  .enter-btn_1:hover {
+    background-color: #4a4ce3;
   }

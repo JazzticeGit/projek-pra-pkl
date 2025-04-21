@@ -26,11 +26,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <h2>Register</h2>
       <p>Create your password</p>
       <form method="POST" id="passwordForm">
-        <input type="password" name="password" id="password" placeholder="Enter your password" required>
+        <input type="password" name="password" id="password"  class="pw" placeholder="Enter your password" required>
         <p id="error-message" style="color: #ff7b7b; font-size: 13px; margin-bottom: 10px;">
           <?php if (isset($error)) echo $error; ?>
         </p>
-        <button type="submit" class="enter-btn">Enter</button>
+        <div class="enter-btn_1"><a href="register-otp.php">Enter</a></div>
       </form>
     </div>
   </div>
