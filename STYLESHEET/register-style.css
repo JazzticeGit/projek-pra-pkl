@@ -91,6 +91,12 @@
     font-size: 16px;
     transition: background 0.3s;
   }
+
+  .enter-btn a {
+    text-decoration: none;
+    background-color: rgba(245, 222, 179, 0);
+    color: white;
+  }
   
   .enter-btn:hover {
     background-color: #4a4ce3;

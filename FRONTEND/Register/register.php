@@ -16,7 +16,7 @@
           <a href="https://accounts.google.com/o/oauth2/auth" class="google-btn">
             <img src="../../image/gambar.png" alt="Google">
           </a>
-          <button type="submit" class="enter-btn">Enter</button>
+          <div class="enter-btn"><a href="register-pw.php">Enter</a></div>
         </div>
       </form>
       <p class="login-text">Have an account? <a href="login.php">Login</a></p>

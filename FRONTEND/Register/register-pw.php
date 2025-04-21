@@ -1,27 +1,38 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $password = $_POST['password'];
+
+    if (strlen($password) < 8) {
+        $error = "Password must be at least 8 characters.";
+    } else {
+        // Lanjut ke proses berikutnya atau simpan data
+        header("Location: register-success.php");
+        exit;
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Register</title>
+  <title>Register Password</title>
   <link rel="stylesheet" href="../../STYLESHEET/register-style.css">
+  <script defer src="../../JS/validation.js"></script>
 </head>
 <body>
   <div class="flex-container">
     <div class="register-box">
       <h2>Register</h2>
-      <p>Please create your account</p>
-      <form action="register-next.php" method="POST">
-        <input type="email" name="email" placeholder="Enter your email" required>
-        <div class="buttons">
-          <a href="https://accounts.google.com/o/oauth2/auth" class="google-btn">
-            <img src="../../image/gambar.png" alt="Google">
-          </a>
-          <button type="submit" class="enter-btn">Enter</button>
-        </div>
+      <p>Create your password</p>
+      <form method="POST" id="passwordForm">
+        <input type="password" name="password" id="password" placeholder="Enter your password" required>
+        <p id="error-message" style="color: #ff7b7b; font-size: 13px; margin-bottom: 10px;">
+          <?php if (isset($error)) echo $error; ?>
+        </p>
+        <button type="submit" class="enter-btn">Enter</button>
       </form>
-      <p class="login-text">Have an account? <a href="login.php">Login</a></p>
     </div>
   </div>
 </body>
 </html>
- 
