@@ -15,3 +15,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
   
+  // otp
+  document.getElementById("passwordForm").addEventListener("submit", function (e) {
+    const otp = document.getElementById("otp").value;
+    if (otp.length !== 6) {
+      alert("Kode OTP harus 6 digit!");
+      e.preventDefault();
+    }
+  });
+  

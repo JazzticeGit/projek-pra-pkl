@@ -56,6 +56,51 @@
     border: 1px solid rgba(255, 255, 255, 0.721);
     color: white;
   }
+  .register-box input[type="number"] {
+    width: 100%;
+    text-align: center;
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 20px;
+    font-size: 16px;
+    background: #f5f5f500;
+    border: 1px solid rgba(255, 255, 255, 0.721);
+    color: white;
+    -moz-appearance: textfield;
+  }
+  .register-box input[type="tel"] {
+    width: 100%;
+    text-align: center;
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 20px;
+    font-size: 16px;
+    background: #f5f5f500;
+    border: 1px solid rgba(255, 255, 255, 0.721);
+    color: white;
+    -moz-appearance: textfield;
+  }
+
+  input[type="number"]:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  input[type="email"]:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  input[type="password"]:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+
+  input[type=number]::-webkit-inner-spin-button, 
+  input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}
   
   .buttons {
     display: flex;
@@ -139,6 +184,29 @@
     transition: background 0.3s;
   }
 
+  input[type="submit"]{
+    width: 100%;
+    padding: 10px 0;
+    background-color: #5d5fef;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+  }
+  button[type="submit"]{
+    width: 100%;
+    padding: 10px 0;
+    background-color: #5d5fef;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+  }
+
   .enter-btn_1 a {
     text-decoration: none;
     background-color: rgba(245, 222, 179, 0);
@@ -146,5 +214,12 @@
   }
   
   .enter-btn_1:hover {
+    background-color: #4a4ce3;
+  }
+
+  input[type="submit"]:hover{
+    background-color: #4a4ce3;
+  }
+  button[type="submit"]:hover{
     background-color: #4a4ce3;
   }

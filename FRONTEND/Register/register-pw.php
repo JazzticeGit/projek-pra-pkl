@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error = "Password must be at least 8 characters.";
     } else {
         // Lanjut ke proses berikutnya atau simpan data
-        header("Location: register-success.php");
+        header("Location: register-otp.php");
         exit;
     }
 }
@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <p id="error-message" style="color: #ff7b7b; font-size: 13px; margin-bottom: 10px;">
           <?php if (isset($error)) echo $error; ?>
         </p>
-        <div class="enter-btn_1"><a href="register-otp.php">Enter</a></div>
+        <input type="submit" value="Enter" class="enter_btn_1">
       </form>
     </div>
   </div>
