@@ -42,6 +42,9 @@ curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
 $response = curl_exec($curl);
 curl_close($curl);
 
-
+curl_setopt($curl, CURLOPT_HTTPHEADER, [
+    "Content-Type: application/x-www-form-urlencoded",
+    "Authorization: $auth_header"
+]);
 header("Location: register-otp.php");
 exit();
