@@ -43,6 +43,8 @@ $result = mysqli_query($koneksi, $query);
 
 // Ambil daftar kategori
 $kategori_query = mysqli_query($koneksi, "SELECT * FROM kategori");
+
+
 ?>
 
 <!DOCTYPE html>
@@ -81,11 +83,13 @@ $kategori_query = mysqli_query($koneksi, "SELECT * FROM kategori");
         <?php endwhile; ?>
     </select>
     <button type="submit">Tambah Produk</button>
+
+    
 </form>
 
 <h2>Daftar Produk</h2>
 <div class="container">
-    <?php while($produk = mysqli_fetch_assoc($result)): ?>
+    
         <?php while($produk = mysqli_fetch_assoc($result)): ?>
             <div class="card">
             <img src="../../<?= htmlspecialchars($produk['image']) ?>" alt="<?= htmlspecialchars($produk['name']) ?>">
@@ -103,7 +107,6 @@ $kategori_query = mysqli_query($koneksi, "SELECT * FROM kategori");
     </div>
 <?php endwhile; ?>
 
-    <?php endwhile; ?>
 </div>
 
 </body>
