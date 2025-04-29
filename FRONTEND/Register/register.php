@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Register</title>
   <link rel="stylesheet" href="../../STYLESHEET/register-style.css">
-</head>
+</head> 
 <body>
   <div class="flex-container">
     <div class="register-box">

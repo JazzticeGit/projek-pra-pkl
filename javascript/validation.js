@@ -14,8 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
-  
-  // otp
+ 
   document.getElementById("passwordForm").addEventListener("submit", function (e) {
     const otp = document.getElementById("otp").value;
     if (otp.length !== 6) {
