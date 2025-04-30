@@ -23,7 +23,7 @@ if (isset($_GET['error'])) {
                 <p style="color: red;"><?php echo $error_message; ?></p>
             <?php endif; ?>
 
-            <form method="POST" action="send-otp.php">
+            <form method="POST" action="generate-otp.php">
                 <!-- Input untuk nomor WhatsApp -->
                 <input type="tel" name="phone" id="phone" placeholder="Masukkan nomor WhatsApp (08...)" required>
                 <button type="submit">Kirim OTP</button>

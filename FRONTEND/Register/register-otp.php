@@ -1,40 +1,32 @@
 <?php
 session_start();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $input_otp = $_POST['otp'];
-    if ($input_otp == $_SESSION['otp']) {
-        // Redirect ke halaman password
-        header("Location: register-pw.php");
-        exit();
-    } else {
-        $error = "OTP salah, coba lagi.";
-    }
+if (!isset($_SESSION['otp'])) {
+    echo "OTP tidak ditemukan.";
+    exit();
 }
+
+$otp = $_SESSION['otp'];
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Verifikasi OTP</title>
-    <link rel="stylesheet" href="../../STYLESHEET/register-style.css">
+  <meta charset="UTF-8">
+  <title>OTP</title>
 </head>
 <body>
-    <div class="flex-container">
-        <div class="register-box">
-            <h2>Verifikasi OTP</h2>
-            <p>Masukkan kode OTP yang telah dikirim ke WhatsApp Anda</p>
-            <form method="POST">
-                <input type="number" name="otp" id="otp" class="otp" placeholder="Masukkan OTP" required>
-                <p id="error-message" style="color: #ff7b7b; font-size: 13px; margin-bottom: 10px;">
-                    <?php if (isset($error)) echo $error; ?>
-                </p>
-                <div class="enter-btn_1">
-                    <button type="submit">Verifikasi OTP</button>
-                </div>
-            </form>
-        </div>
-    </div>
+  <h2>Kode OTP</h2>
+  <p>Nomor Anda: <?php echo htmlspecialchars($_SESSION['phone']); ?></p>
+  <p style="font-size: 20px; color: green;">Kode OTP Anda: <strong><?php echo $otp; ?></strong></p>
+
+  <form action="cek-otp.php" method="POST">
+    <input type="text" name="otp_input" placeholder="Masukkan OTP" required>
+    <button type="submit">Verifikasi</button>
+  </form>
+
+  <?php if (isset($_GET['error'])): ?>
+    <p style="color:red;"><?php echo htmlspecialchars($_GET['error']); ?></p>
+  <?php endif; ?>
 </body>
 </html>

@@ -1,20 +1,11 @@
 <?php
 session_start();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $inputOtp = $_POST['otp'];
-    $realOtp = $_SESSION['otp'] ?? '';
-
-    if ($inputOtp == $realOtp) {
-        echo "OTP Benar! Login/register berhasil.";
-        // Bisa redirect ke dashboard atau halaman sukses
-        // header("Location: dashboard.php");
-        // exit();
-    } else {
-        // Kode OTP salah, kembali ke form
-        $error = urlencode("Kode OTP salah.");
-        header("Location: register-otp.php?error=$error");
-        exit();
-    }
+if ($_POST['otp_input'] == $_SESSION['otp']) {
+    echo "<h2>✅ OTP valid. Registrasi berhasil!</h2>";
+    // lanjut ke register-password.php atau simpan ke database
+} else {
+    $error = urlencode("OTP salah, silakan coba lagi.");
+    header("Location: register-otp.php?error=$error");
+    exit();
 }
-?>

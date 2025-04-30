@@ -56,6 +56,7 @@ $kategori_query = mysqli_query($koneksi, "SELECT * FROM kategori");
 </head>
 <body>
 
+<h1>Produk</h1> <br><br>
 <h2>Tambah Produk Baru</h2>
 <form action="" method="post" enctype="multipart/form-data">
     <input type="text" name="name" placeholder="Nama Produk" required>
@@ -65,7 +66,7 @@ $kategori_query = mysqli_query($koneksi, "SELECT * FROM kategori");
     <input type="file" name="image" accept="image/*" required>
     <label><input type="checkbox" name="best_seller"> Best Seller</label>
     <label><input type="checkbox" name="new_arrival"> New Arrival</label>
-    <select name="size" required>
+    <!-- <select name="size" required>
         <option value="">Pilih Ukuran</option>
         <option value="XS">XS</option>
         <option value="S">S</option>
@@ -74,7 +75,7 @@ $kategori_query = mysqli_query($koneksi, "SELECT * FROM kategori");
         <option value="XL">XL</option>
         <option value="XXL">XXL</option>
         <option value="3XL">3XL</option>
-    </select>
+    </select> -->
     <input type="text" name="color" placeholder="Warna" required>
     <select name="id_kategori" required>
         <option value="">Pilih Kategori</option>
@@ -97,7 +98,8 @@ $kategori_query = mysqli_query($koneksi, "SELECT * FROM kategori");
             <p>Stok: <?= $produk['stok'] ?></p>
             <p>Harga: Rp<?= number_format($produk['harga'], 2, ',', '.') ?></p>
             <p>Kategori: <?= htmlspecialchars($produk['jenis_produk']) ?></p>
-            <p>Ukuran: <?= $produk['size'] ?> | Warna: <?= htmlspecialchars($produk['color']) ?></p>
+            <p>Ukuran: <?= $produk['size'] ?> 
+             Warna: <?= htmlspecialchars($produk['color']) ?></p>
             <?php if($produk['best_seller']): ?><p><strong>🔥 Best Seller</strong></p><?php endif; ?>
             <?php if($produk['new_arrival']): ?><p><strong>🆕 New Arrival</strong></p><?php endif; ?>
             <div class="actions">
