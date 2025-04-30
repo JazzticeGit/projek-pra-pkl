@@ -82,6 +82,32 @@
     color: white;
     -moz-appearance: textfield;
   }
+  .register-box input[type="text"] {
+    width: 100%;
+    text-align: center;
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 20px;
+    font-size: 16px;
+    background: #f5f5f500;
+    border: 1px solid rgba(255, 255, 255, 0.721);
+    color: white;
+    -moz-appearance: textfield;
+  }
+  .register-box input[type="date"] {
+    width: 100%;
+    text-align: center;
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 20px;
+    font-size: 16px;
+    background: #f5f5f500;
+    border: 1px solid rgba(255, 255, 255, 0.721);
+    color: white;
+    -moz-appearance: textfield;
+  }
 
   input[type="number"]:focus {
     border-color: #007bff;

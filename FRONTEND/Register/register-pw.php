@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error = "Password must be at least 8 characters.";
     } else {
         // Lanjut ke proses berikutnya atau simpan data
-        header("Location: register-otp.php");
+        header("Location: register-data-diri.php");
         exit;
     }
 }

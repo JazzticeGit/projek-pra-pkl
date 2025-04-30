@@ -34,7 +34,6 @@ if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
 
 }
 
-// Ambil data produk + kategori
 $query = "SELECT produk.*, kategori.jenis_produk 
           FROM produk 
           JOIN kategori ON produk.id_kategori = kategori.id";
@@ -42,8 +41,6 @@ $result = mysqli_query($koneksi, $query);
 
 // Ambil daftar kategori
 $kategori_query = mysqli_query($koneksi, "SELECT * FROM kategori");
-
-
 ?>
 
 <!DOCTYPE html>
@@ -55,24 +52,6 @@ $kategori_query = mysqli_query($koneksi, "SELECT * FROM kategori");
 </head>
 <body>
 
-
-   <!-- NAVIGASI BAR -->
-   <nav>
-        
-        <div class="navbg">
-            <!-- GAMBAR NAVIGASI -->
-             <a href="index.php"><img src="../../image/AGESA.png" alt="" srcset=""></a>
-
-
-             <!-- LINK NAVIGASI -->
-            <div class="navlink">
-                <ul>
-                    <li><a href="../BACKEND/produk/index-produk.php">Produk</a></li> 
-                    <li><a href="BACKEND/produk/index-produk.php">Collection</a></li>
-                    <li><a href="http://">About</a></li>
-                    <li><a href="http://">Contack</a></li>
-                </ul>
-            </div>
 
 <h1>Produk</h1> <br><br>
 <h2>Tambah Produk Baru</h2>
