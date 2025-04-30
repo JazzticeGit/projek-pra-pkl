@@ -13,7 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_kategori = $_POST['id_kategori'];
 
     // Upload  gambar adohhh ribetnyaaa
-    // Tentukan folder tempat upload gambar
 $upload_dir = "../../image/";
 $file_name = basename($_FILES["image"]["name"]);
 $target_file = $upload_dir . $file_name;
@@ -55,6 +54,25 @@ $kategori_query = mysqli_query($koneksi, "SELECT * FROM kategori");
     <link rel="stylesheet" href="../../STYLESHEET/dashboard.css">
 </head>
 <body>
+
+
+   <!-- NAVIGASI BAR -->
+   <nav>
+        
+        <div class="navbg">
+            <!-- GAMBAR NAVIGASI -->
+             <a href="index.php"><img src="../../image/AGESA.png" alt="" srcset=""></a>
+
+
+             <!-- LINK NAVIGASI -->
+            <div class="navlink">
+                <ul>
+                    <li><a href="../BACKEND/produk/index-produk.php">Produk</a></li> 
+                    <li><a href="BACKEND/produk/index-produk.php">Collection</a></li>
+                    <li><a href="http://">About</a></li>
+                    <li><a href="http://">Contack</a></li>
+                </ul>
+            </div>
 
 <h1>Produk</h1> <br><br>
 <h2>Tambah Produk Baru</h2>

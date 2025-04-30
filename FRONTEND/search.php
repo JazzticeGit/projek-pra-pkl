@@ -1,5 +1,5 @@
 <?php
-include "koneksi.php";
+include "../koneksi.php";
 $query = $_GET['query'];
 // kemananan sql injeksyen
 $query = $koneksi->real_escape_string($query);
