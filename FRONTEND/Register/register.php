@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <button type="submit" class="enter-btn">Enter</button>
                 </div>
             </form>
-            <p class="login-text">Have an account? <a href="login.php">Login</a></p>
+            <p class="login-text">Have an account? <a href="../../FRONTEND/login.php">Login</a></p>
         </div>
     </div>
 </body>
