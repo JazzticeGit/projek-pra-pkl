@@ -1,3 +1,12 @@
+<?php
+session_start();
+if (!isset($_SESSION['email']) || !isset($_SESSION['phone']) || !isset($_SESSION['password'])) {
+    header("Location: register.php?error=" . urlencode("Data belum lengkap."));
+    exit;
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,14 +19,12 @@
     <div class="register-box">
       <h2>Register</h2>
       <p>Please create your account</p>
-      <form action="register-next.php" method="POST">
-        <!-- <input type="email" name="email" placeholder="Enter your email" required> -->
-        <input type="text" name="email" placeholder="Enter your name" required>
-        <input type="date" name="email" placeholder="Enter your birth" required>
-        <div class="buttons">
-          <div class="enter-btn"><a href="../FRONTEND/index.php">Enter</a></div>
-        </div>
+      <form action="proses-register.php" method="POST">
+          <input type="text" name="username" placeholder="Enter your name" required>
+          <input type="date" name="birth" required>
+          <button type="submit" class="enter-btn">Enter</button>
       </form>
+
       <p class="login-text">Have an account? <a href="login.php">Login</a></p>
     </div>
   </div>

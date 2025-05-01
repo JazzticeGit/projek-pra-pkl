@@ -4,6 +4,14 @@ session_start();
 if (isset($_GET['error'])) {
     $error_message = urldecode($_GET['error']);
 }
+
+if (isset($_GET['email'])) {
+    $email = $_GET['email'];
+} else {
+    // Jika email tidak ada, redirect ke halaman sebelumnya atau tampilkan pesan error
+    header("Location: register.php");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -23,10 +31,10 @@ if (isset($_GET['error'])) {
                 <p style="color: red;"><?php echo $error_message; ?></p>
             <?php endif; ?>
 
-            <form method="POST" action="generate-otp.php">
-                <!-- Input untuk nomor WhatsApp -->
-                <input type="tel" name="phone" id="phone" placeholder="Masukkan nomor WhatsApp (08...)" required>
-                <button type="submit">Kirim OTP</button>
+            <form method="POST" action="register-pw.php">
+                <input type="hidden" name="email" value="<?php echo htmlspecialchars($email); ?>">
+                <input type="tel" name="phone" placeholder="Masukkan nomor WhatsApp (08...)" required>
+                <button type="submit">Enter</button>
             </form>
         </div>
     </div>
