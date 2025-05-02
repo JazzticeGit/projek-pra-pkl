@@ -2,38 +2,38 @@
 include '../../koneksi.php'; // Pastikan koneksi.php menginisialisasi $koneksi
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_POST['name'];
+    $name = mysqli_real_escape_string($koneksi, $_POST['name']);
     $stok = $_POST['stok'];
-    $deskripsi = $_POST['deskripsi'];
+    $deskripsi = mysqli_real_escape_string($koneksi, $_POST['deskripsi']);
     $harga = $_POST['harga'];
     $best_seller = isset($_POST['best_seller']) ? 1 : 0;
     $new_arrival = isset($_POST['new_arrival']) ? 1 : 0;
-    $size = $_POST['size'];
-    $color = $_POST['color'];
+    $color = mysqli_real_escape_string($koneksi, $_POST['color']);
     $id_kategori = $_POST['id_kategori'];
 
-    // Upload  gambar adohhh ribetnyaaa
-$upload_dir = "../../image/";
-$file_name = basename($_FILES["image"]["name"]);
-$target_file = $upload_dir . $file_name;
+    // Upload dan bersihkan nama file gambar
+    $upload_dir = "../../image/";
+    $original_file_name = $_FILES["image"]["name"];
+    $clean_file_name = preg_replace("/[^a-zA-Z0-9\.\-_]/", "_", $original_file_name);
+    $target_file = $upload_dir . $clean_file_name;
 
-if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-    $image = "image/" . $file_name; // Simpan path relatif untuk keperluan <img src=...>
-    
-    $query = "INSERT INTO produk (name, stok, deskripsi, harga, image, best_seller, new_arrival, size, color, id_kategori) 
-              VALUES ('$name', '$stok', '$deskripsi', '$harga', '$image', '$best_seller', '$new_arrival', '$size', '$color', '$id_kategori')";
-    
-    if (mysqli_query($koneksi, $query)) {
-        echo "<script>alert('Produk berhasil ditambahkan!'); window.location.href='index-produk.php';</script>";
+    if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+        $image = "image/" . $clean_file_name;
+
+        $query = "INSERT INTO produk (name, stok, deskripsi, harga, image, best_seller, new_arrival, color, id_kategori)
+                  VALUES ('$name', '$stok', '$deskripsi', '$harga', '$image', '$best_seller', '$new_arrival', '$color', '$id_kategori')";
+
+        if (mysqli_query($koneksi, $query)) {
+            echo "<script>alert('Produk berhasil ditambahkan!'); window.location.href='index-produk.php';</script>";
+        } else {
+            echo "Error saat insert: " . mysqli_error($koneksi);
+        }
     } else {
-        echo "Error saat insert: " . mysqli_error($koneksi);
+        echo "Upload gambar gagal!";
     }
-} else {
-    echo "Upload gambar gagal!";
 }
 
-}
-
+// Query tampilkan produk
 $query = "SELECT produk.*, kategori.jenis_produk 
           FROM produk 
           JOIN kategori ON produk.id_kategori = kategori.id";
@@ -42,6 +42,7 @@ $result = mysqli_query($koneksi, $query);
 // Ambil daftar kategori
 $kategori_query = mysqli_query($koneksi, "SELECT * FROM kategori");
 ?>
+
 
 <!DOCTYPE html>
 <html lang="id">
@@ -93,10 +94,10 @@ $kategori_query = mysqli_query($koneksi, "SELECT * FROM kategori");
             <img src="../../<?= htmlspecialchars($produk['image']) ?>" alt="<?= htmlspecialchars($produk['name']) ?>">
             <h3><?= htmlspecialchars($produk['name']) ?></h3>
             <p>Stok: <?= $produk['stok'] ?></p>
-            <p>Harga: Rp<?= number_format($produk['harga'], 2, ',', '.') ?></p>
-            <p>Kategori: <?= htmlspecialchars($produk['jenis_produk']) ?></p>
-            <p>Ukuran: <?= $produk['size'] ?> 
-             Warna: <?= htmlspecialchars($produk['color']) ?></p>
+            <p> Rp<?= number_format($produk['harga'], 2, ',', '.') ?></p>
+            <p> <?= htmlspecialchars($produk['jenis_produk']) ?></p>
+            <p> <?= $produk['size'] ?> 
+             <?= htmlspecialchars($produk['color']) ?></p>
             <?php if($produk['best_seller']): ?><p><strong>🔥 Best Seller</strong></p><?php endif; ?>
             <?php if($produk['new_arrival']): ?><p><strong>🆕 New Arrival</strong></p><?php endif; ?>
             <div class="actions">
