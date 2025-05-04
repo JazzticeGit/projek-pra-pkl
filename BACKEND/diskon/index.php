@@ -1,5 +1,6 @@
 <?php
 include '../../koneksi.php';
+include 'end-date.php'; // ← Tambahan untuk update status diskon yang kadaluarsa
 
 // Proses Tambah Diskon
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -22,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Ambil semua produk
 $produk_query = mysqli_query($koneksi, "SELECT * FROM produk");
 ?>
+
 
 <!DOCTYPE html>
 <html lang="id">
