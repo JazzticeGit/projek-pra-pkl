@@ -35,11 +35,11 @@ if (!$result) {
             <div class="card">
                 <img src="../../<?= htmlspecialchars($produk['image']) ?>" alt="<?= htmlspecialchars($produk['name']) ?>">
                 <div class="info">
-                    <span class="category"><?= htmlspecialchars($produk['kategori'] ?? 'Unisex') ?></span>
+                    <span class="category"><?= htmlspecialchars($produk['kategori'] ?? '') ?></span>
                     <h4><?= htmlspecialchars($produk['name']) ?></h4>
                     <p class="price">Rp<?= number_format($produk['harga'], 0, ',', '.') ?></p>
                     <div class="sizes"><?= htmlspecialchars($produk['ukuran'] ?? 'S-XXL') ?></div>
-                    <a href="keranjang.php?action=add&id=<?= $produk['produk_id'] ?>" class="cart-btn">
+                    <a href="../keranjang.php?action=add&id=<?= $produk['produk_id'] ?>" class="cart-btn">
                         <i class="fa-solid fa-cart-shopping"></i> Add to Cart
                     </a>
                 </div>
