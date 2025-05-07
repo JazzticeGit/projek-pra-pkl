@@ -44,7 +44,7 @@
             <!-- ICON LINK -->
              <div class="iconLink">
              <ul>
-                <li><a href="http://" class="fa-solid fa-cart-shopping"></a></li> <!-- CART SHOPING LINK -->
+                <li><a href="keranjang.php" class="fa-solid fa-cart-shopping"></a></li> <!-- CART SHOPING LINK -->
                 <li><a href="http://" class="fa-solid fa-user"></a></li> <!-- ACCOUNT LINK -->
              </ul>
              </div>
@@ -97,7 +97,7 @@
   <div class="grid_4">
     <h3>#BEST SELLER</h3>
     <button>
-      <a href="http://">View All</a>
+      <a href="../FRONTEND/produk/produk.php">View All</a>
       <div class="round"><i class="fa-solid fa-arrow-right"></i></div>
     </button>
   </div>

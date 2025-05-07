@@ -1,10 +1,36 @@
 <?php
+session_start();
 include '../../koneksi.php';
 
-// Ambil produk best seller dari database
+if (!isset($_SESSION['keranjang'])) {
+    $_SESSION['keranjang'] = [];
+}
+
+if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
+    $produk_id = (int)$_GET['id'];
+
+    $produk_query = mysqli_query($koneksi, "SELECT * FROM produk WHERE produk_id = $produk_id");
+    $produk = mysqli_fetch_assoc($produk_query);
+
+    if ($produk) {
+        if (isset($_SESSION['keranjang'][$produk_id])) {
+            $_SESSION['keranjang'][$produk_id]['jumlah'] += 1;
+        } else {
+            $_SESSION['keranjang'][$produk_id] = [
+                'id' => $produk['produk_id'],
+                'nama' => $produk['name'],
+                'harga' => $produk['harga'],
+                'gambar' => $produk['image'],
+                'jumlah' => 1
+            ];
+        }
+        header("Location: ".$_SERVER['PHP_SELF']);
+        exit;
+    }
+}
+
 $query = "SELECT * FROM produk WHERE best_seller = 1";
 $result = mysqli_query($koneksi, $query);
-
 if (!$result) {
     die("Query gagal: " . mysqli_error($koneksi));
 }
@@ -31,21 +57,20 @@ if (!$result) {
 </div>
 
 <div class="product-grid">
-        <?php while ($produk = mysqli_fetch_assoc($result)): ?>
-            <div class="card">
-                <img src="../../<?= htmlspecialchars($produk['image']) ?>" alt="<?= htmlspecialchars($produk['name']) ?>">
-                <div class="info">
-                    <span class="category"><?= htmlspecialchars($produk['kategori'] ?? '') ?></span>
-                    <h4><?= htmlspecialchars($produk['name']) ?></h4>
-                    <p class="price">Rp<?= number_format($produk['harga'], 0, ',', '.') ?></p>
-                    <div class="sizes"><?= htmlspecialchars($produk['ukuran'] ?? 'S-XXL') ?></div>
-                    <a href="../keranjang.php?action=add&id=<?= $produk['produk_id'] ?>" class="cart-btn">
-                        <i class="fa-solid fa-cart-shopping"></i> Add to Cart
-                    </a>
-                </div>
+    <?php while ($produk = mysqli_fetch_assoc($result)): ?>
+        <div class="card">
+            <img src="../../<?= htmlspecialchars($produk['image']) ?>" alt="<?= htmlspecialchars($produk['name']) ?>">
+            <div class="info">
+                <span class="category"><?= htmlspecialchars($produk['kategori'] ?? '') ?></span>
+                <h4><?= htmlspecialchars($produk['name']) ?></h4>
+                <p class="price">Rp<?= number_format($produk['harga'], 0, ',', '.') ?></p>
+                <div class="sizes"><?= htmlspecialchars($produk['size'] ?? 'S-XXL') ?></div>
+                <a href="?action=add&id=<?= $produk['produk_id'] ?>" class="cart-btn">
+                    <i class="fa-solid fa-cart-shopping"></i> Add to Cart
+                </a>
             </div>
-        <?php endwhile; ?>
-    </div>
+        </div>
+    <?php endwhile; ?>
 </div>
 
 </body>
