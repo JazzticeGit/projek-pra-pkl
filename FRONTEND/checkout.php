@@ -18,7 +18,7 @@ $total = isset($_SESSION['total_harga']) ? $_SESSION['total_harga'] : 0;
 
     <script>
     document.getElementById('pay-button').addEventListener('click', function () {
-        fetch('get-snap-token.php')
+        fetch('../BACKEND/get-snap-token.php')
             .then(response => response.json())
             .then(data => {
                 snap.pay(data.token, {
