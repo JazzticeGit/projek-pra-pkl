@@ -1,88 +1,43 @@
 <?php
 session_start();
-if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
-    exit;
-}
-require_once '../vendor/autoload.php';
-include '../koneksi.php';
-
-$user_id = $_SESSION['user_id'];
-
-\Midtrans\Config::$serverKey = 'SB-Mid-server-59v36Vn6tgB1v11nZsVGuVV2';
-\Midtrans\Config::$isProduction = false;
-\Midtrans\Config::$isSanitized = true;
-\Midtrans\Config::$is3ds = true;
-
-$queryUser = mysqli_query($koneksi, "SELECT * FROM users WHERE id = $user_id");
-$user = mysqli_fetch_assoc($queryUser);
-
-$queryCart = mysqli_query($koneksi, "SELECT k.*, p.name, p.harga FROM keranjang k 
-    JOIN produk p ON k.produk_id = p.produk_id WHERE k.user_id = $user_id");
-
-$items = [];
-$total = 0;
-while ($row = mysqli_fetch_assoc($queryCart)) {
-    $items[] = [
-        'id'       => $row['produk_id'],
-        'price'    => (int)$row['harga'],
-        'quantity' => (int)$row['jumlah'],
-        'name'     => $row['name']
-    ];
-    $total += $row['harga'] * $row['jumlah'];
-}
-
-$order_id = 'AGESA-' . time();
-
-$transaction = [
-    'transaction_details' => [
-        'order_id' => $order_id,
-        'gross_amount' => $total
-    ],
-    'customer_details' => [
-        'first_name' => $user['username'],
-        'email' => $user['email'],
-        'phone' => $user['phone'],
-    ],
-    'item_details' => $items
-];
-
-$snapToken = \Midtrans\Snap::getSnapToken($transaction);
+$total = isset($_SESSION['total_harga']) ? $_SESSION['total_harga'] : 0;
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Checkout - AGESA</title>
-    <link rel="stylesheet" href="style/checkout.css">
+    <title>Checkout</title>
     <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-0KijI4JUjVxvvbYV"></script>
 </head>
 <body>
-
-<div class="checkout-container">
-    <h2>Checkout</h2>
-    <p>Nama: <?= htmlspecialchars($user['username']) ?></p>
-    <p>Telepon: <?= htmlspecialchars($user['phone']) ?></p>
-    <p>Total Pembayaran: Rp<?= number_format($total, 0, ',', '.') ?></p>
+    <h2>Konfirmasi Pembayaran</h2>
+    <p>Total yang harus dibayar: <strong>Rp<?= number_format($total, 0, ',', '.') ?></strong></p>
+    
     <button id="pay-button">Bayar Sekarang</button>
-</div>
 
-<script>
+    <script>
     document.getElementById('pay-button').addEventListener('click', function () {
-        snap.pay('<?= $snapToken ?>', {
-            onSuccess: function(result){
-                window.location.href = 'success.php?order_id=<?= $order_id ?>';
-            },
-            onPending: function(result){
-                alert("Menunggu pembayaran.");
-            },
-            onError: function(result){
-                alert("Pembayaran gagal.");
-            }
-        });
+        fetch('get-snap-token.php')
+            .then(response => response.json())
+            .then(data => {
+                snap.pay(data.token, {
+                    onSuccess: function(result) {
+                        alert("Pembayaran berhasil!");
+                        console.log(result);
+                        window.location.href = 'success.php'; // redirect jika sukses
+                    },
+                    onPending: function(result) {
+                        alert("Menunggu pembayaran...");
+                        console.log(result);
+                    },
+                    onError: function(result) {
+                        alert("Pembayaran gagal.");
+                        console.log(result);
+                    }
+                });
+            });
     });
-</script>
-
+    </script>
 </body>
 </html>

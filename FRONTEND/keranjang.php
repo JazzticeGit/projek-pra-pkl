@@ -24,6 +24,7 @@ if (isset($_GET['action']) && isset($_GET['id'])) {
             unset($_SESSION['keranjang'][$id]);
             break;
     }
+    $_SESSION['total_harga'] = $total_harga;
     header("Location: keranjang.php");
     exit;
 }
@@ -95,6 +96,8 @@ foreach ($_SESSION['keranjang'] as $item) {
             <strong>Total: Rp<?= number_format($total_harga, 0, ',', '.') ?></strong>
         </div>
         <br>
+
+        <?php $_SESSION['total_harga'] = $total_harga; ?>
         <a href="checkout.php" style="padding: 10px 20px; background: #000; color: #fff; text-decoration: none;">Checkout</a>
     <?php endif; ?>
 </div>
