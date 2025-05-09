@@ -59,10 +59,12 @@ if (!$result) {
 <div class="product-grid">
     <?php while ($produk = mysqli_fetch_assoc($result)): ?>
         <div class="card">
-            <img src="../../<?= htmlspecialchars($produk['image']) ?>" alt="<?= htmlspecialchars($produk['name']) ?>">
+            <a href="detail-produk.php?id=<?= $produk['produk_id'] ?>">
+                <img src="../../<?= htmlspecialchars($produk['image']) ?>" alt="<?= htmlspecialchars($produk['name']) ?>">
+            </a>
             <div class="info">
                 <span class="category"><?= htmlspecialchars($produk['kategori'] ?? '') ?></span>
-                <h4><?= htmlspecialchars($produk['name']) ?></h4>
+                <h4><a href="detail-produk.php?id=<?= $produk['produk_id'] ?>"><?= htmlspecialchars($produk['name']) ?></a></h4>
                 <p class="price">Rp<?= number_format($produk['harga'], 0, ',', '.') ?></p>
                 <div class="sizes"><?= htmlspecialchars($produk['size'] ?? 'S-XXL') ?></div>
                 <a href="?action=add&id=<?= $produk['produk_id'] ?>" class="cart-btn">
