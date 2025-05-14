@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $best_seller = isset($_POST['best_seller']) ? 1 : 0;
     $new_arrival = isset($_POST['new_arrival']) ? 1 : 0;
     $size = $_POST['size'];
-    $color = $_POST['color'];
+    // $color = $_POST['color'];
     $id_kategori = $_POST['id_kategori'];
 
     if (!empty($_FILES['image']['name'])) {

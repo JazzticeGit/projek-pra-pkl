@@ -1,158 +1,93 @@
-body{
-    margin :0;
-    padding: 0;
-    font-family: 'poppins', sans-serif;
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #e8f0e5;
 }
 
-
-.banner-container {
-    display: flex;
-    justify-content: center;
-    padding: 20px 50px 0;
-  }
-  
-  .best-seller-banner {
-    background-color: #c89e58;
-    color: white;
-    padding: 40px 30px;
-    display: flex;
-    align-items: center;
-    border-radius: 10px;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    max-width: 1300px;
-    width: 100%;
-  }
-  
-  .logo-img {
-    height: 50px;
-    width: 50px;
-    object-fit: contain;
-  }
-  
-  .title-group {
-    text-align: center;
-    flex: 1;
-  }
-  
-  .title-group h1 {
-    margin: 0;
-    font-size: 3em;
-    font-weight: 900;
-  }
-  
-  .title-group p {
-    margin: 5px 0 0;
-    font-size: 1em;
-  }
-  
-
-  /* Main Container */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: 'Arial', sans-serif;
-}
-
-/* Header Styles */
-header {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-header h1 {
-    color: #333;
-    font-size: 2.2em;
-    margin-bottom: 5px;
-}
-
-header p {
-    color: #666;
-    font-size: 1em;
-    margin-top: 0;
-}
-
-/* Product Grid */
 .product-grid {
-    display: flex;
-    justify-content: left;
-    align-items: left;
-    gap: 30px;
-    padding-left: 175px;
-    padding-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  padding: 40px 20px;
 }
 
-/* Product Card */
-.card {
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
-    overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s;
-    background: white;
-    width: 250px;
+.product-card {
+  background: #fff;
+  border-radius: 20px;
+  width: 320px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s;
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+.product-card:hover {
+  transform: translateY(-5px);
 }
 
-.card img {
-    width: 250px;
-    height: 250px;
-    object-fit: contain;
-    border-bottom: 1px solid #e0e0e0;
+.product-image {
+  width: 100%;
+  height: 250px;
+  object-fit: contain;
+  border-bottom: 1px solid #eee;
 }
 
-/* Product Info */
-.info {
-    padding: 15px;
-    text-align: center;
+.product-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.category {
-    display: block;
-    font-size: 0.8em;
-    color: #666;
-    margin-bottom: 5px;
+.product-title {
+  font-size: 20px;
+  color: #222;
+  margin: 0 0 10px;
 }
 
-.info h4 {
-    margin: 0 0 10px 0;
-    font-size: 1.1em;
-    color: #333;
-    font-weight: 600;
+.product-description {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 16px;
 }
 
-.price {
-    font-weight: bold;
-    color: #e74c3c;
-    margin-bottom: 8px;
-    font-size: 1.1em;
+.product-options {
+  margin-bottom: 20px;
 }
 
-.sizes {
-    color: #666;
-    font-size: 0.9em;
-    margin-bottom: 15px;
+.color-dropdown {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background-color: #f5f5f5;
+  font-size: 14px;
 }
 
-.cart-btn {
-    display: inline-block;
-    background-color: #333;
-    color: white;
-    padding: 8px 15px;
-    border-radius: 4px;
-    text-decoration: none;
-    font-size: 0.9em;
-    transition: background-color 0.3s;
+.product-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.cart-btn:hover {
-    background-color: #e74c3c;
+.product-price {
+  font-size: 20px;
+  font-weight: bold;
+  color: #111;
 }
 
-.cart-btn i {
-    margin-right: 5px;
+.add-to-cart-btn {
+  background-color: #38d168;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #32bd5e;
 }
