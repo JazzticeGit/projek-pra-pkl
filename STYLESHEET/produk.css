@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Segoe UI', sans-serif,'Inter';
   background-color: #e8f0e5;
 }
 
@@ -91,3 +91,166 @@ body {
 .add-to-cart-btn:hover {
   background-color: #32bd5e;
 }
+
+
+ul {
+    list-style-type: none;
+    display: flex;
+}
+
+nav {
+    padding-top: 10px;
+    margin: 10px;
+    position: sticky;
+}
+
+.navbg {
+    border: 2px solid #6a6a6a;
+    border-radius: 15px;
+    display: flex;
+}
+
+.navbg img {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    left: 20px;
+    top: 4px;
+}
+
+.navlink ul li {
+    text-indent: 35px;
+    position: relative;
+    left: 70px;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration-line: underline;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.iconLink {
+    position: relative;
+    left: 350px;
+    letter-spacing: 20px;
+    text-decoration: none;
+}
+
+.searchBar {
+    position: relative;
+    left: 300px;
+    display: flex;
+    align-items: center;
+    background-color: #f5f5f5;
+    border-radius: 25px;
+    padding: 8px 15px;
+    width: 600px;
+    border: 1px solid #ccc;
+    height: 17px;
+    top: 8px;
+}
+
+.searchBar i {
+    color: gray;
+    margin-right: 10px;
+    font-size: 16px;
+    position: relative;
+    left: 360px;
+}
+
+input[type=text] {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 16px;
+    flex: 1;
+}
+
+.searchBar button {
+    border: 2px solid rgb(57, 57, 57);
+    border-radius: 5px;
+    height: px; 
+}
+
+.banner {
+    background-color: #c89e5d;
+    border-radius: 15px;
+    padding: 30px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    color: white;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 1200px;
+    box-sizing: border-box;
+    gap: 20px;
+}
+
+.logo-img {
+    height: 50px; 
+    width: auto;
+    object-fit: contain;
+}
+
+.title {
+    text-align: center;
+    flex-grow: 1;
+}
+
+.title h1 {
+    font-size: 32px;
+    margin: 0;
+    font-weight: bold;
+}
+
+.title p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.pricing-header {
+    padding: 80px 0;
+    /* background-color: #f8f9fa; */
+    text-align: center;
+}
+
+.pricing-label {
+    display: inline-block;
+    background-color: #4ade80;
+    color: #115e59;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 6px 16px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+}
+
+.header-title {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #1a2e35;
+    /* margin-bottom: 10px; */
+}
+
+/* @media (max-width: 768px) {
+    .pricing-header {
+        padding: 60px 0;
+    }
+    
+    .header-title {
+        font-size: 36px;
+    }
+} */

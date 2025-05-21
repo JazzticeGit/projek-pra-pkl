@@ -39,8 +39,60 @@ $result = mysqli_query($koneksi, $query);
     <title>Best Seller</title>
     <link rel="stylesheet" href="../../STYLESHEET/produk.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Bebas Neue' rel='stylesheet'>
 </head>
 <body>
+
+    <nav>
+        
+        <div class="navbg">
+            <!-- GAMBAR NAVIGASI -->
+             <a href="../index.php"><img src="../../image/AGESA.png" alt="" srcset=""></a>
+
+
+             <!-- LINK NAVIGASI -->
+            <div class="navlink">
+                <ul>
+                    <li><a href="produk.php">Shop</a></li>  <!-- SEMENTARA SEBELUM DROPDoWN LINK -->
+                    <li><a href="produk.php">Collection</a></li>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../index.php #footer">Contack</a></li>
+                </ul>
+            </div>
+
+
+            <!-- SEARCH BAR -->
+            <div class="searchBar">
+                <form action="search.php" method="GET">
+                <input type="text" name="query" placeholder="   Search  " required>
+                <i class="fas fa-search"></i>
+                <!-- <button type="submit">Cari</button> -->
+                </form>
+                
+            </div>
+
+
+            <!-- ICON LINK -->
+             <div class="iconLink">
+             <ul>
+                <li><a href="keranjang.php" class="fa-solid fa-cart-shopping"></a></li> <!-- CART SHOPING LINK -->
+                <li><a href="http://" class="fa-solid fa-user"></a></li> <!-- ACCOUNT LINK -->
+             </ul>
+             </div>
+        </div>
+    </nav>
+
+
+<header class="pricing-header">
+        <div class="container">
+            <div class="pricing-label">Product</div>
+            <h1 class="header-title">Items Terlaris Saat Ini<br>Jangan Ketinggalan</h1>
+        </div>
+    </header>
+
 
 <div class="product-grid">
     <?php while ($produk = mysqli_fetch_assoc($result)): ?>

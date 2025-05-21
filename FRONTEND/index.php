@@ -14,7 +14,7 @@
     <!-- NAVIGASI BAR -->
     <nav>
         
-        <div class="navbg">
+        <div class="navbg" id="nav">
             <!-- GAMBAR NAVIGASI -->
              <a href="index.php"><img src="../image/AGESA.png" alt="" srcset=""></a>
 
@@ -22,7 +22,7 @@
              <!-- LINK NAVIGASI -->
             <div class="navlink">
                 <ul>
-                    <li><a href="http://">Shop</a></li>  <!-- SEMENTARA SEBELUM DROPDoWN LINK -->
+                    <li><a href="../FRONTEND/produk/produk.php">Shop</a></li>  
                     <li><a href="http://">Collection</a></li>
                     <li><a href="http://">About</a></li>
                     <li><a href="http://">Contack</a></li>
@@ -213,12 +213,12 @@
     </div>
 
     <!-- Tengah: Navigasi dan teks -->
-    <div class="footer-center">
+    <div class="footer-center" id="footer">
       <nav class="footer-nav">
-        <a href="#">Home</a>
+        <a href="#nav">Home</a>
         <a href="#">Review</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
+        <a href="about.html">About</a>
+        <a href="#footer">Contact</a>
       </nav>
       <p class="footer-text">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget dolor tempus, convallis odio id, pulvinar risus. Lorem ipsum dolor sit amet,
