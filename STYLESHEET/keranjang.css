@@ -1,51 +1,61 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
 }
 
 .container {
-    max-width: 900px;
+    width: 90%;
     margin: 30px auto;
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-table {
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.keranjang-table {
     width: 100%;
     border-collapse: collapse;
+    margin-bottom: 20px;
 }
 
-thead {
-    background: #eee;
+.keranjang-table th,
+.keranjang-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
 }
 
-th, td {
-    padding: 15px;
-    text-align: left;
+.keranjang-table th {
+    background-color: #333;
+    color: #fff;
 }
 
-td img {
-    border-radius: 8px;
+.keranjang-table img {
+    max-width: 80px;
+    height: auto;
 }
 
-input[type="number"] {
-    width: 60px;
+.checkout-box {
+    text-align: right;
 }
 
 .checkout-btn {
-    text-align: right;
-    margin-top: 20px;
-}
-
-.btn {
-    background-color: #007bff;
+    display: inline-block;
+    background-color: #28a745;
     color: white;
-    padding: 10px 18px;
+    padding: 12px 24px;
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: 5px;
+    font-weight: bold;
 }
 
-.btn:hover {
-    background-color: #0056b3;
+.checkout-btn:hover {
+    background-color: #218838;
 }

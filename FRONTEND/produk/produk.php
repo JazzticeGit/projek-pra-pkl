@@ -78,7 +78,7 @@ $result = mysqli_query($koneksi, $query);
             <!-- ICON LINK -->
              <div class="iconLink">
              <ul>
-                <li><a href="keranjang.php" class="fa-solid fa-cart-shopping"></a></li> <!-- CART SHOPING LINK -->
+                <li><a href="../keranjang.php" class="fa-solid fa-cart-shopping"></a></li> <!-- CART SHOPING LINK -->
                 <li><a href="http://" class="fa-solid fa-user"></a></li> <!-- ACCOUNT LINK -->
              </ul>
              </div>
@@ -111,7 +111,7 @@ $result = mysqli_query($koneksi, $query);
 
                 <div class="product-footer">
                     <div class="product-price">Rp<?= number_format($produk['harga'], 0, ',', '.') ?></div>
-                    <a href="?action=add&id=<?= $produk['produk_id'] ?>" class="add-to-cart-btn">
+                    <a href="../../FRONTEND/keranjang.php?action=add&id=<?= $produk['produk_id'] ?>" class="add-to-cart-btn">
                         <i class="fa-solid fa-cart-plus"></i> Add to cart
                     </a>
                 </div>
