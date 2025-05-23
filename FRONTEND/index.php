@@ -168,13 +168,7 @@
 
 <div class="about-container">
 
-  <!-- TULISAN H1 FONT POPPINS -->
-   <h1>“Website ini dikembangkan oleh Asad Tevy Ramadhan (Tevy) <br>
-    dan Jonathan Aridansyah (Nathan), yang merupakan <br>
-     seorang siswa kelas 11 di SMKN 1 Purbalingga. ini adalah <br>
-      website brand fashion pria  Dengan visi menghadirkan <br>
-       pakaian yang nyaman, stylish, dan cocok untuk berbagai <br>
-        kesempatan”</h1>
+
 
   <!-- GAMBAR DAN ABOUT -->
 
