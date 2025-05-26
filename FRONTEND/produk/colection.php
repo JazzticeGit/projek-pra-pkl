@@ -28,8 +28,12 @@ if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
     }
 }
 
-$query = "SELECT * FROM produk WHERE best_seller = 1";
-$result = mysqli_query($koneksi, $query);
+$query_kaos = "SELECT * FROM produk WHERE id_kategori = 1";
+$result_kaos = mysqli_query($koneksi, $query_kaos);
+$query_kemeja = "SELECT * FROM produk WHERE id_kategori = 2";
+$result_kemeja = mysqli_query($koneksi, $query_kemeja);
+$query_jaket = "SELECT * FROM produk WHERE id_kategori = 3";
+$result_jaket = mysqli_query($koneksi, $query_jaket);
 ?>
 
 <!DOCTYPE html>
@@ -94,8 +98,67 @@ $result = mysqli_query($koneksi, $query);
     </header>
 
 
+<div class="label-produk">T-shirt <i class="fa-solid fa-chevron-down"></i></div>
 <div class="product-grid">
-    <?php while ($produk = mysqli_fetch_assoc($result)): ?>
+    <?php while ($produk = mysqli_fetch_assoc($result_kaos)): ?>
+        <div><a href="detail-produk.php?<?= $produk['produk_id'] ?>">
+        <div class="product-card">
+            <img src="../../<?= htmlspecialchars($produk['image']) ?>" alt="<?= htmlspecialchars($produk['name']) ?>" class="product-image">
+
+            <div class="product-content">
+                <h2 class="product-title"><?= htmlspecialchars($produk['name']) ?></h2>
+                <p class="product-description"><?= htmlspecialchars($produk['deskripsi'] ?? 'Deskripsi belum tersedia.') ?></p>
+
+                <div class="product-options">
+                    <!-- <select name="warna" class="color-dropdown">
+                        <option value="<?= htmlspecialchars($produk['warna']) ?>"><?= htmlspecialchars($produk['warna']) ?></option>
+                    </select> -->
+                </div>
+
+                <div class="product-footer">
+                    <div class="product-price">Rp<?= number_format($produk['harga'], 0, ',', '.') ?></div>
+                    <a href="../keranjang.php?action=add&id=<?= $produk['produk_id'] ?>" class="add-to-cart-btn">
+                        <i class="fa-solid fa-cart-plus"></i> Add to cart
+                    </a>
+                </div>
+            </div>
+        </div>
+    </a></div>
+    <?php endwhile; ?>
+</div>
+
+<div class="label-produk">Kemeja <i class="fa-solid fa-chevron-down"></i></div>
+<div class="product-grid">
+    <?php while ($produk = mysqli_fetch_assoc($result_kemeja)): ?>
+        <div><a href="detail-produk.php?<?= $produk['produk_id'] ?>">
+        <div class="product-card">
+            <img src="../../<?= htmlspecialchars($produk['image']) ?>" alt="<?= htmlspecialchars($produk['name']) ?>" class="product-image">
+
+            <div class="product-content">
+                <h2 class="product-title"><?= htmlspecialchars($produk['name']) ?></h2>
+                <p class="product-description"><?= htmlspecialchars($produk['deskripsi'] ?? 'Deskripsi belum tersedia.') ?></p>
+
+                <div class="product-options">
+                    <!-- <select name="warna" class="color-dropdown">
+                        <option value="<?= htmlspecialchars($produk['warna']) ?>"><?= htmlspecialchars($produk['warna']) ?></option>
+                    </select> -->
+                </div>
+
+                <div class="product-footer">
+                    <div class="product-price">Rp<?= number_format($produk['harga'], 0, ',', '.') ?></div>
+                    <a href="../keranjang.php?action=add&id=<?= $produk['produk_id'] ?>" class="add-to-cart-btn">
+                        <i class="fa-solid fa-cart-plus"></i> Add to cart
+                    </a>
+                </div>
+            </div>
+        </div>
+    </a></div>
+    <?php endwhile; ?>
+</div>
+
+<div class="label-produk">Jacket <i class="fa-solid fa-chevron-down"></i></div>
+<div class="product-grid">
+    <?php while ($produk = mysqli_fetch_assoc($result_jaket)): ?>
         <div><a href="detail-produk.php?<?= $produk['produk_id'] ?>">
         <div class="product-card">
             <img src="../../<?= htmlspecialchars($produk['image']) ?>" alt="<?= htmlspecialchars($produk['name']) ?>" class="product-image">

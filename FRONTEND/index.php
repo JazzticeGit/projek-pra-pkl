@@ -23,9 +23,9 @@
             <div class="navlink">
                 <ul>
                     <li><a href="../FRONTEND/produk/produk.php">Shop</a></li>  
-                    <li><a href="http://">Collection</a></li>
+                    <li><a href="../FRONTEND/produk/colection.php">Collection</a></li>
                     <li><a href="http://">About</a></li>
-                    <li><a href="http://">Contack</a></li>
+                    <li><a href="#footer">Contack</a></li>
                 </ul>
             </div>
 

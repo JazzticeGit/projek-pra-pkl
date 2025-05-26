@@ -228,8 +228,8 @@ input[type=text] {
 
 .pricing-label {
     display: inline-block;
-    background-color: #4ade80;
-    color: #115e59;
+    background-color: rgb(74, 222, 128);
+    color: rgb(17, 94, 89);
     font-weight: 600;
     font-size: 16px;
     padding: 6px 16px;
@@ -254,3 +254,29 @@ input[type=text] {
         font-size: 36px;
     }
 } */
+
+.label-produk{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 70px;
+    color: rgba(18, 144, 65, 0.782);
+    text-align: Left;
+    /* font-weight: 600; */
+    font-size: 30px;
+    font-family: 'bebas neue';
+    padding: 15px 15px;
+    width: 90%;
+    height: 40px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+box-shadow: 0 0px 20px rgba(255, 255, 255, 0.301);
+backdrop-filter: blur(9.6px);
+-webkit-backdrop-filter: blur(9.6px);
+/* border: 1px solid rgba(0, 0, 0, 0.3); */
+background: rgb(255, 255, 255);
+
+}
+
+.label-produk i{
+  margin-top: 5px;
+}

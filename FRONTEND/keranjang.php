@@ -63,7 +63,7 @@ $total_items = array_sum($_SESSION['keranjang']);
 <div class="container">
     <!-- Header -->
     <div class="header">
-        <a href="../index.php" class="back-btn">
+        <a href="produk/produk.php" class="back-btn">
             <i class="fas fa-arrow-left"></i>
         </a>
         <h1>Keranjang Belanja</h1>
@@ -143,7 +143,7 @@ $total_items = array_sum($_SESSION['keranjang']);
             <a href="checkout.php" class="checkout-btn">Checkout Sekarang</a>
             
             <div class="shop-link">
-                <a href="../index.php">shop</a>
+                <a href="produk/produk.php">shop</a>
             </div>
         </div>
     <?php endif; ?>
