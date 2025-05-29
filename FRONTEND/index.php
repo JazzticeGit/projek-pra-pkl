@@ -24,7 +24,7 @@
                 <ul>
                     <li><a href="../FRONTEND/produk/produk.php">Shop</a></li>  
                     <li><a href="../FRONTEND/produk/colection.php">Collection</a></li>
-                    <li><a href="http://">About</a></li>
+                    <li><a href="about.html">About</a></li>
                     <li><a href="#footer">Contack</a></li>
                 </ul>
             </div>

@@ -1,24 +1,30 @@
 <?php
+require '../koneksi.php';
+require '../MIDTRANS/Midtrans.php';
+
 session_start();
-require_once '../vendor/autoload.php'; // pastikan Midtrans SDK sudah di-install
+$gross_amount = $_SESSION['total_harga'];
 
 \Midtrans\Config::$serverKey = 'SB-Mid-server-59v36Vn6tgB1v11nZsVGuVV2';
 \Midtrans\Config::$isProduction = false;
 \Midtrans\Config::$isSanitized = true;
 \Midtrans\Config::$is3ds = true;
 
-// Ambil total dari session
-$gross_amount = isset($_SESSION['total_harga']) ? $_SESSION['total_harga'] : 0;
+$params = [
+    'transaction_details' => [
+        'order_id' => rand(),
+        'gross_amount' => $gross_amount,
+    ],
+    'customer_details' => [
+        'first_name' => 'Asad',
+        'phone' => '6285800488815',
+    ],
+];
 
-// Buat transaksi
-$transaction_details = array(
-    'order_id' => 'ORDER-' . rand(),
-    'gross_amount' => $gross_amount
-);
-
-$transaction = array(
-    'transaction_details' => $transaction_details
-);
-
-$snapToken = \Midtrans\Snap::getSnapToken($transaction);
-echo json_encode(['token' => $snapToken]);
+try {
+    $snapToken = \Midtrans\Snap::getSnapToken($params);
+    header('Content-Type: application/json');
+    echo json_encode(['token' => $snapToken]);
+} catch (Exception $e) {
+    echo "Gagal membuat token Midtrans: " . $e->getMessage();
+}
