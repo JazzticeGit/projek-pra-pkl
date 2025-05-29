@@ -25,7 +25,7 @@
                     <li><a href="../FRONTEND/produk/produk.php">Shop</a></li>  
                     <li><a href="../FRONTEND/produk/colection.php">Collection</a></li>
                     <li><a href="about.html">About</a></li>
-                    <li><a href="#footer">Contack</a></li>
+                    <li><a href="#footer">Contact</a></li>
                 </ul>
             </div>
 
@@ -45,7 +45,7 @@
              <div class="iconLink">
              <ul>
                 <li><a href="keranjang.php" class="fa-solid fa-cart-shopping"></a></li> <!-- CART SHOPING LINK -->
-                <li><a href="http://" class="fa-solid fa-user"></a></li> <!-- ACCOUNT LINK -->
+                <li><a href="profile.php" class="fa-solid fa-user"></a></li> <!-- ACCOUNT LINK -->
              </ul>
              </div>
         </div>
@@ -88,7 +88,7 @@
   <div class="grid_3">
     <h3>#NEW ARRIVAL</h3>
     <button>
-    <a href="http://">View All</a>
+    <a href="../FRONTEND/produk/new_arrival.php">View All</a>
     <div class="round"><i class="fa-solid fa-arrow-right"></i></div>
   </button>
   </div>
