@@ -228,7 +228,7 @@ input[type=text] {
 
 .pricing-label {
     display: inline-block;
-    background-color: rgb(74, 222, 128);
+    background-color: #4ade80;
     color: rgb(17, 94, 89);
     font-weight: 600;
     font-size: 16px;
