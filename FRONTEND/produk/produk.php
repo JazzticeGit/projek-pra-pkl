@@ -9,7 +9,6 @@ if (!isset($_SESSION['keranjang'])) {
 if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
     $produk_id = (int)$_GET['id'];
 
-    // Cek produk dan diskon aktif
     $query = "
         SELECT p.*, d.persen_diskon, d.start_date, d.end_date
         FROM produk p
@@ -22,7 +21,6 @@ if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
     $produk = mysqli_fetch_assoc($produk_query);
 
     if ($produk) {
-        // Hitung harga diskon jika ada diskon aktif
         $harga_asli = $produk['harga'];
         $persen_diskon = $produk['persen_diskon'];
         if ($persen_diskon && $persen_diskon > 0) {
@@ -31,7 +29,6 @@ if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
             $harga_final = $harga_asli;
         }
 
-        // Default size dan color untuk add to cart langsung dari halaman produk
         $cart_key = $produk_id . '_default_default';
 
         if (isset($_SESSION['keranjang'][$cart_key])) {
@@ -65,6 +62,9 @@ LEFT JOIN diskon d ON p.produk_id = d.produk_id
 WHERE p.best_seller = 1
 ";
 $result = mysqli_query($koneksi, $query);
+
+error_reporting(E_ALL);
+ini_set('display_errors' , 1);
 ?>
 
 <!DOCTYPE html>
