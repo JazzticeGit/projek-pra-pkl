@@ -854,3 +854,125 @@ iframe{
     font-size: 14px;
   }
 }
+
+/* Overlay background */
+.profile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* dark overlay */
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* Content box */
+.profile-overlay-content {
+    background-color: #fff;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    padding: 30px 25px;
+    position: relative;
+    font-family: 'Segoe UI', sans-serif;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Close button */
+.close-profile {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 24px;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.close-profile:hover {
+    color: #4ade80;
+}
+
+/* Profile header */
+.profile-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-avatar img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #4ade80;
+    margin-bottom: 10px;
+}
+
+.profile-header h3 {
+    margin: 0;
+    color: #333;
+    font-size: 1.4rem;
+}
+
+/* Profile details */
+.profile-details {
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.profile-details p {
+    margin: 8px 0;
+}
+
+/* Action buttons */
+.profile-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.profile-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #4ade80;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.profile-btn i {
+    margin-right: 8px;
+}
+
+.profile-btn:hover {
+    background-color: #22c55e;
+}
+
+.logout-btn {
+    background-color: #ef4444;
+}
+
+.logout-btn:hover {
+    background-color: #dc2626;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

@@ -1,3 +1,28 @@
+<?php
+session_start();
+include '../koneksi.php'; 
+
+if (!isset($_SESSION['user_id'])) {
+   header("location:login.php?loginDulu");
+}
+
+$user_id = $_SESSION['user_id'];
+$query = "SELECT * FROM toko_baju.users WHERE id = ?";
+$stmt = $koneksi->prepare($query);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows === 0) {
+    die('User tidak ditemukan');
+}
+
+$user = $result->fetch_assoc();
+$stmt->close();
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,7 +70,9 @@
              <div class="iconLink">
              <ul>
                 <li><a href="keranjang.php" class="fa-solid fa-cart-shopping"></a></li> <!-- CART SHOPING LINK -->
-                <li><a href="profile.php" class="fa-solid fa-user"></a></li> <!-- ACCOUNT LINK -->
+                <li>
+                <a href="#" class="fa-solid fa-user" id="profileTrigger"></a>
+                </li>
              </ul>
              </div>
         </div>
@@ -190,6 +217,42 @@
 </div>
 
 
+<!-- Avatar / Profil Trigger -->
+<li>
+    <a href="#" id="profileTrigger">
+        <img src="<?php echo !empty($user['icon']) ? htmlspecialchars($user['icon']) : 'default-avatar.jpg'; ?>" 
+             alt="User Avatar" 
+             style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
+    </a>
+</li>
+
+<!-- Overlay Structure -->
+<div id="profileOverlay" class="profile-overlay">
+    <div class="profile-overlay-content">
+        <span class="close-profile">&times;</span>
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <img src="../<?php echo !empty($user['icon']) ? htmlspecialchars($user['icon']) : 'default-avatar.jpg'; ?>" 
+                     alt="User Avatar">
+            </div>
+            <h3><?php echo htmlspecialchars($user['username']); ?></h3>
+        </div>
+        <div class="profile-details">
+            <p><strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
+            <p><strong>Tanggal Lahir:</strong> <?php echo date('d F Y', strtotime($user['birth'])); ?></p>
+            <p><strong>Telepon:</strong> <?php echo htmlspecialchars($user['phone']); ?></p>
+            <p><strong>Bergabung:</strong> <?php echo date('d F Y', strtotime($user['tgl_daftar'])); ?></p>
+        </div>
+        <div class="profile-actions">
+            <a href="keranjang.php" class="profile-btn"><i class="fas fa-shopping-cart"></i> Keranjang Saya</a>
+            <a href="update-profil.php" class="profile-btn"><i class="fas fa-user-edit"></i> Edit Profil</a>
+            <a href="logout.php" class="profile-btn logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </div>
+</div>
+
+
+
 <!-- FOOTER -->
 
 <footer class="footer-container">
@@ -233,5 +296,9 @@
 </footer>
 
 </body>
-<script src="https://kit.fontawesome.com/2de2a0ed8e.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/2de2a0ed8e.js" crossorigin="anonymous">
+</script>
+
+<script src="../javascript/profil.js"></script>
+
 </html>
