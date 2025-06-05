@@ -496,8 +496,8 @@ input[type=text] {
 }
 
 .cta-image img {
-    width: 100%;
-    height: 400px;
+    width: 100px;
+    height: 100px;
     object-fit: cover;
     border-radius: 20px;
 }
@@ -510,63 +510,94 @@ input[type=text] {
 }
 
 /* Footer */
-.footer {
-    background: var(--primary-brown);
-    color: white;
-    padding: 3rem 2rem 1rem;
+.footer-container {
+  background-color: #A0906A;
+  color: #fff;
+  padding: 60px 40px 20px;
+  font-family: 'Poppins', sans-serif;
 }
 
 .footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
 }
 
-.footer-section h3, .footer-section h4 {
-    margin-bottom: 1rem;
+.footer-left,
+.footer-center,
+.footer-right {
+  flex: 1;
+  min-width: 250px;
 }
 
-.footer-section ul {
-    list-style: none;
+.footer-logo {
+  width: 150px;
+  margin-bottom: 10px;
 }
 
-.footer-section ul li {
-    margin-bottom: 0.5rem;
-}
-
-.footer-section a {
-    color: var(--cream);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-section a:hover {
-    color: var(--soft-orange);
+.footer-left p {
+  margin-top: 10px;
+  font-weight: 600;
+  color: #ccc;
 }
 
 .social-icons {
-    display: flex;
-    gap: 1rem;
-    font-size: 1.5rem;
+  margin-top: 20px;
+  font-size: 1.5rem;
 }
 
 .social-icons i {
-    cursor: pointer;
-    transition: color 0.3s ease;
+  margin-right: 15px;
+  cursor: pointer;
+  transition: color 0.3s;
 }
 
 .social-icons i:hover {
-    color: var(--soft-orange);
+  color: #f39c12;
+}
+
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.footer-nav a {
+  color: #fff;
+  text-decoration: none;
+  margin-bottom: 10px;
+  transition: color 0.3s;
+}
+
+.footer-nav a:hover {
+  color: #f39c12;
+}
+
+.footer-text {
+  color: #ccc;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.footer-right h4 {
+  margin-bottom: 15px;
+}
+
+.footer-right iframe {
+  width: 100%;
+  height: 200px;
+  border: none;
+  border-radius: 8px;
 }
 
 .footer-bottom {
-    text-align: center;
-    margin-top: 2rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--secondary-brown);
-    color: var(--cream);
+  text-align: center;
+  margin-top: 40px;
+  border-top: 1px solid #333;
+  padding-top: 15px;
+  font-size: 0.85rem;
+  color: #aaa;
 }
 
 /* Responsive Design */
