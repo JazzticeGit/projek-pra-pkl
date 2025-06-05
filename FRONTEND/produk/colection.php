@@ -223,7 +223,7 @@ $result_jaket = mysqli_query($koneksi, $query_jaket);
             <div class="navlink">
                 <ul>
                     <li><a href="produk.php">Shop</a></li>  <!-- SEMENTARA SEBELUM DROPDoWN LINK -->
-                    <li><a href="produk.php">Collection</a></li>
+                    <li><a href="../produk/colection.php">Collection</a></li>
                     <li><a href="../about.html">About</a></li>
                     <li><a href="../index.php #footer">Contack</a></li>
                 </ul>

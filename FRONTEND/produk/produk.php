@@ -187,7 +187,7 @@ ini_set('display_errors' , 1);
         <div class="navlink">
             <ul>
                 <li><a href="produk.php">Shop</a></li>
-                <li><a href="produk.php">Collection</a></li>
+                <li><a href="../produk/colection.php">Collection</a></li>
                 <li><a href="../about.html">About</a></li>
                 <li><a href="../index.php#footer">Contact</a></li>
             </ul>
