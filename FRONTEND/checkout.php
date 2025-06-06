@@ -2,13 +2,13 @@
 session_start();
 include '../koneksi.php';
 
-$user_id = $_SESSION['user_id'] ?? 1; // asumsikan user login
+$user_id = $_SESSION['user_id'] ?? 1;
 
-// Ambil produk dari keranjang user
+// Ambil produk dari keranjang user yang statusnya 'aktif'
 $queryKeranjang = mysqli_query($koneksi, "SELECT k.*, p.name, p.image, p.harga 
   FROM keranjang k 
   JOIN produk p ON k.produk_id = p.produk_id 
-  WHERE k.user_id = $user_id");
+  WHERE k.user_id = $user_id AND k.status = 'aktif'");
 
 $produk = [];
 $subtotal = 0;
@@ -20,10 +20,9 @@ while ($row = mysqli_fetch_assoc($queryKeranjang)) {
 // Ambil metode pembayaran
 $queryMetode = mysqli_query($koneksi, "SELECT * FROM metode_pembayaran 
   WHERE nama IN ('DANA', 'GoPay', 'OVO')");
+?>
 
- ?>
-
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
@@ -33,7 +32,7 @@ $queryMetode = mysqli_query($koneksi, "SELECT * FROM metode_pembayaran
 <body>
   <div class="container">
     <h2>Checkout</h2>
-    <form action="proses-pembayaran.php" method="POST">
+    <form action="menunggu-pembayaran.php" method="POST">
       <div class="checkout-container">
         <div class="left-section">
           <h3>Alamat Pengiriman</h3>
@@ -50,6 +49,7 @@ $queryMetode = mysqli_query($koneksi, "SELECT * FROM metode_pembayaran
                 <p>Harga: Rp<?= number_format($item['harga']) ?></p>
               </div>
             </div>
+            <input type="hidden" name="keranjang_ids[]" value="<?= $item['id'] ?>">
           <?php endforeach; ?>
         </div>
 

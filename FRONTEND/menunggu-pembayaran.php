@@ -1,233 +1,170 @@
 <?php
+session_start();
 include '../koneksi.php';
 
-$pembayaran_id = $_GET['pembayaran_id'];
+$user_id = $_SESSION['user_id'] ?? 1;
+$alamat = $_POST['alamat_lengkap'] ?? '-';
+$total_bayar = $_POST['total_bayar'] ?? 0;
+$id_metode = $_POST['id_metode_pembayaran'] ?? 0;
+$keranjang_ids = $_POST['keranjang_ids'] ?? [];
 
-// Get payment data with method info and total from pemesanan table
-$query = "SELECT 
-    p.id, p.status, p.tgl_pembayaran, 
-    m.nama, m.norek, 
-    pe.total_harga
-FROM pembayaran p
-JOIN metode_pembayaran m ON p.id_metode_pembayaran = m.id
-JOIN pemesanan pe ON pe.pembayaran_id = p.id
-WHERE p.id = $pembayaran_id;
-";
-
-
-$data = mysqli_fetch_assoc(mysqli_query($koneksi, $query));
-
-if ($data['status'] == 'berhasil') {
-    header("Location: sukses.php");
-    exit;
+if (empty($keranjang_ids) || !$id_metode || $total_bayar <= 0) {
+    die("Data tidak lengkap.");
 }
 
-// Format tanggal pemesanan
-$tanggal_pemesanan = date('d M Y, H:i', strtotime($data['tgl_pembayaran']));
-$order_id = str_pad($data['id'], 6, '0', STR_PAD_LEFT);
+// Ambil data metode pembayaran
+$queryMetode = mysqli_query($koneksi, "SELECT * FROM metode_pembayaran WHERE id = $id_metode");
+$metode = mysqli_fetch_assoc($queryMetode);
 
-// Function to get e-wallet icon
-function getEwalletIcon($nama) {
-    $nama_lower = strtolower($nama);
-    switch($nama_lower) {
-        case 'dana':
-            return '../image/dana-icon.png';
-        case 'gopay':
-            return '../image/gopay-icon.png';
-        case 'ovo':
-            return '../image/ovo-icon.png';
-        default:
-            return '../image/wallet-icon.png';
+// 1. Buat entri PEMESANAN
+$tanggal = date('Y-m-d');
+$now = date('Y-m-d H:i:s');
+
+mysqli_query($koneksi, "INSERT INTO pemesanan (
+    user_id, agensi_id, alamat, alamat_lengkap, kurir_id, pembayaran_id,
+    total_harga, status, tanggal_pemesanan, created_at
+) VALUES (
+    $user_id, 1, '', '$alamat', 1, 1,
+    $total_bayar, 'pending', '$tanggal', '$now'
+)");
+
+$id_pemesanan = mysqli_insert_id($koneksi);
+
+// 2. Ambil dan salin data dari keranjang ke detail_pesanan
+foreach ($keranjang_ids as $kid) {
+    $q = mysqli_query($koneksi, "SELECT * FROM keranjang WHERE id = $kid AND user_id = $user_id");
+    if ($row = mysqli_fetch_assoc($q)) {
+        $produk_id = $row['produk_id'];
+        $jumlah = $row['jumlah'];
+        $total = $row['total'];
+
+        mysqli_query($koneksi, "INSERT INTO detail_pesanan (
+            pemesanan_id, produk_id, jumlah, total
+        ) VALUES (
+            $id_pemesanan, $produk_id, $jumlah, $total
+        )");
+
+        mysqli_query($koneksi, "UPDATE keranjang SET status = 'checkout' WHERE id = $kid");
     }
 }
+
+// 3. Simpan ke tabel pembayaran (gunakan id keranjang pertama saja, karena FK-nya masih keranjang_id)
+$keranjang_id_ref = $keranjang_ids[0];
+mysqli_query($koneksi, "INSERT INTO pembayaran (
+    keranjang_id, id_metode_pembayaran, status, tgl_pembayaran
+) VALUES (
+    $keranjang_id_ref, $id_metode, 'pending', NULL
+)");
+
+// Data untuk tampilan
+$id_pesanan_view = 'ORD-' . date('Y') . '-' . str_pad($id_pemesanan, 3, '0', STR_PAD_LEFT);
+$tanggal_tampil = date('d F Y', strtotime($tanggal));
+$subtotal = $total_bayar - 10000;
 ?>
+
 
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menunggu Pembayaran - Santai Aja!</title>
+    <title>Menunggu Pembayaran - Toko Baju</title>
     <link rel="stylesheet" href="../STYLESHEET/pay-waiting-style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <div class="payment-card">
-            <!-- Header Section -->
-            <div class="header">
-                <div class="icon-wrapper">
-                    <i class="fas fa-clock"></i>
-                </div>
-                <h1>Tunggu Sebentar Ya! 😊</h1>
-                <p class="subtitle">Pembayaranmu lagi diproses nih</p>
+<div class="container">
+    <div class="header">
+        <h1><i class="fas fa-clock"></i> Menunggu Pembayaran</h1>
+        <p>Silakan lakukan pembayaran sesuai instruksi di bawah</p>
+    </div>
+
+    <div class="countdown" id="countdown">
+        <i class="fas fa-hourglass-half"></i> Batas waktu pembayaran: <span id="timeLeft">23:59:45</span>
+    </div>
+
+    <div class="order-info">
+        <div class="info-card">
+            <h3><i class="fas fa-shopping-bag"></i> Detail Pesanan</h3>
+            <div class="info-item">
+                <span>ID Pesanan:</span>
+                <span id="orderId"><?= $id_pesanan_view ?></span>
             </div>
-
-            <!-- Payment Info -->
-            <div class="payment-info">
-                <div class="method-section">
-                    <div class="method-header">
-                        <img src="<?= getEwalletIcon($data['nama']) ?>" alt="<?= $data['nama'] ?>" class="ewallet-icon">
-                        <div class="method-details">
-                            <h3><?= $data['nama'] ?></h3>
-                            <span class="method-label">Metode Pembayaran</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="transfer-details">
-                    <div class="detail-item">
-                        <i class="fas fa-receipt"></i>
-                        <div>
-                            <span class="label">ID Pesanan</span>
-                            <span class="value">#<?= $order_id ?></span>
-                        </div>
-                        <button class="copy-btn" onclick="copyToClipboard('<?= $order_id ?>')">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                    </div>
-
-                    <div class="detail-item">
-                        <i class="fas fa-mobile-alt"></i>
-                        <div>
-                            <span class="label">Nomor Tujuan</span>
-                            <span class="value"><?= $data['norek'] ?></span>
-                        </div>
-                        <button class="copy-btn" onclick="copyToClipboard('<?= $data['norek'] ?>')">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                    </div>
-
-                    <div class="detail-item">
-                        <i class="fas fa-money-bill-wave"></i>
-                        <div>
-                            <span class="label">Total Pembayaran</span>
-                            <span class="value amount">Rp <?= number_format($data['total_harga']) ?></span>
-                        </div>
-                        <button class="copy-btn" onclick="copyToClipboard('<?= $data['total_harga'] ?>')">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                    </div>
-
-                    <div class="detail-item">
-                        <i class="fas fa-clock"></i>
-                        <div>
-                            <span class="label">Waktu Pemesanan</span>
-                            <span class="value"><?= $tanggal_pemesanan ?></span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Status -->
-                <div class="status-section">
-                    <div class="status-indicator">
-                        <div class="pulse-dot"></div>
-                        <span class="status-text">Status: <?= ucfirst($data['status']) ?></span>
-                    </div>
-                    <?php if ($data['status'] == 'pending'): ?>
-                        <div class="status-note">
-                            <i class="fas fa-hourglass-half"></i>
-                            <span>Menunggu pembayaran dari kamu</span>
-                        </div>
-                    <?php elseif ($data['status'] == 'gagal'): ?>
-                        <div class="status-note error">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <span>Pembayaran gagal, silakan coba lagi</span>
-                        </div>
-                    <?php endif; ?>
-                </div>
+            <div class="info-item">
+                <span>Tanggal:</span>
+                <span id="orderDate"><?= $tanggal_tampil ?></span>
             </div>
-
-            <!-- Instructions -->
-            <div class="instructions">
-                <div class="instruction-header">
-                    <i class="fas fa-lightbulb"></i>
-                    <h3>Cara Bayar Gampang Banget!</h3>
-                </div>
-                
-                <div class="steps">
-                    <div class="step">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h4>Buka Aplikasi <?= $data['nama'] ?></h4>
-                            <p>Pastikan saldo kamu cukup ya!</p>
-                        </div>
-                    </div>
-                    
-                    <div class="step">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h4>Transfer ke Nomor di Atas</h4>
-                            <p>Copy paste aja biar gak salah</p>
-                        </div>
-                    </div>
-                    
-                    <div class="step">
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <h4>Tunggu Konfirmasi</h4>
-                            <p>Admin bakal konfirmasi dalam hitungan menit kok</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="info-item">
+                <span>Status:</span>
+                <span id="orderStatus">Menunggu Pembayaran</span>
             </div>
+        </div>
 
-            <!-- Footer -->
-            <div class="footer">
-                <div class="note">
-                    <i class="fas fa-info-circle"></i>
-                    <p>Setelah transfer, halaman ini akan otomatis update. Gak perlu refresh manual! ✨</p>
-                </div>
-                
-                <div class="actions">
-                    <button class="btn-secondary" onclick="window.history.back()">
-                        <i class="fas fa-arrow-left"></i>
-                        Kembali
-                    </button>
-                    <button class="btn-primary" onclick="location.reload()">
-                        <i class="fas fa-sync-alt"></i>
-                        Cek Status
-                    </button>
-                </div>
+        <div class="info-card">
+            <h3><i class="fas fa-calculator"></i> Rincian Biaya</h3>
+            <div class="info-item">
+                <span>Subtotal:</span>
+                <span id="subtotal">Rp <?= number_format($subtotal) ?></span>
+            </div>
+            <div class="info-item">
+                <span>Ongkir:</span>
+                <span id="shipping">Rp 10.000</span>
+            </div>
+            <div class="info-item">
+                <span>Total Bayar:</span>
+                <span id="totalAmount">Rp <?= number_format($total_bayar) ?></span>
             </div>
         </div>
     </div>
 
-    <!-- Toast Notification -->
-    <div id="toast" class="toast">
-        <i class="fas fa-check-circle"></i>
-        <span>Berhasil disalin! 📋</span>
+    <div class="payment-section">
+        <div class="bank-selection">
+            <h3><i class="fas fa-university"></i> Rekening Tujuan</h3>
+            <div class="bank-cards">
+                <div class="bank-card selected">
+                    <div class="bank-logo">🏦</div>
+                    <h4><?= $metode['nama'] ?></h4>
+                    <p><strong><?= $metode['norek'] ?></strong></p>
+                    <p>a.n. AgesaShop_Id</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="upload-section">
+            <h3><i class="fas fa-upload"></i> Upload Bukti Transfer</h3>
+            <form action="upload-bukti.php" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="id_pemesanan" value="<?= $id_pemesanan ?>">
+                <input type="hidden" name="id_metode_pembayaran" value="<?= $id_metode ?>">
+                <input type="hidden" name="total" value="<?= $total_bayar ?>">
+
+                <p style="color: #555; margin-bottom: 10px;">Format file: JPG, PNG, PDF (max 5MB)</p>
+                <input type="file" name="bukti_transfer" accept=".jpg,.jpeg,.png,.pdf" required><br><br>
+                <textarea name="catatan" placeholder="Catatan tambahan (opsional)" style="width:100%;height:80px;padding:10px;"></textarea><br><br>
+
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> Kirim Bukti Transfer
+                </button>
+            </form>
+        </div>
     </div>
+</div>
 
-    <script>
-        // Auto refresh every 30 seconds
-        setInterval(() => {
-            location.reload();
-        }, 30000);
+<script>
+    let timeLeft = 86400; // 24 jam
+    const countdownElement = document.getElementById('timeLeft');
 
-        // Copy to clipboard function
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                showToast();
-            });
+    setInterval(() => {
+        if (timeLeft <= 0) {
+            countdownElement.innerText = "Waktu habis";
+            return;
         }
 
-        // Show toast notification
-        function showToast() {
-            const toast = document.getElementById('toast');
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
-        }
+        const hours = String(Math.floor(timeLeft / 3600)).padStart(2, '0');
+        const minutes = String(Math.floor((timeLeft % 3600) / 60)).padStart(2, '0');
+        const seconds = String(timeLeft % 60).padStart(2, '0');
 
-        // Add some fun interactions
-        document.querySelector('.pulse-dot').addEventListener('click', function() {
-            this.style.animation = 'none';
-            setTimeout(() => {
-                this.style.animation = 'pulse 2s infinite';
-            }, 100);
-        });
-    </script>
+        countdownElement.innerText = `${hours}:${minutes}:${seconds}`;
+        timeLeft--;
+    }, 1000);
+</script>
 </body>
 </html>

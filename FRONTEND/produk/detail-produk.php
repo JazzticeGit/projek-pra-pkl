@@ -2,46 +2,80 @@
 session_start();
 require_once '../../koneksi.php';
 
-// Handle add to cart
-if ($_POST && isset($_POST['add_to_cart'])) {
+// Pada bagian add to cart handler
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     $produk_id = (int)$_POST['produk_id'];
     $size = $_POST['size'] ?? '';
     
-    if ($produk_id > 0 && !empty($size)) {
-        // Get product details
-        $query = "SELECT p.*, d.persen_diskon 
-                  FROM produk p 
-                  LEFT JOIN diskon d ON p.produk_id = d.produk_id 
-                      AND d.status = 'active' 
-                      AND NOW() BETWEEN d.start_date AND d.end_date 
-                  WHERE p.produk_id = $produk_id";
+    // Validasi
+    if ($produk_id <= 0 || empty($size)) {
+        die("Data tidak valid");
+    }
+
+    // Pastikan user sudah login
+    if (!isset($_SESSION['user_id'])) {
+        $_SESSION['error'] = "Silakan login terlebih dahulu";
+        header("Location: login.php");
+        exit;
+    }
+
+    // Query produk dengan nama tabel yang benar
+    $query = "SELECT p.*, d.persen_diskon 
+              FROM produk p 
+              LEFT JOIN diskon d ON p.id = d.produk_id 
+                  AND d.status = 'active' 
+                  AND NOW() BETWEEN d.start_date AND d.end_date 
+              WHERE p.id = ?";
+    
+    $stmt = mysqli_prepare($koneksi, $query);
+    mysqli_stmt_bind_param($stmt, "i", $produk_id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $produk = mysqli_fetch_assoc($result);
+    
+    if (!$produk) {
+        die("Produk tidak ditemukan");
+    }
+
+    // Hitung harga
+    $harga_final = ($produk['persen_diskon'] ?? 0) > 0 
+        ? $produk['harga'] * (1 - ($produk['persen_diskon'] / 100)) 
+        : $produk['harga'];
+
+    // Simpan ke database
+    $insert_query = "INSERT INTO keranjang 
+                    (produk_id, user_id, size, jumlah, total) 
+                    VALUES (?, ?, ?, ?, ?)";
+    $stmt = mysqli_prepare($koneksi, $insert_query);
+    $user_id = $_SESSION['user_id'];
+    $jumlah = 1;
+    $total = $harga_final * $jumlah;
+    
+    mysqli_stmt_bind_param($stmt, "iisid", 
+        $produk_id, 
+        $user_id, 
+        $size, 
+        $jumlah, 
+        $total
+    );
+    
+    if (mysqli_stmt_execute($stmt)) {
+        // Update session
+        $cart_key = $produk_id . '_' . $size;
+        $_SESSION['keranjang'][$cart_key] = [
+            'id' => $produk_id,
+            'nama' => $produk['name'],
+            'harga' => $harga_final,
+            'gambar' => $produk['image'],
+            'jumlah' => $jumlah,
+            'size' => $size,
+            'cart_id' => mysqli_insert_id($koneksi)
+        ];
         
-        $result = mysqli_query($koneksi, $query);
-        $produk = mysqli_fetch_assoc($result);
-        
-        if ($produk) {
-            $harga_asli = $produk['harga'];
-            $persen_diskon = $produk['persen_diskon'];
-            $harga_final = ($persen_diskon && $persen_diskon > 0) ? $harga_asli * (1 - $persen_diskon / 100) : $harga_asli;
-            
-            // Create unique cart key with size
-            $cart_key = $produk_id . '_' . $size;
-            
-            if (isset($_SESSION['keranjang'][$cart_key])) {
-                $_SESSION['keranjang'][$cart_key]['jumlah'] += 1;
-            } else {
-                $_SESSION['keranjang'][$cart_key] = [
-                    'id' => $produk['produk_id'],
-                    'nama' => $produk['name'],
-                    'harga' => $harga_final,
-                    'gambar' => $produk['image'],
-                    'jumlah' => 1,
-                    'size' => $size
-                ];
-            }
-            
-            echo "<script>alert('Produk berhasil ditambahkan ke keranjang!');</script>";
-        }
+        header("Location: keranjang.php");
+        exit;
+    } else {
+        echo "Error: " . mysqli_error($koneksi);
     }
 }
 
