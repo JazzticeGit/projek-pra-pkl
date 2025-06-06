@@ -48,7 +48,6 @@ foreach ($keranjang_ids as $kid) {
     }
 }
 
-// 3. Simpan ke tabel pembayaran (gunakan id keranjang pertama saja, karena FK-nya masih keranjang_id)
 $keranjang_id_ref = $keranjang_ids[0];
 mysqli_query($koneksi, "INSERT INTO pembayaran (
     keranjang_id, id_metode_pembayaran, status, tgl_pembayaran
@@ -56,7 +55,6 @@ mysqli_query($koneksi, "INSERT INTO pembayaran (
     $keranjang_id_ref, $id_metode, 'pending', NULL
 )");
 
-// Data untuk tampilan
 $id_pesanan_view = 'ORD-' . date('Y') . '-' . str_pad($id_pemesanan, 3, '0', STR_PAD_LEFT);
 $tanggal_tampil = date('d F Y', strtotime($tanggal));
 $subtotal = $total_bayar - 10000;

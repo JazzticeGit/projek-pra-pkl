@@ -1,253 +1,15 @@
-kode navigasiiiiiiiii
-css:
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'poppins', sans-serif;
-}
+<?php include '../../koneksi.php'; ?>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar User - Admin Panel</title>
+    <link rel="stylesheet" href="../../STYLESHEET/user.css">
+</head>
+<body>
 
-ul {
-    list-style-type: none;
-    display: flex;
-}
-
-nav {
-    padding-top: 10px;
-    margin: 10px;
-    position: sticky;
-}
-
-.navbg {
-    border: 2px solid #6a6a6a;
-    border-radius: 15px;
-    display: flex;
-}
-
-.navbg img {
-    width: 50px;
-    height: 50px;
-    position: relative;
-    left: 20px;
-    top: 4px;
-}
-
-.navlink ul li {
-    text-indent: 35px;
-    position: relative;
-    left: 70px;
-    font-weight: 600;
-    font-size: 15px;
-    text-decoration-line: underline;
-}
-
-a {
-    text-decoration: none;
-    color: black;
-}
-
-.iconLink {
-    position: relative;
-    left: 350px;
-    letter-spacing: 20px;
-    text-decoration: none;
-}
-
-.searchBar {
-    position: relative;
-    left: 300px;
-    display: flex;
-    align-items: center;
-    background-color: #f5f5f5;
-    border-radius: 25px;
-    padding: 8px 15px;
-    width: 600px;
-    border: 1px solid #ccc;
-    height: 17px;
-    top: 8px;
-}
-
-.searchBar i {
-    color: gray;
-    margin-right: 10px;
-    font-size: 16px;
-    position: relative;
-    left: 360px;
-}
-
-input[type=text] {
-    border: none;
-    outline: none;
-    background: transparent;
-    font-size: 16px;
-    flex: 1;
-}
-
-.searchBar button {
-    border: 2px solid rgb(57, 57, 57);
-    border-radius: 5px;
-    height: px; /* <- Anda mungkin perlu mengisi nilai tinggi di sini */
-}
-
-
-======================================================================================================================================
-
-HTML:
-<nav>
-        
-        <div class="navbg">
-            <!-- GAMBAR NAVIGASI -->
-             <a href="index.php"><img src="../../image/AGESA.png" alt="" srcset=""></a>
-
-
-             <!-- LINK NAVIGASI -->
-            <div class="navlink">
-                <ul>
-                    <li><a href="http://">Shop</a></li>  <!-- SEMENTARA SEBELUM DROPDoWN LINK -->
-                    <li><a href="http://">Collection</a></li>
-                    <li><a href="http://">About</a></li>
-                    <li><a href="http://">Contack</a></li>
-                </ul>
-            </div>
-
-
-            <!-- SEARCH BAR -->
-            <div class="searchBar">
-                <form action="search.php" method="GET">
-                <input type="text" name="query" placeholder="   Search  " required>
-                <i class="fas fa-search"></i>
-                <!-- <button type="submit">Cari</button> -->
-                </form>
-                
-            </div>
-
-
-            <!-- ICON LINK -->
-             <div class="iconLink">
-             <ul>
-                <li><a href="keranjang.php" class="fa-solid fa-cart-shopping"></a></li> <!-- CART SHOPING LINK -->
-                <li><a href="http://" class="fa-solid fa-user"></a></li> <!-- ACCOUNT LINK -->
-             </ul>
-             </div>
-        </div>
-    </nav>
-
-
-    ===================================================================================================================================
-    ===================================================================================================================================
-    ===================================================================================================================================
-
-    Footer 
-    css :
-    /* ====== FOOTER SECTION ====== */
-
-.footer-container {
-  background-color: #111;
-  color: #fff;
-  padding: 60px 40px 20px;
-  font-family: 'Poppins', sans-serif;
-}
-
-.footer-content {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 40px;
-}
-
-.footer-left,
-.footer-center,
-.footer-right {
-  flex: 1;
-  min-width: 250px;
-}
-
-.footer-logo {
-  width: 150px;
-  margin-bottom: 10px;
-}
-
-.footer-left p {
-  margin-top: 10px;
-  font-weight: 600;
-  color: #ccc;
-}
-
-.social-icons {
-  margin-top: 20px;
-  font-size: 1.5rem;
-}
-
-.social-icons i {
-  margin-right: 15px;
-  cursor: pointer;
-  transition: color 0.3s;
-}
-
-.social-icons i:hover {
-  color: #f39c12;
-}
-
-.footer-nav {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-}
-
-.footer-nav a {
-  color: #fff;
-  text-decoration: none;
-  margin-bottom: 10px;
-  transition: color 0.3s;
-}
-
-.footer-nav a:hover {
-  color: #f39c12;
-}
-
-.footer-text {
-  color: #ccc;
-  font-size: 0.9rem;
-  line-height: 1.6;
-}
-
-.footer-right h4 {
-  margin-bottom: 15px;
-}
-
-.footer-right iframe {
-  width: 100%;
-  height: 200px;
-  border: none;
-  border-radius: 8px;
-}
-
-.footer-bottom {
-  text-align: center;
-  margin-top: 40px;
-  border-top: 1px solid #333;
-  padding-top: 15px;
-  font-size: 0.85rem;
-  color: #aaa;
-}
-
-==============================================================================================================
-
-html:
-
-
-
-
-
-
-
-
-
-
-
-
-==========================================================================================
-=============================           ADMIN NAV             ============================
-==========================================================================================
+<!-- NAV BE -->
 
    <style>
         * {
@@ -402,7 +164,7 @@ html:
             display: flex;
             align-items: center;
             padding: 0.8rem 2rem;
-            color: #334155;
+            color:rgb(255, 255, 255);
             text-decoration: none;
             transition: all 0.2s ease;
             border-left: 3px solid transparent;
@@ -605,7 +367,64 @@ html:
         </div>
     </nav>
 
-     <script>
+
+    <h2>Daftar User</h2>
+    
+    <!-- Search and Controls Section -->
+    <div class="controls">
+        <input type="text" class="search-box" placeholder="Cari user berdasarkan username atau email..." id="searchInput">
+    </div>
+    
+    <div class="clearfix" id="userGrid">
+        <?php
+        $query = $koneksi->query("SELECT * FROM users ORDER BY username ASC");
+        $userCount = 0;
+        while($user = $query->fetch_assoc()) {
+            $userCount++;
+        ?>
+            <div class="user-box" onclick="location.href='detail_user.php?id=<?= $user['id'] ?>'" data-username="<?= strtolower($user['username']) ?>" data-email="<?= strtolower($user['email']) ?>">
+                <strong><?= htmlspecialchars($user['username']) ?></strong>
+                <div style="color: #7f8c8d; margin-top: 0.5rem;">
+                    <?= htmlspecialchars($user['email']) ?>
+                </div>
+                <?php if (!empty($user['phone'])): ?>
+                    <div style="color: #95a5a6; font-size: 0.9rem; margin-top: 0.25rem;">
+                        📞 <?= htmlspecialchars($user['phone']) ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        <?php } ?>
+        
+        <?php if ($userCount == 0): ?>
+            <div class="empty-state">
+                <p>Tidak ada user yang terdaftar</p>
+            </div>
+        <?php endif; ?>
+    </div>
+    
+    <!-- User Statistics -->
+    <div style="margin-top: 2rem; padding: 1rem; background: white; border-radius: 8px; border-left: 4px solid #3498db;">
+        <strong>Total User: <?= $userCount ?></strong>
+    </div>
+
+    <script>
+        // Simple search functionality
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const userBoxes = document.querySelectorAll('.user-box');
+            
+            userBoxes.forEach(box => {
+                const username = box.getAttribute('data-username');
+                const email = box.getAttribute('data-email');
+                
+                if (username.includes(searchTerm) || email.includes(searchTerm)) {
+                    box.style.display = 'block';
+                } else {
+                    box.style.display = 'none';
+                }
+            });
+        });
+
         const hamburger = document.getElementById('hamburger');
         const navOverlay = document.getElementById('navOverlay');
         const navPanel = document.getElementById('navPanel');
@@ -654,4 +473,7 @@ html:
                 }
             });
         });
+
     </script>
+</body>
+</html>
