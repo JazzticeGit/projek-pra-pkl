@@ -2,35 +2,74 @@
 session_start();
 include '../../koneksi.php';
 include '../../BACKEND/diskon/end-date.php';
+
+// Initialize cart session
 if (!isset($_SESSION['keranjang'])) {
     $_SESSION['keranjang'] = [];
 }
 
-if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
+// Add to cart handler
+if (isset($_GET['action']) && $_GET['action'] === 'add' && isset($_GET['id'])) {
     $produk_id = (int)$_GET['id'];
 
+    // Cek login
+    if (!isset($_SESSION['user_id'])) {
+        $_SESSION['error'] = "Silakan login terlebih dahulu";
+        header("Location: ../../login.php");
+        exit;
+    }
+
+    // Ambil data produk + diskon jika ada
     $query = "
-        SELECT p.*, d.persen_diskon, d.start_date, d.end_date
+        SELECT p.*, d.persen_diskon
         FROM produk p
         LEFT JOIN diskon d ON p.produk_id = d.produk_id 
             AND d.status = 'active' 
             AND NOW() BETWEEN d.start_date AND d.end_date
-        WHERE p.produk_id = $produk_id
+        WHERE p.produk_id = ?
     ";
-    $produk_query = mysqli_query($koneksi, $query);
-    $produk = mysqli_fetch_assoc($produk_query);
+
+    $stmt = mysqli_prepare($koneksi, $query);
+    mysqli_stmt_bind_param($stmt, "i", $produk_id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $produk = mysqli_fetch_assoc($result);
 
     if ($produk) {
         $harga_asli = $produk['harga'];
-        $persen_diskon = $produk['persen_diskon'];
-        if ($persen_diskon && $persen_diskon > 0) {
-            $harga_final = $harga_asli * (1 - $persen_diskon / 100);
+        $persen_diskon = $produk['persen_diskon'] ?? 0;
+        $harga_final = ($persen_diskon > 0) ? $harga_asli * (1 - $persen_diskon / 100) : $harga_asli;
+
+        $user_id = $_SESSION['user_id'];
+        $size = 'default';
+        $color = 'default';
+
+        // Cek apakah produk sudah ada di keranjang
+        $check_query = "SELECT * FROM keranjang WHERE user_id = ? AND produk_id = ? AND size = ?";
+        $check_stmt = mysqli_prepare($koneksi, $check_query);
+        mysqli_stmt_bind_param($check_stmt, "iis", $user_id, $produk_id, $size);
+        mysqli_stmt_execute($check_stmt);
+        $existing = mysqli_fetch_assoc(mysqli_stmt_get_result($check_stmt));
+
+        if ($existing) {
+            // Update jumlah dan total
+            $update_query = "UPDATE keranjang 
+                             SET jumlah = jumlah + 1, total = total + ? 
+                             WHERE user_id = ? AND produk_id = ? AND size = ?";
+            $update_stmt = mysqli_prepare($koneksi, $update_query);
+            mysqli_stmt_bind_param($update_stmt, "diis", $harga_final, $user_id, $produk_id, $size);
+            mysqli_stmt_execute($update_stmt);
         } else {
-            $harga_final = $harga_asli;
+            // Insert ny
+            $insert_query = "INSERT INTO keranjang (user_id, produk_id, jumlah, size, color, total)
+                             VALUES (?, ?, 1, ?, ?, ?)";
+            $insert_stmt = mysqli_prepare($koneksi, $insert_query);
+            mysqli_stmt_bind_param($insert_stmt, "iissd", $user_id, $produk_id, $size, $color, $harga_final);
+            mysqli_stmt_execute($insert_stmt);
         }
 
-        $cart_key = $produk_id . '_default_default';
-
+        //  session keranjang 
+        $cart_key = $produk_id . "_$size" . "_$color";
         if (isset($_SESSION['keranjang'][$cart_key])) {
             $_SESSION['keranjang'][$cart_key]['jumlah'] += 1;
         } else {
@@ -40,10 +79,16 @@ if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
                 'harga' => $harga_final,
                 'gambar' => $produk['image'],
                 'jumlah' => 1,
-                'size' => 'default',
-                'color' => 'default'
+                'size' => $size,
+                'color' => $color
             ];
         }
+
+        $_SESSION['success'] = "Produk berhasil ditambahkan ke keranjang";
+        header("Location: " . $_SERVER['PHP_SELF']);
+        exit;
+    } else {
+        $_SESSION['error'] = "Produk tidak ditemukan.";
         header("Location: " . $_SERVER['PHP_SELF']);
         exit;
     }
@@ -64,7 +109,7 @@ WHERE p.best_seller = 1
 $result = mysqli_query($koneksi, $query);
 
 error_reporting(E_ALL);
-ini_set('display_errors' , 1);
+ini_set('display_errors', 1);
 ?>
 
 <!DOCTYPE html>
