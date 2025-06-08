@@ -263,7 +263,7 @@ $stmt->close();
       <p><strong>clothing and accessories</strong></p>
       <div class="social-icons">
         <i class="fa-brands fa-instagram"></i>
-        <i class="fa-brands fa-youtube"></i>
+        <i class="fa-brands fa-whatsapp"></i>
         <i class="fa-brands fa-tiktok"></i>
         <i class="fa-solid fa-bag-shopping"></i>
       </div>
@@ -278,7 +278,7 @@ $stmt->close();
         <a href="#footer">Contact</a>
       </nav>
       <p class="footer-text">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget dolor tempus, convallis odio id, pulvinar risus. Lorem ipsum dolor sit amet,
+        terimakasih sudah mengunjungi dan berbelanja pada toko kami, kenyamanan dan kepercayaan pembeli sangat berarti bagi kami
       </p>
     </div>
 
