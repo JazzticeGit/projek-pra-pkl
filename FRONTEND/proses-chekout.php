@@ -88,7 +88,6 @@ if (!$metode) {
     ");
 }
 
-// Mulai transaksi database
 mysqli_begin_transaction($koneksi);
 
 try {
@@ -122,38 +121,40 @@ try {
             WHERE k.id = $kid AND k.user_id = $user_id AND k.status = 'aktif'");
         
         if ($row = mysqli_fetch_assoc($q)) {
-            $produk_id = $row['produk_id'];
-            $jumlah = $row['jumlah'];
-            $harga_satuan = $row['harga'];
-            $total_item = $harga_satuan * $jumlah;
+    $produk_id = $row['produk_id'];
+    $jumlah = $row['jumlah'];
+    $harga_satuan = $row['harga'];
+    $total_item = $harga_satuan * $jumlah;
+    $queryDetailPesanan = "INSERT INTO detail_pesanan (
+        pemesanan_id, produk_id, jumlah, total
+    ) VALUES (
+        $id_pemesanan, $produk_id, $jumlah, $total_item
+    )";
+    
+    if (!mysqli_query($koneksi, $queryDetailPesanan)) {
+        throw new Exception("Error menyimpan detail pesanan: " . mysqli_error($koneksi));
+    }
 
-            $queryDetailPesanan = "INSERT INTO detail_pesanan (
-                pemesanan_id, produk_id, jumlah, total
-            ) VALUES (
-                $id_pemesanan, $produk_id, $jumlah, $total_item
-            )";
-            
-            if (!mysqli_query($koneksi, $queryDetailPesanan)) {
-                throw new Exception("Error menyimpan detail pesanan: " . mysqli_error($koneksi));
-            }
+    $queryUpdateKeranjang = "UPDATE keranjang SET status = 'checkout' WHERE id = $kid";
+    if (!mysqli_query($koneksi, $queryUpdateKeranjang)) {
+        throw new Exception("Error update keranjang: " . mysqli_error($koneksi));
+    }
+    $queryKurangiStok = "UPDATE produk SET stok = stok - $jumlah WHERE produk_id = $produk_id";
+    if (!mysqli_query($koneksi, $queryKurangiStok)) {
+        throw new Exception("Error mengurangi stok produk: " . mysqli_error($koneksi));
+    }
 
-            // Update status keranjang menjadi 'checkout'
-            $queryUpdateKeranjang = "UPDATE keranjang SET status = 'checkout' WHERE id = $kid";
-            if (!mysqli_query($koneksi, $queryUpdateKeranjang)) {
-                throw new Exception("Error update keranjang: " . mysqli_error($koneksi));
-            }
-            
-            $valid_keranjang_processed = true;
-            $total_items++;
-            $total_harga_detail += $total_item;
-        }
+    $valid_keranjang_processed = true;
+    $total_items++;
+    $total_harga_detail += $total_item;
+}
+
     }
 
     if (!$valid_keranjang_processed) {
         throw new Exception("Tidak ada item keranjang yang valid untuk diproses");
     }
 
-    // 3. Buat entri pembayaran
     $keranjang_id_ref = intval($keranjang_ids[0]);
     $queryPembayaran = "INSERT INTO pembayaran (
         keranjang_id, id_metode_pembayaran, status, tgl_pembayaran, total_bayar
@@ -167,16 +168,11 @@ try {
 
     $id_pembayaran = mysqli_insert_id($koneksi);
 
-    // Update pemesanan dengan ID pembayaran yang benar
     $queryUpdatePemesanan = "UPDATE pemesanan SET pembayaran_id = $id_pembayaran WHERE id = $id_pemesanan";
     if (!mysqli_query($koneksi, $queryUpdatePemesanan)) {
         throw new Exception("Error update pembayaran ID: " . mysqli_error($koneksi));
     }
-
-    // Commit transaksi
     mysqli_commit($koneksi);
-
-    // Simpan ID pemesanan di session untuk referensi
     $_SESSION['last_pemesanan_id'] = $id_pemesanan;
 
     // Redirect ke halaman menunggu pembayaran

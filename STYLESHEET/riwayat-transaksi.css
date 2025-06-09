@@ -1,0 +1,72 @@
+.transaction-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            transition: box-shadow 0.3s ease;
+        }
+        .transaction-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .badge {
+            font-size: 0.75em;
+            padding: 0.5em 0.75em;
+        }
+        .badge-success { background-color: #28a745; }
+        .badge-warning { background-color: #ffc107; color: #212529; }
+        .badge-danger { background-color: #dc3545; }
+        .badge-secondary { background-color: #6c757d; }
+        
+        .filter-tabs {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 30px;
+        }
+        .filter-tab {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            background: #fff;
+            color: #6c757d;
+            text-decoration: none;
+            border-radius: 5px;
+            border: 1px solid #dee2e6;
+            transition: all 0.3s ease;
+        }
+        .filter-tab.active {
+            background: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+        .filter-tab:hover {
+            text-decoration: none;
+            background: #e9ecef;
+        }
+        .filter-tab.active:hover {
+            background: #0056b3;
+        }
+        
+        .product-preview {
+            background: #f8f9fa;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 0.9em;
+            color: #6c757d;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6c757d;
+        }
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+        
+        .btn-action {
+            margin: 2px;
+            font-size: 0.85em;
+        }

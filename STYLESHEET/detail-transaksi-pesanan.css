@@ -1,0 +1,539 @@
+/* Detail Pesanan Styles */
+.detail-pesanan {
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.detail-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+}
+
+.detail-header h4 {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.detail-header .text-muted {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Info Section */
+.info-section {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #f0f0f0;
+    transition: all 0.3s ease;
+}
+
+.info-section:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+}
+
+.section-title {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f8f9fa;
+    display: flex;
+    align-items: center;
+}
+
+.section-title i {
+    font-size: 1.2em;
+}
+
+/* Info Items */
+.info-item {
+    margin-bottom: 20px;
+}
+
+.info-item label {
+    font-weight: 600;
+    color: #666;
+    font-size: 0.9em;
+    margin-bottom: 5px;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.info-value {
+    color: #2c3e50;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.info-value strong {
+    color: #1a202c;
+}
+
+/* Badge Styles */
+.badge {
+    padding: 8px 12px;
+    font-size: 0.85em;
+    font-weight: 500;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge-success {
+    background: linear-gradient(135deg, #48bb78, #38a169);
+    color: white;
+    border: none;
+}
+
+.badge-warning {
+    background: linear-gradient(135deg, #ed8936, #dd6b20);
+    color: white;
+    border: none;
+}
+
+.badge-danger {
+    background: linear-gradient(135deg, #f56565, #e53e3e);
+    color: white;
+    border: none;
+}
+
+.badge-secondary {
+    background: linear-gradient(135deg, #a0aec0, #718096);
+    color: white;
+    border: none;
+}
+
+/* Product List */
+.product-list {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.product-item {
+    padding: 20px;
+    border-bottom: 1px solid #e2e8f0;
+    transition: background-color 0.3s ease;
+}
+
+.product-item:last-child {
+    border-bottom: none;
+}
+
+.product-item:hover {
+    background-color: #f8f9ff;
+}
+
+.product-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-placeholder {
+    width: 80px;
+    height: 80px;
+    background: #f7fafc;
+    border: 2px dashed #cbd5e0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #a0aec0;
+    font-size: 1.5rem;
+}
+
+.product-desc {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+.quantity-badge {
+    background: #667eea;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9em;
+}
+
+.price-info {
+    text-align: right;
+}
+
+.unit-price {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.total-price {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 1.1em;
+}
+
+/* Cost Summary */
+.cost-summary {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.cost-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    font-size: 1rem;
+}
+
+.cost-item.discount {
+    color: #e53e3e;
+}
+
+.cost-item.total {
+    font-size: 1.2em;
+    color: #2c3e50;
+}
+
+.cost-item.paid {
+    color: #38a169;
+}
+
+.cost-divider {
+    margin: 15px 0;
+    border-color: #dee2e6;
+}
+
+/* Bukti Transfer */
+.bukti-transfer {
+    max-width: 200px;
+    max-height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.bukti-transfer:hover {
+    transform: scale(1.05);
+}
+
+/* Timeline */
+.timeline {
+    position: relative;
+    padding: 20px 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 25px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #e2e8f0;
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 60px;
+    margin-bottom: 25px;
+}
+
+.timeline-item.completed .timeline-marker {
+    background: #48bb78;
+    color: white;
+}
+
+.timeline-item.completed::before {
+    background: #48bb78;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50px;
+    height: 50px;
+    background: #e2e8f0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 1.2em;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+}
+
+.timeline-content {
+    background: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid #f0f0f0;
+}
+
+.timeline-content strong {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+/* Modal Styles */
+#imageModal .modal-dialog {
+    max-width: 800px;
+}
+
+#imageModal .modal-body {
+    padding: 30px;
+}
+
+#modalImage {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .detail-header {
+        padding: 20px;
+        text-align: center;
+    }
+    
+    .info-section {
+        padding: 20px;
+        margin-bottom: 15px;
+    }
+    
+    .section-title {
+        font-size: 1.1em;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .product-item {
+        padding: 15px;
+    }
+    
+    .product-image,
+    .product-placeholder {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .cost-summary {
+        padding: 15px;
+    }
+    
+    .cost-item {
+        font-size: 0.95em;
+    }
+    
+    .timeline-item {
+        padding-left: 50px;
+    }
+    
+    .timeline-marker {
+        width: 40px;
+        height: 40px;
+        font-size: 1em;
+    }
+    
+    .timeline::before {
+        left: 20px;
+    }
+    
+    .bukti-transfer {
+        max-width: 150px;
+        max-height: 120px;
+    }
+}
+
+@media (max-width: 576px) {
+    .detail-pesanan {
+        padding: 10px;
+    }
+    
+    .detail-header {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .info-section {
+        padding: 15px;
+    }
+    
+    .section-title {
+        font-size: 1em;
+        margin-bottom: 15px;
+    }
+    
+    .product-item {
+        padding: 10px;
+    }
+    
+    .badge {
+        padding: 6px 10px;
+        font-size: 0.8em;
+    }
+    
+    .quantity-badge {
+        padding: 4px 8px;
+        font-size: 0.8em;
+    }
+}
+
+/* Animation Effects */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.info-section {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.product-item {
+    animation: fadeInUp 0.4s ease forwards;
+}
+
+/* Print Styles */
+@media print {
+    .detail-pesanan {
+        background: white !important;
+        color: black !important;
+    }
+    
+    .info-section {
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+        page-break-inside: avoid;
+    }
+    
+    .detail-header {
+        background: white !important;
+        color: black !important;
+        border: 1px solid #ccc !important;
+    }
+    
+    .badge {
+        background: white !important;
+        color: black !important;
+        border: 1px solid #ccc !important;
+    }
+    
+    .timeline-marker {
+        background: white !important;
+        border: 1px solid #ccc !important;
+    }
+    
+    .product-image {
+        max-width: 50px !important;
+        max-height: 50px !important;
+    }
+    
+    .bukti-transfer {
+        max-width: 100px !important;
+        max-height: 100px !important;
+    }
+}
+
+/* Loading States */
+.loading-skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, transparent 37%, #f0f0f0 63%);
+    background-size: 400% 100%;
+    animation: skeleton-loading 1.4s ease infinite;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: -100% 50%;
+    }
+}
+
+/* Additional Utility Classes */
+.text-primary {
+    color: #667eea !important;
+}
+
+.bg-light-primary {
+    background-color: rgba(102, 126, 234, 0.1) !important;
+}
+
+.border-primary {
+    border-color: #667eea !important;
+}
+
+/* Hover Effects */
+.info-item:hover .info-value {
+    color: #1a202c;
+    transition: color 0.3s ease;
+}
+
+.cost-item:hover {
+    background-color: rgba(102, 126, 234, 0.05);
+    padding: 8px 10px;
+    margin: 0 -10px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+/* Status Specific Styles */
+.status-pending {
+    border-left: 4px solid #ed8936;
+}
+
+.status-berhasil {
+    border-left: 4px solid #48bb78;
+}
+
+.status-gagal {
+    border-left: 4px solid #f56565;
+}
+
+/* Custom Scrollbar */
+.detail-pesanan::-webkit-scrollbar {
+    width: 6px;
+}
+
+.detail-pesanan::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.detail-pesanan::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.detail-pesanan::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
