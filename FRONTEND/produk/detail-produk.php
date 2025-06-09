@@ -219,9 +219,9 @@ $related_result = mysqli_query($koneksi, $related_query);
                 <!-- Add to Cart Form -->
                 <?php if ($produk['stok'] > 0): ?>
                 <!-- DEBUG: Form akan submit ke halaman ini -->
-                <div class="alert alert-info">
+                <!-- <div class="alert alert-info">
                     <small><strong>DEBUG:</strong> Form action: <?php echo $_SERVER['PHP_SELF'] . '?id=' . $produk_id; ?></small>
-                </div>
+                </div> -->
                 
                 <form method="POST" action="" id="addToCartForm" onsubmit="return validateForm()">
                     <input type="hidden" name="produk_id" value="<?php echo $produk['produk_id']; ?>">
