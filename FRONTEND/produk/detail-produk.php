@@ -172,7 +172,7 @@ $related_result = mysqli_query($koneksi, $related_query);
         <!-- Breadcrumb -->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
                 <li class="breadcrumb-item"><a href="produk.php">Produk</a></li>
                 <li class="breadcrumb-item active"><?php echo htmlspecialchars($produk['name']); ?></li>
             </ol>

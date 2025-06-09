@@ -273,7 +273,7 @@ $stmt->close();
     <div class="footer-center" id="footer">
       <nav class="footer-nav">
         <a href="#nav">Home</a>
-        <a href="#">Review</a>
+        <a href="#">Preview</a>
         <a href="about.html">About</a>
         <a href="#footer">Contact</a>
       </nav>
