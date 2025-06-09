@@ -1,20 +1,37 @@
-<?php include '../../koneksi.php'; ?>
+<?php
+include '../koneksi.php'; 
+
+//  user
+$result_user = mysqli_query($koneksi, "SELECT COUNT(*) AS total_user FROM users");
+$data_user = mysqli_fetch_assoc($result_user);
+$total_user = $data_user['total_user'];
+
+//  produk
+$result_produk = mysqli_query($koneksi, "SELECT COUNT(*) AS total_produk FROM produk");
+$data_produk = mysqli_fetch_assoc($result_produk);
+$total_produk = $data_produk['total_produk'];
+
+//  transaksi
+$result_transaksi = mysqli_query($koneksi, "SELECT COUNT(*) AS total_transaksi FROM pembayaran");
+$data_transaksi = mysqli_fetch_assoc($result_transaksi);
+$total_transaksi = $data_transaksi['total_transaksi'];
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar User - Admin Panel</title>
-    <link rel="stylesheet" href="../../STYLESHEET/user.css">
+    <title>Dashboard Admin - Backend</title>
+    <link rel="stylesheet" href="../STYLESHEET/admin-dashboard.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 
-<!-- NAV BE -->
-
-   <style>
-
-<style>
-      * {
+ <style>
+       * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -260,15 +277,13 @@
                 width: 100vw;
             }
         }
+    </style>
 
-        .nav-menu{
-            z-index: 99;
-        }
-</style>
 
-<!-- nav -->
 
-<div class="header">
+
+
+   <div class="header">
         <button class="hamburger" id="hamburgerBtn">
             <span></span>
             <span></span>
@@ -287,103 +302,178 @@
         <div class="nav-menu">
             <div class="nav-section">
                 <div class="nav-section-title">Dashboard</div>
-                <a href="../dashboard.php" class="nav-item active">
+                <a href="index.php" class="nav-item active">
                     <i>📊</i> Dashboard Utama
                 </a>
             </div>
             
             <div class="nav-section">
                 <div class="nav-section-title">Manajemen User</div>
-                <a href="../user/user.php" class="nav-item">
+                <a href="user/index.php" class="nav-item">
                     <i>👥</i> Daftar User
                 </a>
-                <a href="../user/user.php" class="nav-item">
+                <a href="user/user.php" class="nav-item">
                     <i>👤</i> Kelola User
                 </a>
             </div>
             
             <div class="nav-section">
                 <div class="nav-section-title">Produk</div>
-                <a href="../produk/index-produk.php" class="nav-item">
+                <a href="produk/index-produk.php" class="nav-item">
                     <i>📦</i> Daftar Produk
                 </a>
             </div>
             
             <div class="nav-section">
                 <div class="nav-section-title">Verifikasi</div>
-                <a href="../admin-verif/admin-verifikasi.php" class="nav-item">
+                <a href="admin-verif/admin-verifikasi.php" class="nav-item">
                     <i>✅</i> Admin Verifikasi
                 </a>
             </div>
             
-            <!-- <div class="nav-section">
+            <div class="nav-section">
                 <div class="nav-section-title">Sistem</div>
                 <a href="diskon/index.php" class="nav-item">
                     <i>🏷️</i> Manajemen Diskon
                 </a>
-            </div> -->
+            </div>
         </div>
     </nav>
 
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
 
-    <h2>Daftar User</h2>
-    
-    <!-- Search and Controls Section -->
-    <div class="controls">
-        <input type="text" class="search-box" placeholder="Cari user berdasarkan username atau email..." id="searchInput">
-    </div>
-    
-    <div class="clearfix" id="userGrid">
-        <?php
-        $query = $koneksi->query("SELECT * FROM users ORDER BY username ASC");
-        $userCount = 0;
-        while($user = $query->fetch_assoc()) {
-            $userCount++;
-        ?>
-            <div class="user-box" onclick="location.href='detail_user.php?id=<?= $user['id'] ?>'" data-username="<?= strtolower($user['username']) ?>" data-email="<?= strtolower($user['email']) ?>">
-                <strong><?= htmlspecialchars($user['username']) ?></strong>
-                <div style="color: #7f8c8d; margin-top: 0.5rem;">
-                    <?= htmlspecialchars($user['email']) ?>
+    <div class="container-h">
+        <header class="header-h">
+            <h1><i class="fas fa-tachometer-alt"></i> Dashboard Admin</h1>
+            <p>Kelola sistem backend dengan mudah</p>
+        </header>
+
+        <div class="dashboard-grid">
+            <!-- Admin Verifikasi Section -->
+            <div class="section-card">
+                <h3><i class="fas fa-user-shield"></i> Admin Verifikasi</h3>
+                <div class="button-group">
+                    <button class="nav-button" onclick="navigate('../BACKEND/admin-veriv/admin-verifikasi.php')">
+                        <i class="fas fa-check-circle"></i>
+                        Admin Verifikasi
+                    </button>
+                    <!-- <button class="nav-button" onclick="navigate('proses-update-status.php')">
+                        <i class="fas fa-sync-alt"></i>
+                        Update Status
+                    </button> -->
                 </div>
-                <?php if (!empty($user['phone'])): ?>
-                    <div style="color: #95a5a6; font-size: 0.9rem; margin-top: 0.25rem;">
-                        📞 <?= htmlspecialchars($user['phone']) ?>
-                    </div>
-                <?php endif; ?>
             </div>
-        <?php } ?>
-        
-        <?php if ($userCount == 0): ?>
-            <div class="empty-state">
-                <p>Tidak ada user yang terdaftar</p>
+
+            <!-- Diskon Section -->
+            <!-- <div class="section-card">
+                <h3><i class="fas fa-percent"></i> Manajemen Diskon</h3>
+                <div class="button-group">
+                    <button class="nav-button" onclick="navigate('end-date.php')">
+                        <i class="fas fa-calendar-times"></i>
+                        Atur Tanggal Berakhir
+                    </button>
+                    <button class="nav-button" onclick="navigate('index.php')">
+                        <i class="fas fa-list"></i>
+                        Daftar Diskon
+                    </button>
+                </div>
+            </div> -->
+
+            <!-- Produk Section -->
+            <div class="section-card">
+                <h3><i class="fas fa-box"></i> Manajemen Produk</h3>
+                <div class="button-group">
+                    <button class="nav-button" onclick="navigate('../BACKEND/produk/edit.php')">
+                        <i class="fas fa-edit"></i>
+                        Edit Produk
+                    </button>
+                    <!-- <button class="nav-button" onclick="navigate('hapus.php')">
+                        <i class="fas fa-trash-alt"></i>
+                        Hapus Produk
+                    </button> -->
+                    <button class="nav-button" onclick="navigate('../BACKEND/produk/index-produk.php')">
+                        <i class="fas fa-th-large"></i>
+                        Daftar Produk
+                    </button>
+                </div>
             </div>
-        <?php endif; ?>
+
+            <!-- User Section -->
+            <div class="section-card">
+                <h3><i class="fas fa-users"></i> Manajemen User</h3>
+                <div class="button-group">
+                    <!-- <button class="nav-button" onclick="navigate('detail_user.php')">
+                        <i class="fas fa-user-circle"></i>
+                        Detail User
+                    </button> -->
+                    <button class="nav-button" onclick="navigate('../BACKEND/user/user.php')">
+                        <i class="fas fa-users-cog"></i>
+                        Kelola User
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="stats-section">
+            <h3><i class="fas fa-chart-bar"></i> Statistik Cepat</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                <i class="fas fa-users"></i>
+                <div class="stat-info">
+                    <h4>Total User</h4>
+                    <span class="stat-number"><?php echo $total_user; ?></span>
+                </div>
+            </div>
+                <div class="stat-card">
+    <i class="fas fa-box"></i>
+    <div class="stat-info">
+        <h4>Total Produk</h4>
+        <span class="stat-number"><?php echo $total_produk; ?></span>
     </div>
-    
-    <!-- User Statistics -->
-    <div style="margin-top: 2rem; padding: 1rem; background: white; border-radius: 8px; border-left: 4px solid #3498db;">
-        <strong>Total User: <?= $userCount ?></strong>
+</div>
+                <div class="stat-card">
+    <i class="fas fa-money-check-alt"></i>
+    <div class="stat-info">
+        <h4>Total Transaksi</h4>
+        <span class="stat-number"><?php echo $total_transaksi; ?></span>
+    </div>
+</div>
+            </div>
+        </div>
     </div>
 
     <script>
-        // Simple search functionality
-        document.getElementById('searchInput').addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase();
-            const userBoxes = document.querySelectorAll('.user-box');
-            
-            userBoxes.forEach(box => {
-                const username = box.getAttribute('data-username');
-                const email = box.getAttribute('data-email');
-                
-                if (username.includes(searchTerm) || email.includes(searchTerm)) {
-                    box.style.display = 'block';
-                } else {
-                    box.style.display = 'none';
-                }
+        function navigate(page) {
+            // Simulasi navigasi - dalam implementasi nyata, ini akan redirect ke halaman yang sesuai
+            alert(`Navigasi ke: ${page}`);
+            window.location.href = page;
+        }
+
+        // Animasi saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.section-card, .stat-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
             });
         });
 
-         // Hamburger menu functionality
+        // Efek hover pada tombol
+        document.querySelectorAll('.nav-button').forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px)';
+            });
+            
+            button.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Hamburger menu functionality
         const hamburgerBtn = document.getElementById('hamburgerBtn');
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('overlay');
