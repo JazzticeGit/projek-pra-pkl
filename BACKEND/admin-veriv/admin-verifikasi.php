@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../../koneksi.php';
+include '../../koneksi.php'; 
 
 // Cek apakah admin sudah login (sesuaikan dengan sistem login admin Anda)
 // if (!isset($_SESSION['admin_id'])) {
@@ -38,11 +38,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["pembayaran_id"])) {
 
         // Commit transaksi jika berhasil semua
         mysqli_commit($koneksi);
-        echo "<script>alert('Status berhasil diperbarui'); window.location='verifikasi-pembayaran.php';</script>";
+        echo "<script>alert('Status berhasil diperbarui'); window.location='admin-verifikasi.php';</script>";
     } catch (Exception $e) {
         // Rollback jika ada error
         mysqli_rollback($koneksi);
-        echo "<script>alert('Error: " . $e->getMessage() . "'); window.location='verifikasi-pembayaran.php';</script>";
+        echo "<script>alert('Error: " . $e->getMessage() . "'); window.location='admin-verifikasi.php';</script>";
     }
 
     // Kembalikan ke autocommit normal

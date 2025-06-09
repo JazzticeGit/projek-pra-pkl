@@ -25,7 +25,7 @@ if (!in_array($status_baru, $allowed_status)) {
 }
 
 try {
-    mysqli_autocommit($koneksi, false);
+    mysqli_autocommit($koneksi, false); 
     
     // Update status pembayaran
     $queryUpdatePembayaran = "UPDATE pembayaran SET 

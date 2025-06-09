@@ -61,15 +61,16 @@ if (isset($_GET['action']) && $_GET['action'] === 'add' && isset($_GET['id'])) {
             mysqli_stmt_execute($update_stmt);
         } else {
             // Insert ny
-            $insert_query = "INSERT INTO keranjang (user_id, produk_id, jumlah, size, color, total)
-                             VALUES (?, ?, 1, ?, ?, ?)";
-            $insert_stmt = mysqli_prepare($koneksi, $insert_query);
-            mysqli_stmt_bind_param($insert_stmt, "iissd", $user_id, $produk_id, $size, $color, $harga_final);
-            mysqli_stmt_execute($insert_stmt);
+            $insert_query = "INSERT INTO keranjang (user_id, produk_id, jumlah, size, total)
+                 VALUES (?, ?, 1, ?, ?)";
+$insert_stmt = mysqli_prepare($koneksi, $insert_query);
+mysqli_stmt_bind_param($insert_stmt, "iisd", $user_id, $produk_id, $size, $harga_final);
+mysqli_stmt_execute($insert_stmt);
+
         }
 
         //  session keranjang 
-        $cart_key = $produk_id . "_$size" . "_$color";
+        $cart_key = $produk_id . "_$size" ;
         if (isset($_SESSION['keranjang'][$cart_key])) {
             $_SESSION['keranjang'][$cart_key]['jumlah'] += 1;
         } else {
@@ -80,7 +81,6 @@ if (isset($_GET['action']) && $_GET['action'] === 'add' && isset($_GET['id'])) {
                 'gambar' => $produk['image'],
                 'jumlah' => 1,
                 'size' => $size,
-                'color' => $color
             ];
         }
 
