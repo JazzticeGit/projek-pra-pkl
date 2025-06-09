@@ -109,7 +109,6 @@ FROM produk p
 LEFT JOIN diskon d ON p.produk_id = d.produk_id 
     AND d.status = 'active' 
     AND NOW() BETWEEN d.start_date AND d.end_date
-WHERE p.best_seller = 1
 ";
 $result = mysqli_query($koneksi, $query);
 

@@ -1,4 +1,11 @@
-<?php include '../../koneksi.php'; ?>
+<?php
+session_start();
+include '../../koneksi.php';
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+    header("Location: ../../FRONTEND/login.php");
+    exit;
+}
+ ?>
 <!DOCTYPE html>
 <html lang="id">
 <head>

@@ -1,5 +1,13 @@
 <?php
-include '../koneksi.php'; 
+session_start();
+include '../koneksi.php';
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+    header("Location: ../FRONTEND/login.php");
+    exit;
+}
+
+
+ 
 
 //  user
 $result_user = mysqli_query($koneksi, "SELECT COUNT(*) AS total_user FROM users");

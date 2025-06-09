@@ -39,7 +39,7 @@ $queryPemesanan = "
 $result = mysqli_query($koneksi, $queryPemesanan);
 
 // Hitung statistik untuk filter
-$queryStats = "
+$queryStats = " 
     SELECT 
         status,
         COUNT(*) as count
@@ -210,10 +210,10 @@ function formatTanggal($tanggal) {
                                                     onclick="reorder(<?= $pesanan['id'] ?>)">
                                                 <i class="fas fa-redo me-1"></i>Beli Lagi
                                             </button>
-                                            <button class="btn btn-outline-warning btn-action"
+                                            <!-- <button class="btn btn-outline-warning btn-action"
                                                     onclick="rateOrder(<?= $pesanan['id'] ?>)">
                                                 <i class="fas fa-star me-1"></i>Rating
-                                            </button>
+                                            </button> -->
                                         <?php endif; ?>
                                     </div>
                                 </div>

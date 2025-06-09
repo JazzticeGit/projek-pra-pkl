@@ -1,6 +1,10 @@
 <?php
 session_start();
 include '../koneksi.php';
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'user') {
+    header("Location: login.php");
+    exit;
+};
 
 $user_id = $_SESSION['user_id'] ?? 1;
 $pesanan_id = $_GET['id'] ?? 0;
@@ -31,13 +35,13 @@ $queryDetail = "
         k.nama_kurir,
         k.no_tlp as tlp_kurir,
         a.nama_agensi,
-        a.ongkir
+        a.ongkir 
     FROM pemesanan p
     LEFT JOIN users u ON p.user_id = u.id
     LEFT JOIN pembayaran pay ON p.pembayaran_id = pay.id
     LEFT JOIN metode_pembayaran mp ON pay.id_metode_pembayaran = mp.id
     LEFT JOIN kurir k ON p.kurir_id = k.id
-    LEFT JOIN agensi a ON k.kurir_id = a.id
+    LEFT JOIN agensi a ON k.id = a.id
     WHERE p.id = $pesanan_id
 ";
 
@@ -225,7 +229,7 @@ function getStatusPembayaranBadge($status) {
                     <div class="row align-items-center">
                         <div class="col-md-2">
                             <?php if ($produk['gambar_produk']): ?>
-                                <img src="../uploads/<?= htmlspecialchars($produk['gambar_produk']) ?>" 
+                                <img src="../image/<?= htmlspecialchars($produk['gambar_produk']) ?>" 
                                      alt="<?= htmlspecialchars($produk['nama_produk']) ?>"
                                      class="product-image">
                             <?php else: ?>

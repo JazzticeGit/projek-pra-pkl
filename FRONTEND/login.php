@@ -18,9 +18,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Verifikasi password
         if (password_verify($password, $user['password'])) {
+            // Simpan data ke session
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
-            header("Location: index.php"); // Ganti ke halaman utama
+            $_SESSION['role'] = $user['role']; // Tambahkan role ke session
+
+            // Redirect berdasarkan role
+            if ($user['role'] === 'admin') {
+                header("Location: ../BACKEND/dashboard.php");
+            } else {
+                header("Location: index.php");
+            }
             exit;
         } else {
             $error_message = "Password salah.";
@@ -30,6 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -1,6 +1,13 @@
 <?php
+
 session_start();
+
 include '../../koneksi.php';
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+    header("Location: ../../FRONTEND/login.php");
+    exit;
+}
+
 
 // Cek apakah admin sudah login
 // if (!isset($_SESSION['admin_id'])) {
