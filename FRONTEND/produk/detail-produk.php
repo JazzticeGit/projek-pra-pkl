@@ -178,6 +178,7 @@ $related_result = mysqli_query($koneksi, $related_query);
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
                 <li class="breadcrumb-item"><a href="produk.php">Produk</a></li>
+                <li class="breadcrumb-item"><a href="../keranjang.php">keranjang</a></li>
                 <li class="breadcrumb-item active"><?php echo htmlspecialchars($produk['name']); ?></li>
             </ol>
         </nav>

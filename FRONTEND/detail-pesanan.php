@@ -313,7 +313,7 @@ function getStatusPembayaranBadge($status) {
                 <div class="info-item">
                     <label>Bukti Transfer:</label>
                     <div class="info-value">
-                        <img src="../uploads/bukti/<?= htmlspecialchars($pesanan['bukti_transfer']) ?>" 
+                        <img src="../BACKEND/bukti_transfer<?= htmlspecialchars($pesanan['bukti_transfer']) ?>" 
                              alt="Bukti Transfer" 
                              class="bukti-transfer"
                              onclick="showImage(this.src)">

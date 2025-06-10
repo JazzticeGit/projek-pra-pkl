@@ -358,8 +358,8 @@ ini_set('display_errors', 1);
             <ul>
                 <li><a href="../FRONTEND/produk/produk.php">Shop</a></li>
                 <li><a href="colection.php">Collection</a></li>
-                <li><a href="../about.html">About</a></li>
-                <li><a href="../index.php#footer">Contact</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="index.php#footer">Contact</a></li>
                                     <li><a href="riwayat-transaksi.php">Transaksi</a></li>
 
             </ul>

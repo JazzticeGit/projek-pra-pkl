@@ -318,7 +318,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
             
             <div class="nav-section">
                 <div class="nav-section-title">Verifikasi</div>
-                <a href="../admin-verif/admin-verifikasi.php" class="nav-item">
+                <a href="../admin-veriv/admin-verifikasi.php" class="nav-item">
                     <i>✅</i> Admin Verifikasi
                 </a>
             </div>

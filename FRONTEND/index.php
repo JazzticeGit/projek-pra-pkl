@@ -31,6 +31,7 @@ $stmt->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Landing page</title>
     <link rel="stylesheet" href="../STYLESHEET/index_style.css">
+    <link rel="stylesheet" href="../STYLESHEET/carousel.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -81,6 +82,7 @@ $stmt->close();
         </div>
     </nav>
 
+
     <!-- FIRST MAIN LAYOUT -->
 
     <div class="grid-container">
@@ -91,7 +93,7 @@ $stmt->close();
     <p>segera dapatkan dan jangan sampai terlewat untuk koleksi kami, Siap tampil beda? Temukan koleksi terbaik kami yang siap mengubah gayamu!</p>
     <div class="container-tbl">
       <button class="tbl-harga">
-      <a href="../produk/colection.php">Preview</a>
+      <a href="../FRONTEND/produk/colection.php">Preview</a>
       <div class="round-2"><i class="fa-solid fa-arrow-right"></i></div>
       </button>
 
@@ -133,6 +135,76 @@ $stmt->close();
   </div>
 </div>
 
+
+    <!-- INFINITE CAROUSEL SECTION -->
+    <section class="carousel-section">
+        <div class="carousel-container">
+            <div class="carousel-title">
+                <h2>Koleksi Fashion Terbaru</h2>
+                <p>Temukan style terbaik untuk tampilan yang memukau</p>
+            </div>
+            
+            <div class="carousel-wrapper">
+                <div class="carousel-track">
+                    <div class="carousel-slide">
+                        <img src="../image/kaos1.jpg" alt="Fashion Collection 1">
+                        <div class="carousel-overlay">
+                            <div class="slide-content">
+                                <h3>Koleksi Casual</h3>
+                                <p>Gaya santai yang tetap stylish untuk aktivitas sehari-hari</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="../image/kaos2.jpg" alt="Fashion Collection 2">
+                        <div class="carousel-overlay">
+                            <div class="slide-content">
+                                <h3>Koleksi Formal</h3>
+                                <p>Busana elegan untuk tampilan profesional dan acara khusus</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="../image/kaos3.jpg" alt="Fashion Collection 3">
+                        <div class="carousel-overlay">
+                            <div class="slide-content">
+                                <h3>Koleksi Trendy</h3>
+                                <p>Fashion terkini yang mengikuti perkembangan zaman</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="../image/download (16).jpg" alt="Fashion Collection 4">
+                        <div class="carousel-overlay">
+                            <div class="slide-content">
+                                <h3>Koleksi Vintage</h3>
+                                <p>Gaya klasik yang timeless dan selalu menarik</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Fashion Collection 1">
+                        <div class="carousel-overlay">
+                            <div class="slide-content">
+                                <h3>Koleksi Casual</h3>
+                                <p>Gaya santai yang tetap stylish untuk aktivitas sehari-hari</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="carousel-indicators">
+                <div class="indicator active"></div>
+                <div class="indicator"></div>
+                <div class="indicator"></div>
+                <div class="indicator"></div>
+            </div>
+        </div>
+    </section>
+
+
+
 <!-- LANDING PAGE SECOND MAIN -->
 
 <section class="promo-box">
@@ -152,6 +224,12 @@ $stmt->close();
       <img src="../image/Untitled design (6).png" alt="Pakaian Kekinian" />
     </div>
   </section>
+
+
+
+
+
+  
 
  <!-- KETIGA, 3 CARD BERSEBELAHAN -->
 
@@ -218,6 +296,9 @@ $stmt->close();
   <!-- GAMBAR -->
    <img src="../image/cara checkout 1.png" alt="eror" srcset="">
 </div>
+
+
+
 
 
 <!-- Avatar / Profil Trigger -->
@@ -297,6 +378,52 @@ $stmt->close();
     <p>&copy; hak cipta dilindungi undang undang</p>
   </div>
 </footer>
+
+<script>
+// ===== INFINITE CAROUSEL JAVASCRIPT =====
+document.addEventListener('DOMContentLoaded', function() {
+    // Auto-update indicators untuk carousel
+    const indicators = document.querySelectorAll('.carousel-indicators .indicator');
+    let currentIndex = 0;
+    
+    function updateIndicators() {
+        indicators.forEach((indicator, index) => {
+            indicator.classList.toggle('active', index === currentIndex);
+        });
+        currentIndex = (currentIndex + 1) % 4;
+    }
+    
+    // Update indicators every 3.75 seconds (15s animation / 4 slides)
+    if (indicators.length > 0) {
+        setInterval(updateIndicators, 3750);
+    }
+    
+    // Pause animation on hover
+    const carouselTrack = document.querySelector('.carousel-track');
+    const container = document.querySelector('.carousel-container');
+    
+    if (container && carouselTrack) {
+        container.addEventListener('mouseenter', () => {
+            carouselTrack.style.animationPlayState = 'paused';
+        });
+        
+        container.addEventListener('mouseleave', () => {
+            carouselTrack.style.animationPlayState = 'running';
+        });
+    }
+    
+    // Optional: Click handler untuk indicators
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+            // Reset all indicators
+            indicators.forEach(ind => ind.classList.remove('active'));
+            // Set clicked indicator as active
+            indicator.classList.add('active');
+            currentIndex = index;
+        });
+    });
+});
+</script>
 
 </body>
 <script src="https://kit.fontawesome.com/2de2a0ed8e.js" crossorigin="anonymous">
