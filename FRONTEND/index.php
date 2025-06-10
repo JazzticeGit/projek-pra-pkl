@@ -92,10 +92,10 @@ $stmt->close();
       <div class="round-2"><i class="fa-solid fa-arrow-right"></i></div>
       </button>
 
-        <button class="tbl-harga-2">
+        <!-- <button class="tbl-harga-2">
           <a href="http://">Hot Discount</a>
           <div class="round"><i class="fa-solid fa-arrow-right"></i></div>
-        </button>
+        </button> -->
 
         
         </div>
