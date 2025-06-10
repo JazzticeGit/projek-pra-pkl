@@ -240,15 +240,13 @@ ini_set('display_errors', 1);
                 <li><a href="../produk/colection.php">Collection</a></li>
                 <li><a href="../about.html">About</a></li>
                 <li><a href="../index.php#footer">Contact</a></li>
-<<<<<<< HEAD
-                <li><a href="">Transaksi</a></li>
-=======
-                    <li><a href="../FRONTEND/riwayat-transaksi.php">Transaksi</a></li>
->>>>>>> f312364d8ab9ea281d28f4ab313e37f5d29b3f21
+
+                    <li><a href="../riwayat-transaksi.php">Transaksi</a></li>
+
             </ul>
         </div>
         <div class="searchBar">
-            <form action="../FRONTEND/search.php" method="GET">
+            <form action="../search.php" method="GET">
                 <input type="text" name="query" placeholder="Search" required>
                 <i class="fas fa-search"></i>
             </form>
