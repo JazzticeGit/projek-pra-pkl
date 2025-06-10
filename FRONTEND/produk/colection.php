@@ -237,7 +237,7 @@ $result_jaket = mysqli_query($koneksi, $query_jaket);
 
             <!-- SEARCH BAR -->
             <div class="searchBar">
-                <form action="search.php" method="GET">
+            <form action="../FRONTEND/search.php" method="GET">
                 <input type="text" name="query" placeholder="   Search  " required>
                 <i class="fas fa-search"></i>
                 <!-- <button type="submit">Cari</button> -->

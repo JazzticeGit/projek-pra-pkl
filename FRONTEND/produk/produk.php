@@ -244,7 +244,7 @@ ini_set('display_errors', 1);
             </ul>
         </div>
         <div class="searchBar">
-            <form action="search.php" method="GET">
+            <form action="../FRONTEND/search.php" method="GET">
                 <input type="text" name="query" placeholder="Search" required>
                 <i class="fas fa-search"></i>
             </form>
