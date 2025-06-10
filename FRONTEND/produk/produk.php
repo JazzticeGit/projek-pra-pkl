@@ -240,7 +240,7 @@ ini_set('display_errors', 1);
                 <li><a href="../produk/colection.php">Collection</a></li>
                 <li><a href="../about.html">About</a></li>
                 <li><a href="../index.php#footer">Contact</a></li>
-                <li><a href="riwayat-transaksi.php">Transaksi</a></li>
+                    <li><a href="../FRONTEND/riwayat-transaksi.php">Transaksi</a></li>
             </ul>
         </div>
         <div class="searchBar">
@@ -252,7 +252,7 @@ ini_set('display_errors', 1);
         <div class="iconLink">
             <ul>
                 <li><a href="../keranjang.php" class="fa-solid fa-cart-shopping"></a></li>
-                <li><a href="#" class="fa-solid fa-user"></a></li>
+                <li><a href="../FRONTEND/profile.php" class="fa-solid fa-user"></a></li>
             </ul>
         </div>
     </div>

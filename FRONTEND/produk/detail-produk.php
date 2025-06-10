@@ -287,10 +287,10 @@ $related_result = mysqli_query($koneksi, $related_query);
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" 
+                        <!-- <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" 
                                 data-bs-target="#reviews" type="button" role="tab">
                             Ulasan
-                        </button>
+                        </button> -->
                     </li>
                 </ul>
                 
@@ -304,7 +304,7 @@ $related_result = mysqli_query($koneksi, $related_query);
                         <div class="p-3">
                             <table class="table table-striped">
                                 <tr><td><strong>Kategori</strong></td><td><?php echo htmlspecialchars($produk['jenis_produk']); ?></td></tr>
-                                <tr><td><strong>Stok</strong></td><td><?php echo $produk['stok']; ?> pcs</td></tr>
+                                <tr><td><strong>Stok</strong></td>< td><?php echo $produk['stok']; ?> pcs</td></tr>
                                 <tr><td><strong>Berat</strong></td><td>~500g</td></tr>
                                 <tr><td><strong>Material</strong></td><td>Cotton 100%</td></tr>
                             </table>

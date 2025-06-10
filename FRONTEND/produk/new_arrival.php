@@ -64,7 +64,7 @@ $result = mysqli_query($koneksi, $query);
                     <li><a href="../produk/colection.php">Collection</a></li>
                     <li><a href="../about.html">About</a></li>
                     <li><a href="../index.php #footer">Contack</a></li>
-                    <li><a href="riwayat-transaksi.php">Transaksi</a></li>
+                    <li><a href="../FRONTEND/riwayat-transaksi.php">Transaksi</a></li>
                 </ul>
             </div>
 
@@ -84,7 +84,7 @@ $result = mysqli_query($koneksi, $query);
              <div class="iconLink">
              <ul>
                 <li><a href="../keranjang.php" class="fa-solid fa-cart-shopping"></a></li> <!-- CART SHOPING LINK -->
-                <li><a href="http://" class="fa-solid fa-user"></a></li> <!-- ACCOUNT LINK -->
+                <li><a href="../FRONTEND/profile.php" class="fa-solid fa-user"></a></li> <!-- ACCOUNT LINK -->
              </ul>
              </div>
         </div>
