@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         best_seller = '$best_seller',
         new_arrival = '$new_arrival',
         size = '$size',
-        color = '$color',
+        -- color = '$color',
         id_kategori = '$id_kategori'
         WHERE produk_id = $id
     ");
@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <label><input type="checkbox" name="best_seller" <?= $produk['best_seller'] ? 'checked' : '' ?>> Best Seller</label>
     <label><input type="checkbox" name="new_arrival" <?= $produk['new_arrival'] ? 'checked' : '' ?>> New Arrival</label>
     <input type="text" name="size" value="<?= htmlspecialchars($produk['size']) ?>" placeholder="Ukuran">
-    <input type="text" name="color" value="<?= htmlspecialchars($produk['color']) ?>" required>
+    <!-- <input type="text" name="color" value="<?= htmlspecialchars($produk['color']) ?>" required> -->
     <select name="id_kategori" required>
         <option value="">Pilih Kategori</option>
         <?php while($kategori = mysqli_fetch_assoc($kategori_query)): ?>

@@ -115,6 +115,20 @@ $result = mysqli_query($koneksi, $query);
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+
+$user_id = $_SESSION['user_id'];
+$query_user = "SELECT * FROM toko_baju.users WHERE id = ?";
+$stmt_user = $koneksi->prepare($query_user);
+$stmt_user->bind_param("i", $user_id);
+$stmt_user->execute();
+$result_user = $stmt_user->get_result();
+
+if ($result_user->num_rows === 0) {
+    die('User tidak ditemukan');
+}
+
+$user = $result_user->fetch_assoc();
+$stmt_user->close();
 ?>
 
 <!DOCTYPE html>
@@ -248,13 +262,16 @@ ini_set('display_errors', 1);
         <div class="searchBar">
             <form action="../search.php" method="GET">
                 <input type="text" name="query" placeholder="Search" required>
-                <i class="fas fa-search"></i>
+               <i class="fas fa-search"></i>
             </form>
         </div>
         <div class="iconLink">
             <ul>
                 <li><a href="../keranjang.php" class="fa-solid fa-cart-shopping"></a></li>
-                <li><a href="../FRONTEND/profile.php" class="fa-solid fa-user"></a></li>
+               <li></li> <a href="#" class="fa-solid fa-user" id="profileTrigger"></a></li>
+               <!-- <script src="../javascript/profil.js"></script>
+               <script src="../javascript/popup.js"></script> -->
+               
             </ul>
         </div>
     </div>
@@ -318,6 +335,7 @@ ini_set('display_errors', 1);
     <?php endwhile; ?>
 </div>
 
+
 <script>
 // Add click event to product cards
 document.querySelectorAll('.product-card').forEach(card => {
@@ -351,6 +369,8 @@ document.querySelectorAll('.quick-add-btn').forEach(btn => {
         }, 500);
     });
 });
+
+
 </script>
 
 </body>

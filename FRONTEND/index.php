@@ -75,6 +75,7 @@ $stmt->close();
                 <li>
                 <a href="#" class="fa-solid fa-user" id="profileTrigger"></a>
                 </li>
+                <script src="../javascript/profil.js"></script>
              </ul>
              </div>
         </div>
@@ -301,6 +302,6 @@ $stmt->close();
 <script src="https://kit.fontawesome.com/2de2a0ed8e.js" crossorigin="anonymous">
 </script>
 
-<script src="../javascript/profil.js"></script>
+
 
 </html>
