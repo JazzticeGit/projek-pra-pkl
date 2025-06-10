@@ -60,7 +60,7 @@ form input, form textarea, form select {
 }
 
 form button {
-    background: #28a745;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     padding: 10px;
     border: none;
@@ -70,7 +70,7 @@ form button {
 }
 
 form button:hover {
-    background: #218838;
+    background: linear-gradient(135deg, #4d69e7 0%, #6b35a1 100%);
 }
 
 h2 {
@@ -257,3 +257,90 @@ h1{
             z-index: 1000;
             display: none;
         }
+
+        .card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 6px;
+    width: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+
+.card h3 {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 8px;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.card .badge-custom {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-weight: bold;
+}
+
+.card .actions {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.card .btn {
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+    transition: 0.2s;
+    margin: 2px;
+    display: inline-block;
+}
+
+.btn.edit {
+    background: #6c5ce7;
+    color: white;
+}
+
+.btn.delete {
+    background: #d63031;
+    color: white;
+}
+
+.btn.edit:hover {
+    background: #4834d4;
+}
+
+.btn.delete:hover {
+    background: #c0392b;
+}

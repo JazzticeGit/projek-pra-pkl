@@ -1,6 +1,11 @@
 <?php
 session_start();
 include '../../koneksi.php';
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'user') {
+    header("Location: ../FRONTEND/login.php");
+    exit;
+}
+
 include '../../BACKEND/diskon/end-date.php';
 
 // Initialize cart session
@@ -61,15 +66,16 @@ if (isset($_GET['action']) && $_GET['action'] === 'add' && isset($_GET['id'])) {
             mysqli_stmt_execute($update_stmt);
         } else {
             // Insert ny
-            $insert_query = "INSERT INTO keranjang (user_id, produk_id, jumlah, size, color, total)
-                             VALUES (?, ?, 1, ?, ?, ?)";
-            $insert_stmt = mysqli_prepare($koneksi, $insert_query);
-            mysqli_stmt_bind_param($insert_stmt, "iissd", $user_id, $produk_id, $size, $color, $harga_final);
-            mysqli_stmt_execute($insert_stmt);
+            $insert_query = "INSERT INTO keranjang (user_id, produk_id, jumlah, size, total)
+                 VALUES (?, ?, 1, ?, ?)";
+$insert_stmt = mysqli_prepare($koneksi, $insert_query);
+mysqli_stmt_bind_param($insert_stmt, "iisd", $user_id, $produk_id, $size, $harga_final);
+mysqli_stmt_execute($insert_stmt);
+
         }
 
         //  session keranjang 
-        $cart_key = $produk_id . "_$size" . "_$color";
+        $cart_key = $produk_id . "_$size" ;
         if (isset($_SESSION['keranjang'][$cart_key])) {
             $_SESSION['keranjang'][$cart_key]['jumlah'] += 1;
         } else {
@@ -80,7 +86,6 @@ if (isset($_GET['action']) && $_GET['action'] === 'add' && isset($_GET['id'])) {
                 'gambar' => $produk['image'],
                 'jumlah' => 1,
                 'size' => $size,
-                'color' => $color
             ];
         }
 
@@ -231,10 +236,11 @@ ini_set('display_errors', 1);
         <a href="../index.php"><img src="../../image/AGESA.png" alt=""></a>
         <div class="navlink">
             <ul>
-                <li><a href="produk.php">Shop</a></li>
+                <li><a href="all-produk.php">Shop</a></li>
                 <li><a href="../produk/colection.php">Collection</a></li>
                 <li><a href="../about.html">About</a></li>
                 <li><a href="../index.php#footer">Contact</a></li>
+                <li><a href="riwayat-transaksi.php">Transaksi</a></li>
             </ul>
         </div>
         <div class="searchBar">

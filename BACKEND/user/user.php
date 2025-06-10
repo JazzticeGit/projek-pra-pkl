@@ -1,4 +1,11 @@
-<?php include '../../koneksi.php'; ?>
+<?php
+session_start();
+include '../../koneksi.php';
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+    header("Location: ../../FRONTEND/login.php");
+    exit;
+}
+ ?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -12,7 +19,9 @@
 <!-- NAV BE -->
 
    <style>
-        * {
+
+<style>
+      * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -20,61 +29,50 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f8fafc;
-            color: #334155;
-            line-height: 1.6;
+            background-color: #f5f5f5;
+            overflow-x: hidden;
         }
 
-        /* Header */
+        /* Header dengan hamburger button */
         .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 1rem 2rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1000;
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            letter-spacing: -0.5px;
-        }
-
-        /* Hamburger Button */
         .hamburger {
-            display: flex;
-            flex-direction: column;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
             cursor: pointer;
             padding: 0.5rem;
-            border-radius: 6px;
+            border-radius: 4px;
             transition: all 0.3s ease;
-            background: rgba(255,255,255,0.1);
-            border: none;
+            margin-right: 1rem;
         }
 
         .hamburger:hover {
-            background: rgba(255,255,255,0.2);
-            transform: scale(1.05);
+            background-color: rgba(255,255,255,0.1);
         }
 
         .hamburger span {
-            width: 24px;
+            display: block;
+            width: 25px;
             height: 3px;
             background: white;
-            margin: 2px 0;
-            transition: all 0.3s ease;
+            margin: 5px 0;
+            transition: 0.3s;
             border-radius: 2px;
         }
 
         .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
+            transform: rotate(-45deg) translate(-5px, 6px);
         }
 
         .hamburger.active span:nth-child(2) {
@@ -82,171 +80,181 @@
         }
 
         .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
+            transform: rotate(45deg) translate(-5px, -6px);
         }
 
-        /* Navigation Overlay */
-        .nav-overlay {
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
             position: fixed;
             top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100vh;
+            background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
+            transition: left 0.3s ease;
+            z-index: 999;
+            box-shadow: 2px 0 15px rgba(0,0,0,0.1);
+        }
+
+        .sidebar.active {
             left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(4px);
-            z-index: 1001;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
         }
 
-        .nav-overlay.active {
-            opacity: 1;
-            visibility: visible;
+        .sidebar-header {
+            background: rgba(0,0,0,0.2);
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* Navigation Panel */
-        .nav-panel {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 350px;
-            height: 100vh;
-            background: white;
-            box-shadow: -5px 0 20px rgba(0,0,0,0.15);
-            transition: right 0.3s ease;
-            z-index: 1002;
-            overflow-y: auto;
-        }
-
-        .nav-panel.active {
-            right: 0;
-        }
-
-        .nav-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .sidebar-header h3 {
             color: white;
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .nav-header h2 {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
+            font-weight: 600;
             margin-bottom: 0.5rem;
         }
 
-        .nav-header p {
-            opacity: 0.9;
+        .sidebar-header p {
+            color: #bdc3c7;
             font-size: 0.9rem;
         }
 
-        /* Navigation Menu */
         .nav-menu {
             padding: 1rem 0;
         }
 
         .nav-section {
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .nav-section-title {
-            padding: 0.5rem 2rem;
+            color: #95a5a6;
             font-size: 0.8rem;
             font-weight: 600;
             text-transform: uppercase;
-            color: #64748b;
-            letter-spacing: 0.5px;
-            border-bottom: 1px solid #e2e8f0;
+            letter-spacing: 1px;
+            padding: 0 1.5rem;
             margin-bottom: 0.5rem;
         }
 
         .nav-item {
-            display: flex;
-            align-items: center;
-            padding: 0.8rem 2rem;
-            color:rgb(255, 255, 255);
+            display: block;
+            color: #ecf0f1;
             text-decoration: none;
-            transition: all 0.2s ease;
-            border-left: 3px solid transparent;
+            padding: 0.75rem 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-item:hover::before {
+            left: 100%;
         }
 
         .nav-item:hover {
-            background: #f1f5f9;
-            border-left-color: #667eea;
-            color: #1e293b;
+            background-color: rgba(52, 152, 219, 0.2);
+            color: #3498db;
+            padding-left: 2rem;
         }
 
         .nav-item.active {
-            background: #e0e7ff;
-            border-left-color: #667eea;
-            color: #3730a3;
-            font-weight: 500;
+            background-color: rgba(52, 152, 219, 0.3);
+            color: #3498db;
+            border-right: 3px solid #3498db;
         }
 
-        .nav-icon {
-            width: 20px;
-            height: 20px;
-            margin-right: 1rem;
-            opacity: 0.7;
+        .nav-item i {
+            margin-right: 0.75rem;
+            width: 18px;
+            text-align: center;
         }
 
-        /* Close Button */
-        .close-btn {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            background: rgba(255,255,255,0.2);
-            border: none;
-            color: white;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            transition: all 0.2s ease;
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0,0,0,0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 998;
         }
 
-        .close-btn:hover {
-            background: rgba(255,255,255,0.3);
-            transform: scale(1.1);
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
         }
 
         /* Main Content */
         .main-content {
-            margin-top: 80px;
             padding: 2rem;
-            min-height: calc(100vh - 80px);
+            transition: margin-left 0.3s ease;
         }
 
         .content-card {
             background: white;
             border-radius: 12px;
             padding: 2rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             margin-bottom: 2rem;
         }
 
-        .content-card h1 {
-            color: #1e293b;
+        .content-card h2 {
+            color: #2c3e50;
             margin-bottom: 1rem;
-            font-size: 2rem;
+            font-size: 1.5rem;
         }
 
         .content-card p {
-            color: #64748b;
-            margin-bottom: 1rem;
+            color: #7f8c8d;
+            line-height: 1.6;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .stat-card h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card p {
+            opacity: 0.9;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .nav-panel {
-                width: 100%;
-                max-width: 320px;
-            }
-            
             .header {
                 padding: 1rem;
             }
@@ -254,116 +262,73 @@
             .main-content {
                 padding: 1rem;
             }
+            
+            .sidebar {
+                width: 100vw;
+            }
         }
 
-        /* Animation untuk smooth scrolling */
-        html {
-            scroll-behavior: smooth;
+        .nav-menu{
+            z-index: 99;
         }
+</style>
 
-        /* Prevent body scroll when nav is open */
-        body.nav-open {
-            overflow: hidden;
-        }
-    </style>
-</head>
-<body>
-    <!-- Header -->
-    <header class="header">
-        <div class="logo">Admin Panel</div>
-        <button class="hamburger" id="hamburger">
+<!-- nav -->
+
+<div class="header">
+        <button class="hamburger" id="hamburgerBtn">
             <span></span>
             <span></span>
             <span></span>
         </button>
-    </header>
+        <h1>Admin Dashboard</h1>
+    </div>
 
-    <!-- Navigation Overlay -->
-    <div class="nav-overlay" id="navOverlay"></div>
-
-    <!-- Navigation Panel -->
-    <nav class="nav-panel" id="navPanel">
-        <div class="nav-header">
-            <button class="close-btn" id="closeBtn">&times;</button>
-            <h2>Navigation</h2>
-            <p>Backend Administration</p>
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>Admin Panel</h3>
+            <p>Sistem Manajemen Backend</p>
         </div>
         
         <div class="nav-menu">
-            <!-- Dashboard Section -->
             <div class="nav-section">
                 <div class="nav-section-title">Dashboard</div>
-                <a href="#" class="nav-item active">
-                    <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
-                    </svg>
-                    Overview
-                </a>
-                <a href="#" class="nav-item">
-                    <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/>
-                    </svg>
-                    Analytics
+                <a href="../dashboard.php" class="nav-item active">
+                    <i>📊</i> Dashboard Utama
                 </a>
             </div>
-
-            <!-- Content Management -->
+            
             <div class="nav-section">
-                <div class="nav-section-title">Content Management</div>
-                <a href="#" class="nav-item">
-                    <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
-                        <path fill-rule="evenodd" d="M4 5a2 2 0 012-2v1a1 1 0 001 1h6a1 1 0 001-1V3a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3z"/>
-                    </svg>
-                    Posts
+                <div class="nav-section-title">Manajemen User</div>
+                <a href="../user/user.php" class="nav-item">
+                    <i>👥</i> Daftar User
                 </a>
-                <a href="#" class="nav-item">
-                    <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"/>
-                    </svg>
-                    Media
-                </a>
-                <a href="#" class="nav-item">
-                    <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h4a1 1 0 010 2H6.414l2.293 2.293a1 1 0 11-1.414 1.414L5 6.414V8a1 1 0 01-2 0V4zm9 1a1 1 0 010-2h4a1 1 0 011 1v4a1 1 0 01-2 0V6.414l-2.293 2.293a1 1 0 11-1.414-1.414L13.586 5H12zm-9 7a1 1 0 012 0v1.586l2.293-2.293a1 1 0 111.414 1.414L6.414 15H8a1 1 0 010 2H4a1 1 0 01-1-1v-4zm13-1a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 010-2h1.586l-2.293-2.293a1 1 0 111.414-1.414L15 13.586V12a1 1 0 011-1z"/>
-                    </svg>
-                    Categories
+                <a href="../user/user.php" class="nav-item">
+                    <i>👤</i> Kelola User
                 </a>
             </div>
-
-            <!-- User Management -->
+            
             <div class="nav-section">
-                <div class="nav-section-title">User Management</div>
-                <a href="#" class="nav-item">
-                    <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
-                    </svg>
-                    Users
-                </a>
-                <a href="#" class="nav-item">
-                    <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M18 8a6 6 0 01-7.743 5.743L10 14l-1 1-1 1H6v2H2v-4l4.257-4.257A6 6 0 1118 8zm-6-4a1 1 0 100 2 2 2 0 012 2 1 1 0 102 0 4 4 0 00-4-4z"/>
-                    </svg>
-                    Permissions
+                <div class="nav-section-title">Produk</div>
+                <a href="../produk/index-produk.php" class="nav-item">
+                    <i>📦</i> Daftar Produk
                 </a>
             </div>
-
-            <!-- Settings -->
+            
             <div class="nav-section">
-                <div class="nav-section-title">System</div>
-                <a href="#" class="nav-item">
-                    <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"/>
-                    </svg>
-                    Settings
-                </a>
-                <a href="#" class="nav-item">
-                    <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
-                    </svg>
-                    Backup
+                <div class="nav-section-title">Verifikasi</div>
+                <a href="../admin-verif/admin-verifikasi.php" class="nav-item">
+                    <i>✅</i> Admin Verifikasi
                 </a>
             </div>
+            
+            <!-- <div class="nav-section">
+                <div class="nav-section-title">Sistem</div>
+                <a href="diskon/index.php" class="nav-item">
+                    <i>🏷️</i> Manajemen Diskon
+                </a>
+            </div> -->
         </div>
     </nav>
 
@@ -425,55 +390,48 @@
             });
         });
 
-        const hamburger = document.getElementById('hamburger');
-        const navOverlay = document.getElementById('navOverlay');
-        const navPanel = document.getElementById('navPanel');
-        const closeBtn = document.getElementById('closeBtn');
-        const body = document.body;
+         // Hamburger menu functionality
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const mainContent = document.getElementById('mainContent');
 
-        // Open navigation
-        function openNav() {
-            hamburger.classList.add('active');
-            navOverlay.classList.add('active');
-            navPanel.classList.add('active');
-            body.classList.add('nav-open');
+        function toggleMenu() {
+            hamburgerBtn.classList.toggle('active');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
         }
 
-        // Close navigation
-        function closeNav() {
-            hamburger.classList.remove('active');
-            navOverlay.classList.remove('active');
-            navPanel.classList.remove('active');
-            body.classList.remove('nav-open');
-        }
+        hamburgerBtn.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
 
-        // Event listeners
-        hamburger.addEventListener('click', openNav);
-        closeBtn.addEventListener('click', closeNav);
-        navOverlay.addEventListener('click', closeNav);
-
-        // Close nav on escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeNav();
-            }
-        });
-
-        // Handle nav item clicks
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('click', function(e) {
-                // Remove active class from all items
-                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
-                // Add active class to clicked item
-                this.classList.add('active');
-                
-                // Close navigation on mobile after selection
+        // Close menu when clicking nav item (for better UX on mobile)
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
                 if (window.innerWidth <= 768) {
-                    setTimeout(closeNav, 300);
+                    toggleMenu();
                 }
             });
         });
 
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                hamburgerBtn.classList.remove('active');
+            }
+        });
+
+        // Active nav item highlighting
+        const currentPage = window.location.pathname;
+        navItems.forEach(item => {
+            if (item.getAttribute('href') === currentPage || 
+                currentPage.includes(item.getAttribute('href'))) {
+                item.classList.add('active');
+            }
+        });
     </script>
 </body>
 </html>

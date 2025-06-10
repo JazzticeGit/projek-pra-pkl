@@ -1,10 +1,11 @@
 <?php
 session_start();
-include '../koneksi.php'; 
+include '../koneksi.php';
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'user') {
+    header("Location: login.php");
+    exit;
+};
 
-if (!isset($_SESSION['user_id'])) {
-   header("location:login.php?loginDulu");
-}
 
 $user_id = $_SESSION['user_id'];
 $query = "SELECT * FROM toko_baju.users WHERE id = ?";
@@ -51,6 +52,7 @@ $stmt->close();
                     <li><a href="../FRONTEND/produk/colection.php">Collection</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="#footer">Contact</a></li>
+                    <li><a href="riwayat-transaksi.php">Transaksi</a></li>
                 </ul>
             </div>
 
