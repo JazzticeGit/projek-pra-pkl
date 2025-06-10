@@ -85,12 +85,12 @@ $stmt->close();
     <div class="grid-container">
   <!-- Grid 1: Diskon -->
   <div class="grid_1">
-    <h2>#Discount Up To <span>50%</span></h2>
-    <h4>Oversized Boxy Work Jacket</h4>
-    <p>Tetap hangat dan stylish dengan jaket berkualitas tinggi! <br>Dibuat dari bahan premium yang nyaman dipakai, desain modern<br> yang cocok  untuk segala suasana</p>
+    <h2>#collection of <span>2024</span></h2>
+    <h4>terbaik dan terlaris</h4>
+    <p>segera dapatkan dan jangan sampai terlewat untuk koleksi kami, Siap tampil beda? Temukan koleksi terbaik kami yang siap mengubah gayamu!</p>
     <div class="container-tbl">
       <button class="tbl-harga">
-      <a href="http://">Rp.800.000,00</a>
+      <a href="../produk/colection.php">Preview</a>
       <div class="round-2"><i class="fa-solid fa-arrow-right"></i></div>
       </button>
 
