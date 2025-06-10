@@ -60,10 +60,11 @@ $result = mysqli_query($koneksi, $query);
              <!-- LINK NAVIGASI -->
             <div class="navlink">
                 <ul>
-                    <li><a href="produk.php">Shop</a></li>  <!-- SEMENTARA SEBELUM DROPDoWN LINK -->
+                    <li><a href="all-produk.php">Shop</a></li>  <!-- SEMENTARA SEBELUM DROPDoWN LINK -->
                     <li><a href="../produk/colection.php">Collection</a></li>
                     <li><a href="../about.html">About</a></li>
                     <li><a href="../index.php #footer">Contack</a></li>
+                    <li><a href="riwayat-transaksi.php">Transaksi</a></li>
                 </ul>
             </div>
 

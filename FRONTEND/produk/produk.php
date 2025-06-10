@@ -236,10 +236,11 @@ ini_set('display_errors', 1);
         <a href="../index.php"><img src="../../image/AGESA.png" alt=""></a>
         <div class="navlink">
             <ul>
-                <li><a href="produk.php">Shop</a></li>
+                <li><a href="all-produk.php">Shop</a></li>
                 <li><a href="../produk/colection.php">Collection</a></li>
                 <li><a href="../about.html">About</a></li>
                 <li><a href="../index.php#footer">Contact</a></li>
+                <li><a href="riwayat-transaksi.php">Transaksi</a></li>
             </ul>
         </div>
         <div class="searchBar">

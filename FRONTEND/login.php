@@ -61,9 +61,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="email" name="email" placeholder="Enter your email" required>
                 <input type="password" name="password" placeholder="Enter your password" required>
                 <div class="buttons">
-                    <a href="https://accounts.google.com/o/oauth2/auth" class="google-btn">
+                    <!-- <a href="https://accounts.google.com/o/oauth2/auth" class="google-btn">
                         <img src="../image/gambar.png" alt="Google">
-                    </a>
+                    </a> -->
                     <button type="submit" class="enter-btn">Enter</button>
                 </div>
             </form>
