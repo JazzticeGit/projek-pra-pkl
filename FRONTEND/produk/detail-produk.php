@@ -1,10 +1,10 @@
 <?php
 session_start();
 include '../../koneksi.php';
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'user') {
-    header("Location: ../FRONTEND/login.php");
-    exit;
-}
+// if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'user') {
+//     header("Location: ../FRONTEND/login.php");
+//     exit;
+// }
 
 // Get product ID from URL first (moved to top)
 $produk_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;

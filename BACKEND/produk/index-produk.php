@@ -2,10 +2,10 @@
 session_start();
 include '../../koneksi.php'; 
 
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
-    header("Location: ../../FRONTEND/login.php");
-    exit;
-}
+// if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+//     header("Location: ../../FRONTEND/login.php");
+//     exit;
+// }
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
