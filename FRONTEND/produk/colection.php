@@ -1,10 +1,10 @@
 <?php
 session_start();
 include '../../koneksi.php';
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'user') {
-    header("Location: ../FRONTEND/login.php");
-    exit;
-}
+// if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'user') {
+//     header("Location: ../FRONTEND/login.php");
+//     exit;
+// }
 
 if (!isset($_SESSION['keranjang'])) {
     $_SESSION['keranjang'] = [];
