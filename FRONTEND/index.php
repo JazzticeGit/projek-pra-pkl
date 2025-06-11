@@ -346,9 +346,9 @@ $stmt->close();
       <img src="../image/AGESA.png" alt="Agesa Shop Logo" class="footer-logo">
       <p><strong>clothing and accessories</strong></p>
       <div class="social-icons">
-        <i class="fa-brands fa-instagram"></i>
-        <i class="fa-brands fa-whatsapp"></i>
-        <i class="fa-brands fa-tiktok"></i>
+        <a href="https://www.instagram.com/agesa1nfinity?igsh=MWRvZXQxZWRneno0MA=="><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://wa.me/628815436598"><i class="fa-brands fa-whatsapp"></i></a>
+        <a href="https://www.tiktok.com/@rpl1smega?_t=ZS-8x6R6GXpkeq&_r=1"><i class="fa-brands fa-tiktok"></i></a>
         <i class="fa-solid fa-bag-shopping"></i>
       </div>
     </div>

@@ -105,7 +105,7 @@ function formatTanggal($tanggal) {
                     <li><a href="../FRONTEND/produk/produk.php">Shop</a></li>  
                     <li><a href="../FRONTEND/produk/colection.php">Collection</a></li>
                     <li><a href="about.html">About</a></li>
-                    <li><a href="#footer">Contact</a></li>
+                    <li><a href="../FRONTEND/about.html#footer">Contact</a></li>
                     <li><a href="riwayat-transaksi.php">Transaksi</a></li>
                 </ul>
             </div>
