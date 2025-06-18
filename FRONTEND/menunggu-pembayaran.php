@@ -75,11 +75,16 @@ $subtotal = $pemesanan['total_harga'] - 10000;
 </head>
 <body>
 <div class="container">
-    <?php if ($status_pembayaran === 'berhasil'): ?>
-        <script>
-            window.location.href = 'sukses-pembayaran.php?id=<?= $id_pemesanan ?>';
-        </script>
-    <?php endif; ?>
+   <?php if ($status_pembayaran === 'berhasil'): ?>
+    <script>
+        window.location.href = 'sukses-pembayaran.php?id=<?= $id_pemesanan ?>';
+    </script>
+<?php elseif ($status_pembayaran === 'gagal'): ?>
+    <script>
+        window.location.href = 'gagal.php?id=<?= $id_pemesanan ?>';
+    </script>
+<?php endif; ?>
+
 
     <?php if ($bukti_uploaded && $status_pembayaran === 'pending'): ?>
         <div style="background: #d1ecf1; color: #0c5460; padding: 15px; border-radius: 5px; margin-bottom: 20px; border: 1px solid #bee5eb;">
