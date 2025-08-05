@@ -2,21 +2,18 @@
 session_start();
 include '../../koneksi.php'; 
 
-// Cek apakah admin sudah login (sesuaikan dengan sistem login admin Anda)
-// if (!isset($_SESSION['admin_id'])) {
-//     echo "<script>alert('Silakan login sebagai admin terlebih dahulu!'); window.location.href='../admin/login.php';</script>";
-//     exit;
-// }
+
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["pembayaran_id"])) {
     $id = (int) $_POST["pembayaran_id"];
     $status = mysqli_real_escape_string($koneksi, $_POST["status"]);
 
-    // Mulai transaksi
+    // Mulai transaksi 
     mysqli_autocommit($koneksi, false);
 
     try {
-        // Update status pembayaran
+        // Update status pembayaran 
         $query = "UPDATE pembayaran SET status = ? WHERE id = ?";
         $stmt = mysqli_prepare($koneksi, $query);
         mysqli_stmt_bind_param($stmt, "si", $status, $id);
@@ -50,13 +47,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["pembayaran_id"])) {
 }
 
 // Ambil data pembayaran yang perlu diverifikasi
-$filter_status = mysqli_real_escape_string($koneksi, $_GET['status'] ?? 'pending');
+$filter_status = mysqli_real_escape_string($koneksi, $_GET['status'] ?? 'all');
 $search = mysqli_real_escape_string($koneksi, $_GET['search'] ?? '');
 
-$whereClause = "WHERE pb.status = '$filter_status'";
-if (!empty($search)) {
-    $whereClause .= " AND (u.username LIKE '%$search%' OR pb.id LIKE '%$search%')";
+$whereClause = "";
+if ($filter_status !== 'all') {
+    $whereClause = "WHERE pb.status = '$filter_status'";
+} else {
+    $whereClause = "WHERE 1=1"; // kondisi selalu true untuk menampilkan semua
 }
+
+if (!empty($search)) {
+    if ($filter_status !== 'all') {
+        $whereClause .= " AND (u.username LIKE '%$search%' OR pb.id LIKE '%$search%')";
+    } else {
+        $whereClause .= " AND (u.username LIKE '%$search%' OR pb.id LIKE '%$search%')";
+    }
+}
+
 
 // QUERY YANG DIPERBAIKI - menghilangkan JOIN yang menyebabkan duplikasi
 $queryPembayaran = "SELECT 
@@ -76,7 +84,7 @@ JOIN keranjang k ON pb.keranjang_id = k.id
 JOIN users u ON k.user_id = u.id
 LEFT JOIN metode_pembayaran mp ON pb.id_metode_pembayaran = mp.id
 $whereClause
-ORDER BY pb.tgl_pembayaran DESC";
+ORDER BY pb.tgl_pembayaran DESC, pb.id DESC";
 
 $resultPembayaran = mysqli_query($koneksi, $queryPembayaran);
 
@@ -85,6 +93,8 @@ $queryStats = "SELECT
     COUNT(CASE WHEN status = 'pending' THEN 1 END) as pending,
     COUNT(CASE WHEN status = 'berhasil' THEN 1 END) as berhasil,
     COUNT(CASE WHEN status = 'gagal' THEN 1 END) as gagal,
+    COUNT(CASE WHEN status = 'dikirim' THEN 1 END) as dikirim,
+    COUNT(CASE WHEN status = 'diterima' THEN 1 END) as diterima,
     COUNT(*) as total
 FROM pembayaran";
 $resultStats = mysqli_query($koneksi, $queryStats);
@@ -354,6 +364,24 @@ $stats = mysqli_fetch_assoc($resultStats);
         .nav-menu{
             z-index: 99;
         }
+
+        .status-dikirim {
+    background-color: #f39c12;
+    color: white;
+}
+
+.status-diterima {
+    background-color: #27ae60;
+    color: white;
+}
+
+.stat-card.dikirim {
+    background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+}
+
+.stat-card.diterima {
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+}
 </style>
 
 <!-- nav -->
@@ -438,37 +466,48 @@ $stats = mysqli_fetch_assoc($resultStats);
 
         <!-- Statistik -->
         <div class="stats-cards">
-            <div class="stat-card pending">
-                <div class="stat-number"><?= $stats['pending'] ?></div>
-                <div>Menunggu Verifikasi</div>
-            </div>
-            <div class="stat-card berhasil">
-                <div class="stat-number"><?= $stats['berhasil'] ?></div>
-                <div>Pembayaran Berhasil</div>
-            </div>
-            <div class="stat-card gagal">
-                <div class="stat-number"><?= $stats['gagal'] ?></div>
-                <div>Pembayaran Gagal</div>
-            </div>
-            <div class="stat-card total">
-                <div class="stat-number"><?= $stats['total'] ?></div>
-                <div>Total Pembayaran</div>
-            </div>
-        </div>
+    <div class="stat-card pending">
+        <div class="stat-number"><?= $stats['pending'] ?></div>
+        <div>Pending</div>
+    </div>
+    <div class="stat-card berhasil">
+        <div class="stat-number"><?= $stats['berhasil'] ?></div>
+        <div>Berhasil</div>
+    </div>
+    <div class="stat-card gagal">
+        <div class="stat-number"><?= $stats['gagal'] ?></div>
+        <div>Gagal</div>
+    </div>
+    <div class="stat-card dikirim">
+        <div class="stat-number"><?= $stats['dikirim'] ?></div>
+        <div>Dikirim</div>
+    </div>
+    <div class="stat-card diterima">
+        <div class="stat-number"><?= $stats['diterima'] ?></div>
+        <div>Diterima</div>
+    </div>
+    <div class="stat-card total">
+        <div class="stat-number"><?= $stats['total'] ?></div>
+        <div>Total</div>
+    </div>
+</div>
 
         <!-- Filter -->
         <div class="filters">
-            <form method="GET" style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
-                <select name="status">
-                    <option value="pending" <?= $filter_status === 'pending' ? 'selected' : '' ?>>Menunggu Verifikasi</option>
-                    <option value="berhasil" <?= $filter_status === 'berhasil' ? 'selected' : '' ?>>Berhasil</option>
-                    <option value="gagal" <?= $filter_status === 'gagal' ? 'selected' : '' ?>>Gagal</option>
-                </select>
-                <input type="text" name="search" placeholder="Cari username atau ID..." value="<?= htmlspecialchars($search) ?>">
-                <button type="submit"><i class="fas fa-search"></i> Filter</button>
-                <a href="?" class="btn btn-info"><i class="fas fa-refresh"></i> Reset</a>
-            </form>
-        </div>
+    <form method="GET" style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
+        <select name="status">
+    <option value="all" <?= $filter_status === 'all' ? 'selected' : '' ?>>Semua Status</option>
+    <option value="pending" <?= $filter_status === 'pending' ? 'selected' : '' ?>>Pending</option>
+    <option value="berhasil" <?= $filter_status === 'berhasil' ? 'selected' : '' ?>>Berhasil</option>
+    <option value="gagal" <?= $filter_status === 'gagal' ? 'selected' : '' ?>>Gagal</option>
+    <option value="dikirim" <?= $filter_status === 'dikirim' ? 'selected' : '' ?>>Dikirim</option>
+    <option value="diterima" <?= $filter_status === 'diterima' ? 'selected' : '' ?>>Diterima</option>
+</select>
+        <input type="text" name="search" placeholder="Cari username atau ID..." value="<?= htmlspecialchars($search) ?>">
+        <button type="submit"><i class="fas fa-search"></i> Filter</button>
+        <a href="?" class="btn btn-info"><i class="fas fa-refresh"></i> Reset</a>
+    </form>
+</div>
 
         <!-- Tabel Pembayaran -->
         <div class="payments-table">
@@ -537,7 +576,7 @@ $stats = mysqli_fetch_assoc($resultStats);
                 </table>
             </div>
         </div>
-    </div>
+    </div> 
 
     <!-- Modal Update Status -->
     <div id="modalUpdateStatus" class="modal">
@@ -548,13 +587,15 @@ $stats = mysqli_fetch_assoc($resultStats);
                 <input type="hidden" id="pembayaran_id" name="pembayaran_id">
                 
                 <div class="form-group">
-                    <label>Status Baru:</label>
-                    <select name="status" id="status_baru" required>
-                        <option value="pending">Pending</option>
-                        <option value="berhasil">Berhasil</option>
-                        <option value="gagal">Gagal</option>
-                    </select>
-                </div>
+    <label>Status Baru:</label>
+    <select name="status" id="status_baru" required>
+        <option value="pending">Pending</option>
+        <option value="berhasil">Berhasil</option>
+        <option value="gagal">Gagal</option>
+        <option value="dikirim">Dikirim</option>
+        <option value="diterima">Diterima</option>
+    </select>
+</div>
                 
                 <button type="submit" class="btn btn-success">
                     <i class="fas fa-save"></i> Simpan Perubahan
@@ -665,6 +706,12 @@ $stats = mysqli_fetch_assoc($resultStats);
                 item.classList.add('active');
             }
         });
+
+        <?php if ($filter_status === 'pending'): ?>
+setInterval(() => {
+    location.reload();
+}, 30000);
+<?php endif; ?>
     </script>
 </body>
 </html>

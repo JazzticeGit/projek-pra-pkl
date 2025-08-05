@@ -61,12 +61,37 @@ function getStatusBadge($status) {
             return '<span class="badge badge-success">Berhasil</span>';
         case 'pending':
             return '<span class="badge badge-warning">Menunggu</span>';
+        case 'diproses':
+            return '<span class="badge badge-info">Diproses</span>';
+        case 'dikirim':
+            return '<span class="badge badge-primary">Dikirim</span>';
+        case 'selesai':
+            return '<span class="badge badge-success">Selesai</span>';
         case 'gagal':
             return '<span class="badge badge-danger">Gagal</span>';
         default:
             return '<span class="badge badge-secondary">' . ucfirst($status) . '</span>';
     }
 }
+
+    function getTrackingProgress($status) {
+    $allSteps = [
+        'pending' => 1,
+        'diproses' => 2, 
+        'dikirim' => 3,
+        'selesai' => 4,
+        'berhasil' => 4 // berhasil sama dengan selesai
+    ];
+    
+    $currentStep = $allSteps[$status] ?? 0;
+    
+    return [
+        'current_step' => $currentStep,
+        'total_steps' => 4,
+        'percentage' => ($currentStep / 4) * 100
+    ];
+}
+
 
 function formatRupiah($angka) {
     return 'Rp ' . number_format($angka, 0, ',', '.');
@@ -87,17 +112,232 @@ function formatTanggal($tanggal) {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../STYLESHEET/riwayat-transaksi.css">
     <style>
+        /* Tracking Progress Styles */
+        .tracking-container {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #007bff;
+        }
         
+        .tracking-progress {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+        }
+        
+        .tracking-step {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            z-index: 2;
+        }
+        
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .step-circle.completed {
+            background: #28a745;
+            color: white;
+            box-shadow: 0 0 0 4px rgba(40, 167, 69, 0.2);
+        }
+        
+        .step-circle.active {
+            background: #007bff;
+            color: white;
+            box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.2);
+            animation: pulse 2s infinite;
+        }
+        
+        .step-circle.pending {
+            background: #e9ecef;
+            color: #6c757d;
+            border: 2px solid #dee2e6;
+        }
+        
+        .step-text {
+            text-align: center;
+            font-size: 12px;
+            font-weight: 500;
+            max-width: 80px;
+            line-height: 1.2;
+        }
+        
+        .step-text.completed {
+            color: #28a745;
+        }
+        
+        .step-text.active {
+            color: #007bff;
+            font-weight: 600;
+        }
+        
+        .step-text.pending {
+            color: #6c757d;
+        }
+        
+        .tracking-line {
+            position: absolute;
+            top: 20px;
+            left: 40px;
+            right: 40px;
+            height: 2px;
+            background: #dee2e6;
+            z-index: 1;
+        }
+        
+        .tracking-line-progress {
+            height: 100%;
+            background: linear-gradient(to right, #28a745, #007bff);
+            transition: width 0.8s ease;
+            border-radius: 1px;
+        }
+        
+        .failed-message {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+        }
+        
+        .failed-message i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+        
+        .failed-message h4 {
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .failed-message p {
+            margin-bottom: 0;
+            opacity: 0.9;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+            }
+        }
+        
+        .transaction-card {
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .transaction-card:hover {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+        }
+        
+        .filter-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-tab {
+            padding: 12px 20px;
+            background: #f8f9fa;
+            color: #6c757d;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .filter-tab:hover {
+            background: #e9ecef;
+            color: #495057;
+            text-decoration: none;
+        }
+        
+        .filter-tab.active {
+            background: #007bff;
+            color: white;
+            border-color: #0056b3;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6c757d;
+        }
+        
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+        
+        .btn-action {
+            margin: 2px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            padding: 8px 16px;
+        }
+        
+        @media (max-width: 768px) {
+            .tracking-step {
+                flex: none;
+                margin: 0 5px;
+            }
+            
+            .step-circle {
+                width: 35px;
+                height: 35px;
+                font-size: 12px;
+            }
+            
+            .step-text {
+                font-size: 10px;
+                max-width: 60px;
+            }
+            
+            .tracking-line {
+                left: 35px;
+                right: 35px;
+                top: 17px;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- NAVIGASI BAR -->
     <nav>
-        
         <div class="navbg" id="nav">
             <!-- GAMBAR NAVIGASI -->
              <a href="index.php"><img src="../image/AGESA.png" alt="" srcset=""></a>
-
 
              <!-- LINK NAVIGASI -->
             <div class="navlink">
@@ -110,22 +350,18 @@ function formatTanggal($tanggal) {
                 </ul>
             </div>
 
-
             <!-- SEARCH BAR -->
             <div class="searchBar">
                 <form action="search.php" method="GET">
                 <input type="text" name="query" placeholder="   Search  " required>
                 <i class="fas fa-search"></i>
-                <!-- <button type="submit">Cari</button> -->
                 </form>
-                
             </div>
-
 
             <!-- ICON LINK -->
              <div class="iconLink">
              <ul>
-                <li><a href="keranjang.php" class="fa-solid fa-cart-shopping"></a></li> <!-- CART SHOPING LINK -->
+                <li><a href="keranjang.php" class="fa-solid fa-cart-shopping"></a></li>
                 <li>
                 <a href="#" class="fa-solid fa-user" id="profileTrigger"></a>
                 </li>
@@ -154,6 +390,15 @@ function formatTanggal($tanggal) {
             <a href="?status=pending" class="filter-tab <?= $filter_status === 'pending' ? 'active' : '' ?>">
                 Menunggu (<?= $stats['pending'] ?? 0 ?>)
             </a>
+            <a href="?status=diproses" class="filter-tab <?= $filter_status === 'diproses' ? 'active' : '' ?>">
+                Diproses (<?= $stats['diproses'] ?? 0 ?>)
+            </a>
+            <a href="?status=dikirim" class="filter-tab <?= $filter_status === 'dikirim' ? 'active' : '' ?>">
+                Dikirim (<?= $stats['dikirim'] ?? 0 ?>)
+            </a>
+            <a href="?status=selesai" class="filter-tab <?= $filter_status === 'selesai' ? 'active' : '' ?>">
+                Selesai (<?= $stats['selesai'] ?? 0 ?>)
+            </a>
             <a href="?status=berhasil" class="filter-tab <?= $filter_status === 'berhasil' ? 'active' : '' ?>">
                 Berhasil (<?= $stats['berhasil'] ?? 0 ?>)
             </a>
@@ -175,7 +420,7 @@ function formatTanggal($tanggal) {
                         </a>
                     </div>
                 <?php else: ?>
-                    <?php while ($pesanan = mysqli_fetch_assoc($result)): ?>
+                  <div class="transaction-card" data-pesanan-id="<?= $pesanan['id'] ?>">  <?php while ($pesanan = mysqli_fetch_assoc($result)): ?> </div>
                         <div class="transaction-card">
                             <div class="card-body p-4">
                                 <!-- Header Transaksi -->
@@ -194,6 +439,75 @@ function formatTanggal($tanggal) {
                                         <?= getStatusBadge($pesanan['status']) ?>
                                     </div>
                                 </div>
+
+                                <!-- Tracking Progress atau Pesan Gagal -->
+                                <?php if ($pesanan['status'] === 'gagal'): ?>
+    <div class="failed-message">
+        <i class="fas fa-exclamation-triangle"></i>
+        <h4>Pembayaran Gagal</h4>
+        <p>Maaf, pembayaran Anda tidak dapat diproses. Silakan coba lagi atau hubungi customer service.</p>
+    </div>
+<?php else: ?>
+    <?php 
+    $trackingData = getTrackingProgress($pesanan['status']);
+    $currentStep = $trackingData['current_step'];
+    $progressPercentage = $trackingData['percentage'];
+    ?>
+    <div class="tracking-container">
+        <h6 class="mb-3">
+            <i class="fas fa-truck me-2"></i>Status Pengiriman
+        </h6>
+        <div class="tracking-progress">
+            <div class="tracking-line">
+                <div class="tracking-line-progress" style="width: <?= $progressPercentage ?>%;"></div>
+            </div>
+            
+            <?php 
+            $stepLabels = ['Pesanan Dibuat', 'Pesanan Diproses', 'Pesanan Dikirim', 'Pesanan Selesai'];
+            $stepStatuses = ['pending', 'diproses', 'dikirim', 'selesai'];
+            
+            foreach ($stepLabels as $index => $label): 
+                $stepNumber = $index + 1;
+                $isCompleted = $stepNumber < $currentStep;
+                $isActive = $stepNumber == $currentStep;
+                $isPending = $stepNumber > $currentStep;
+                
+                if ($isCompleted) {
+                    $stepClass = 'completed';
+                } elseif ($isActive) {
+                    $stepClass = 'active';
+                } else {
+                    $stepClass = 'pending';
+                }
+            ?>
+            <div class="tracking-step">
+                <div class="step-circle <?= $stepClass ?>">
+                    <?php if ($isCompleted): ?>
+                        <i class="fas fa-check"></i>
+                    <?php elseif ($isActive): ?>
+                        <i class="fas fa-clock"></i>
+                    <?php else: ?>
+                        <?= $stepNumber ?>
+                    <?php endif; ?>
+                </div>
+                <div class="step-text <?= $stepClass ?>">
+                    <?= $label ?>
+                </div>
+            </div>
+            <?php endforeach; ?> 
+        </div>
+        
+        <!-- Status Text -->
+        <div class="mt-3 text-center">
+            <small class="text-muted">
+                Status saat ini: <strong><?= ucfirst($pesanan['status']) ?></strong>
+                <?php if ($pesanan['updated_at']): ?>
+                    <br>Diperbarui: <?= formatTanggal($pesanan['updated_at']) ?>
+                <?php endif; ?>
+            </small>
+        </div>
+    </div>
+<?php endif; ?>
 
                                 <!-- Info Produk -->
                                 <div class="product-preview">
@@ -248,15 +562,16 @@ function formatTanggal($tanggal) {
                                                     onclick="cancelOrder(<?= $pesanan['id'] ?>)">
                                                 <i class="fas fa-times me-1"></i>Batalkan
                                             </button>
-                                        <?php elseif ($pesanan['status'] === 'berhasil'): ?>
+                                        <?php elseif ($pesanan['status'] === 'gagal'): ?>
+                                            <button class="btn btn-outline-warning btn-action"
+                                                    onclick="retryPayment(<?= $pesanan['id'] ?>)">
+                                                <i class="fas fa-redo me-1"></i>Coba Lagi
+                                            </button>
+                                        <?php elseif (in_array($pesanan['status'], ['berhasil', 'selesai'])): ?>
                                             <button class="btn btn-outline-success btn-action"
                                                     onclick="reorder(<?= $pesanan['id'] ?>)">
                                                 <i class="fas fa-redo me-1"></i>Beli Lagi
                                             </button>
-                                            <!-- <button class="btn btn-outline-warning btn-action"
-                                                    onclick="rateOrder(<?= $pesanan['id'] ?>)">
-                                                <i class="fas fa-star me-1"></i>Rating
-                                            </button> -->
                                         <?php endif; ?>
                                     </div>
                                 </div>
@@ -326,6 +641,12 @@ function formatTanggal($tanggal) {
             }
         }
 
+        function retryPayment(pesananId) {
+            if (confirm('Coba bayar pesanan ini lagi?')) {
+                window.location.href = `menunggu-pembayaran.php?id=${pesananId}`;
+            }
+        }
+
         function cancelOrder(pesananId) {
             if (confirm('Apakah Anda yakin ingin membatalkan pesanan ini?')) {
                 fetch(`batalkan-pesanan.php?id=${pesananId}`, {
@@ -368,35 +689,78 @@ function formatTanggal($tanggal) {
             }
         }
 
-        function rateOrder(pesananId) {
-            const rating = prompt('Berikan rating (1-5):');
-            if (rating && rating >= 1 && rating <= 5) {
-                const review = prompt('Berikan ulasan (opsional):') || '';
-                
-                fetch(`rating-pesanan.php`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        pesanan_id: pesananId,
-                        rating: rating,
-                        review: review
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert('Terima kasih atas rating Anda!');
-                    } else {
-                        alert('Gagal menyimpan rating: ' + data.message);
-                    }
-                })
-                .catch(error => {
-                    alert('Terjadi kesalahan');
-                });
+        // Auto-refresh untuk update status real-time (opsional)
+        function checkStatusUpdates() {
+    const activeOrders = document.querySelectorAll('[data-pesanan-id]');
+    
+    if (activeOrders.length > 0) {
+        const orderIds = Array.from(activeOrders).map(el => el.dataset.pesananId);
+        
+        fetch('check-status-update.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ order_ids: orderIds })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.updates && data.updates.length > 0) {
+                // Ada update status, refresh halaman dengan smooth transition
+                showUpdateNotification(data.updates.length);
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
             }
+        })
+        .catch(error => {
+            console.log('Status check error:', error);
+        });
+    }
+}
+
+function showUpdateNotification(count) {
+    // Buat notifikasi update
+    const notification = document.createElement('div');
+    notification.className = 'alert alert-info position-fixed';
+    notification.style.cssText = `
+        top: 20px;
+        right: 20px;
+        z-index: 9999;
+        min-width: 300px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    `;
+    notification.innerHTML = `
+        <i class="fas fa-sync-alt me-2"></i>
+        ${count} pesanan memiliki update status baru!
+        <button type="button" class="btn-close float-end" onclick="this.parentElement.remove()"></button>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Auto remove setelah 5 detik
+    setTimeout(() => {
+        if (notification.parentElement) {
+            notification.remove();
         }
+    }, 5000);
+}
+
+// Jalankan pengecekan setiap 30 detik
+setInterval(checkStatusUpdates, 30000);
+
+// Jalankan sekali saat halaman dimuat
+document.addEventListener('DOMContentLoaded', function() {
+    // Animate progress lines on page load
+    const progressLines = document.querySelectorAll('.tracking-line-progress');
+    progressLines.forEach(line => {
+        const width = line.style.width;
+        line.style.width = '0%';
+        setTimeout(() => {
+            line.style.width = width;
+        }, 500);
+    });
+});
     </script>
 </body>
 </html>
