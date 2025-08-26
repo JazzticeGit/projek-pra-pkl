@@ -1,9 +1,6 @@
 <?php
 session_start();
-include '../../koneksi.php'; 
-
-
-
+include '../../koneksi.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["pembayaran_id"])) {
     $id = (int) $_POST["pembayaran_id"];

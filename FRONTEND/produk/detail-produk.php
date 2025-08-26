@@ -157,6 +157,46 @@ $related_result = mysqli_query($koneksi, $related_query);
     <link href="../../STYLESHEET/detail-produk.css" rel="stylesheet">
 </head>
 <body>
+
+    <nav>
+        
+        <div class="navbg">
+            <!-- GAMBAR NAVIGASI -->
+             <a href="index.php"><img src="../../image/AGESA.png" alt="" srcset=""></a>
+
+
+             <!-- LINK NAVIGASI -->
+            <div class="navlink">
+                <ul>
+                    <li><a href="http://">Shop</a></li>  <!-- SEMENTARA SEBELUM DROPDoWN LINK -->
+                    <li><a href="http://">Collection</a></li>
+                    <li><a href="http://">About</a></li>
+                    <li><a href="http://">Contack</a></li>
+                </ul>
+            </div>
+
+
+            <!-- SEARCH BAR -->
+            <div class="searchBar">
+                <form action="../search.php" method="GET">
+                <input type="text" name="query" placeholder="   Search  " required>
+                <i class="fas fa-search"></i>
+                <!-- <button type="submit">Cari</button> -->
+                </form>
+                
+            </div>
+
+
+            <!-- ICON LINK -->
+             <div class="iconLink">
+             <ul>
+                <li><a href="keranjang.php" class="fa-solid fa-cart-shopping"></a></li> <!-- CART SHOPING LINK -->
+                <li><a href="http://" class="fa-solid fa-user"></a></li> <!-- ACCOUNT LINK -->
+             </ul>
+             </div>
+        </div>
+    </nav>
+
     <div class="container mt-4">
         <!-- Error/Success Messages -->
         <?php if (isset($_SESSION['error'])): ?>
@@ -174,14 +214,7 @@ $related_result = mysqli_query($koneksi, $related_query);
         <?php endif; ?>
 
         <!-- Breadcrumb -->
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
-                <li class="breadcrumb-item"><a href="produk.php">Produk</a></li>
-                <li class="breadcrumb-item"><a href="../keranjang.php">keranjang</a></li>
-                <li class="breadcrumb-item active"><?php echo htmlspecialchars($produk['name']); ?></li>
-            </ol>
-        </nav>
+
 
         <div class="row">
             <!-- Product Image -->

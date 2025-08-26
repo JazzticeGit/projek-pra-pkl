@@ -11,7 +11,7 @@ if (isset($_GET['debug'])) {
     echo "</pre>";
     echo "<h3>SESSION Data:</h3>";
     echo "<pre>";
-    print_r($_SESSION);
+    print_r($_SESSION); 
     echo "</pre>";
     exit;
 }
