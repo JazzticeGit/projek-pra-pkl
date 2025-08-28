@@ -59,3 +59,29 @@ a:hover {
 .checkout-btn:hover {
     background-color: #218838;
 }
+
+.needs-attention {
+    background-color: #fff3cd !important;
+    border: 1px solid #ffeaa7;
+}
+
+.needs-attention:hover {
+    background-color: #ffeaa7 !important;
+}
+
+/* Style untuk badge warning */
+.badge.bg-warning {
+    color: #856404 !important;
+}
+
+/* Animation untuk tombol pilih ukuran */
+.btn-outline-primary.btn-sm:hover {
+    transform: translateY(-1px);
+    transition: all 0.2s ease;
+}
+
+/* Style untuk checkout button yang disabled */
+.btn-secondary:disabled, 
+.btn-secondary[style*="pointer-events: none"] {
+    cursor: not-allowed;
+}

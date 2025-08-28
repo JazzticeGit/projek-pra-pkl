@@ -168,9 +168,9 @@ $related_result = mysqli_query($koneksi, $related_query);
              <!-- LINK NAVIGASI -->
             <div class="navlink">
                 <ul>
-                    <li><a href="http://">Shop</a></li>  <!-- SEMENTARA SEBELUM DROPDoWN LINK -->
-                    <li><a href="http://">Collection</a></li>
-                    <li><a href="http://">About</a></li>
+                    <li><a href="produk.php">Shop</a></li>  <!-- SEMENTARA SEBELUM DROPDoWN LINK -->
+                    <li><a href="colection.php">Collection</a></li>
+                    <li><a href="../about.html">About</a></li>
                     <li><a href="http://">Contack</a></li>
                 </ul>
             </div>
@@ -190,7 +190,7 @@ $related_result = mysqli_query($koneksi, $related_query);
             <!-- ICON LINK -->
              <div class="iconLink">
              <ul>
-                <li><a href="keranjang.php" class="fa-solid fa-cart-shopping"></a></li> <!-- CART SHOPING LINK -->
+                <li><a href="../keranjang.php" class="fa-solid fa-cart-shopping"></a></li> <!-- CART SHOPING LINK -->
                 <li><a href="http://" class="fa-solid fa-user"></a></li> <!-- ACCOUNT LINK -->
              </ul>
              </div>
@@ -372,7 +372,7 @@ $related_result = mysqli_query($koneksi, $related_query);
                                 <p class="card-text text-primary fw-bold">
                                     Rp<?php echo number_format($related['harga'], 0, ',', '.'); ?>
                                 </p>
-                                <a href="detail_produk.php?id=<?php echo $related['produk_id']; ?>" 
+                                <a href="detail-produk.php?id=<?php echo $related['produk_id']; ?>" 
                                    class="btn btn-outline-primary btn-sm">Lihat Detail</a>
                             </div>
                         </div>

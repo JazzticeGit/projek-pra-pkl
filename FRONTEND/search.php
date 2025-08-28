@@ -417,7 +417,7 @@ ini_set('display_errors', 1);
                     
                     <!-- Overlay saat hover -->
                     <div class="product-overlay">
-                        <a href="detail-produk.php?id=<?= $produk['produk_id'] ?>" class="overlay-btn">
+                        <a href="../FRONTEND/produk/detail-produk.php?id=<?= $produk['produk_id'] ?>" class="overlay-btn">
                             <i class="fas fa-eye"></i> Lihat Detail
                         </a>
                     </div>

@@ -9,6 +9,28 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
+// Handle update ukuran
+if (isset($_POST['update_size'])) {
+    $keranjang_id = (int)$_POST['keranjang_id'];
+    $new_size = $_POST['new_size'];
+    $user_id = $_SESSION['user_id'];
+
+    // Update ukuran di keranjang
+    $query = "UPDATE keranjang SET size = ? WHERE id = ? AND user_id = ?";
+    $stmt = mysqli_prepare($koneksi, $query);
+    mysqli_stmt_bind_param($stmt, "sii", $new_size, $keranjang_id, $user_id);
+    
+    if (mysqli_stmt_execute($stmt)) {
+        $_SESSION['success'] = "Ukuran berhasil diperbarui";
+    } else {
+        $_SESSION['error'] = "Gagal memperbarui ukuran";
+    }
+    
+    mysqli_stmt_close($stmt);
+    header("Location: keranjang.php");
+    exit;
+}
+
 if (isset($_GET['hapus'])) {
     $id = (int)$_GET['hapus'];
     $user_id = $_SESSION['user_id'];
@@ -105,9 +127,8 @@ if (isset($_GET['kurang'])) {
     exit;
 }
 
-// Ambil data keranjang user (hanya yang status-nya 'aktif') with discount calculation
 $query = mysqli_query($koneksi, "
-SELECT keranjang.*, produk.name, produk.harga, produk.image,
+SELECT keranjang.*, produk.name, produk.harga, produk.image, produk.size as available_sizes,
        COALESCE(d.persen_diskon, 0) as persen_diskon
 FROM keranjang
 JOIN produk ON keranjang.produk_id = produk.produk_id
@@ -131,6 +152,47 @@ $ongkir = 10000;
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../STYLESHEET/keranjang.css">
+    <style>
+/* Style untuk dropdown ukuran */
+.size-dropdown {
+    border: 2px solid #dee2e6;
+    transition: all 0.3s ease;
+}
+
+.size-dropdown:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.size-update-form {
+    margin: 0;
+}
+
+.size-dropdown:disabled {
+    background-color: #f8f9fa;
+    opacity: 0.7;
+    cursor: wait;
+}
+
+.badge.bg-success {
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+tr[style*="background-color: rgb(255, 243, 205)"] {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { background-color: #fff3cd; }
+    50% { background-color: #ffeaa7; }
+    100% { background-color: #fff3cd; }
+}
+    </style>
 </head>
 <body>
     <div class="container mt-4">
@@ -200,9 +262,46 @@ $ongkir = 10000;
                                                 </div>
                                             </td>
                                             <td>
-                                                <span class="badge bg-secondary">
-                                                    <?php echo $item['size'] ?: 'Default'; ?>
-                                                </span>
+                                                <?php 
+                                                // Parse available sizes dari enum
+                                                $available_sizes = [];
+                                                if (!empty($item['available_sizes'])) {
+                                                    // Ambil pilihan dari enum, contoh: enum('XS','S','M','L','XL','XXL','3XL')
+                                                    preg_match_all("/'([^']+)'/", $item['available_sizes'], $matches);
+                                                    $available_sizes = $matches[1];
+                                                }
+                                                
+                                                if (empty($available_sizes)): ?>
+                                                    <!-- Jika produk tidak punya pilihan ukuran, tampilkan ukuran yang sudah dipilih atau default -->
+                                                    <span class="badge bg-secondary">
+                                                        <?php echo !empty($item['size']) ? htmlspecialchars($item['size']) : 'Tidak Ada Ukuran'; ?>
+                                                    </span>
+                                                <?php else: ?>
+                                                    <!-- Dropdown untuk pilih ukuran -->
+                                                    <form method="POST" class="size-update-form">
+                                                        <input type="hidden" name="keranjang_id" value="<?php echo $item['id']; ?>">
+                                                        <input type="hidden" name="update_size" value="1">
+                                                        
+                                                        <select name="new_size" class="form-select form-select-sm size-dropdown" 
+                                                                onchange="this.form.submit()" style="width: auto; min-width: 120px;">
+                                                            <option value="">Pilih Ukuran</option>
+                                                            <?php foreach ($available_sizes as $size): ?>
+                                                                <option value="<?php echo htmlspecialchars($size); ?>" 
+                                                                        <?php echo ($item['size'] == $size) ? 'selected' : ''; ?>>
+                                                                    <?php echo htmlspecialchars($size); ?>
+                                                                </option>
+                                                            <?php endforeach; ?>
+                                                        </select>
+                                                        
+                                                        <?php if (!empty($item['size'])): ?>
+                                                            <div class="mt-1">
+                                                                <small class="badge bg-success">
+                                                                    <i class="fas fa-check"></i> <?php echo htmlspecialchars($item['size']); ?>
+                                                                </small>
+                                                            </div>
+                                                        <?php endif; ?>
+                                                    </form>
+                                                <?php endif; ?>
                                             </td>
                                             <td>
                                                 <?php if ($persen_diskon > 0): ?>
@@ -296,7 +395,7 @@ $ongkir = 10000;
                         </div>
                         <h4 class="text-muted mb-3">Keranjang Belanja Kosong</h4>
                         <p class="text-muted mb-4">Yuk, isi keranjang belanja Anda dengan produk-produk menarik dari toko kami!</p>
-                        <a href="produk.php" class="btn btn-primary btn-lg">
+                        <a href="../FRONTEND/produk/produk.php" class="btn btn-primary btn-lg">
                             <i class="fas fa-shopping-bag me-2"></i>Mulai Belanja
                         </a>
                     </div>
@@ -333,6 +432,76 @@ $ongkir = 10000;
                     e.preventDefault();
                 }
             });
+        });
+
+        // ===== SCRIPT DROPDOWN UKURAN (VERSI LEBIH TOLERAN) =====
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle dropdown ukuran dengan loading state
+            document.querySelectorAll('.size-dropdown').forEach(dropdown => {
+                dropdown.addEventListener('change', function() {
+                    if (this.value) {
+                        // Tampilkan loading
+                        const originalHTML = this.innerHTML;
+                        this.innerHTML = '<option>Menyimpan...</option>';
+                        this.disabled = true;
+                        
+                        // Auto submit form (sudah ada onchange="this.form.submit()")
+                        // Loading state akan hilang setelah page reload
+                    }
+                });
+            });
+            
+            // Cek apakah ada dropdown yang belum dipilih (HANYA UNTUK PRODUK YANG PUNYA PILIHAN UKURAN)
+            const emptyDropdowns = [];
+            const hasOptionsDropdowns = [];
+            
+            document.querySelectorAll('.size-dropdown').forEach(dropdown => {
+                const options = dropdown.querySelectorAll('option');
+                // Jika dropdown punya lebih dari 1 option (berarti ada pilihan ukuran)
+                if (options.length > 1) {
+                    hasOptionsDropdowns.push(dropdown);
+                    if (dropdown.value === '') {
+                        emptyDropdowns.push(dropdown);
+                    }
+                }
+            });
+            
+            // HANYA tampilkan warning jika ada dropdown dengan pilihan yang belum dipilih
+            if (emptyDropdowns.length > 0) {
+                // Tampilkan alert warning
+                const container = document.querySelector('.container.mt-4');
+                const titleSection = container.querySelector('.d-flex.justify-content-between.align-items-center.mb-4');
+                
+                const alertDiv = document.createElement('div');
+                alertDiv.className = 'alert alert-info alert-dismissible fade show mt-3';
+                alertDiv.innerHTML = `
+                    <i class="fas fa-info-circle me-2"></i>
+                    <strong>Info:</strong> Ada ${emptyDropdowns.length} produk yang tersedia pilihan ukuran. 
+                    Anda dapat memilih ukuran dari dropdown untuk pengalaman yang lebih baik, atau lanjutkan checkout dengan ukuran default.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                `;
+                
+                // Insert alert setelah judul
+                titleSection.parentNode.insertBefore(alertDiv, titleSection.nextSibling);
+                
+                // Highlight dropdown yang belum dipilih (tapi jangan disable checkout)
+                emptyDropdowns.forEach(dropdown => {
+                    const row = dropdown.closest('tr');
+                    if (row) {
+                        row.style.backgroundColor = '#e7f3ff';
+                        dropdown.style.borderColor = '#0d6efd';
+                        dropdown.style.boxShadow = '0 0 0 0.2rem rgba(13, 110, 253, 0.15)';
+                    }
+                });
+            }
+            
+            // Initialize tooltips jika ada Bootstrap
+            if (typeof bootstrap !== 'undefined') {
+                var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+                var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                    return new bootstrap.Tooltip(tooltipTriggerEl);
+                });
+            }
         });
     </script>
 </body>
