@@ -291,14 +291,14 @@ $total_transaksi = $data_transaksi['total_transaksi'];
 
 
 
-   <div class="header">
+   <!-- <div class="header">
         <button class="hamburger" id="hamburgerBtn">
             <span></span>
             <span></span>
             <span></span>
         </button>
         <h1>Admin Dashboard</h1>
-    </div>
+    </div> -->
 
     <!-- Sidebar Navigation -->
     <!-- <nav class="sidebar" id="sidebar">
@@ -423,7 +423,7 @@ $total_transaksi = $data_transaksi['total_transaksi'];
             </div>
         </div>
 
-        <!-- Quick Stats -->
+        <!-- Stats cpt -->
         <div class="stats-section">
             <h3><i class="fas fa-chart-bar"></i> Statistik Cepat</h3>
             <div class="stats-grid">
