@@ -19,8 +19,6 @@ include '../../koneksi.php';
 <!-- NAV BE -->
 
    <style>
-
-<style>
       * {
             margin: 0;
             padding: 0;
@@ -97,7 +95,6 @@ include '../../koneksi.php';
             height: 100vh;
             background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
             transition: left 0.3s ease;
-            z-index: 999;
             box-shadow: 2px 0 15px rgba(0,0,0,0.1);
         }
 

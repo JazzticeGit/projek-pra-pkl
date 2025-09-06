@@ -301,7 +301,7 @@ $total_transaksi = $data_transaksi['total_transaksi'];
     </div>
 
     <!-- Sidebar Navigation -->
-    <nav class="sidebar" id="sidebar">
+    <!-- <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <h3>Admin Panel</h3>
             <p>Sistem Manajemen Backend</p>
@@ -346,7 +346,7 @@ $total_transaksi = $data_transaksi['total_transaksi'];
                 </a>
             </div>
         </div>
-    </nav>
+    </nav> -->
 
     <!-- Overlay -->
     <div class="overlay" id="overlay"></div>
@@ -392,10 +392,10 @@ $total_transaksi = $data_transaksi['total_transaksi'];
             <div class="section-card">
                 <h3><i class="fas fa-box"></i> Manajemen Produk</h3>
                 <div class="button-group">
-                    <button class="nav-button" onclick="navigate('../BACKEND/produk/edit.php')">
+                    <!-- <button class="nav-button" onclick="navigate('../BACKEND/produk/edit.php')">
                         <i class="fas fa-edit"></i>
                         Edit Produk
-                    </button>
+                    </button> -->
                     <!-- <button class="nav-button" onclick="navigate('hapus.php')">
                         <i class="fas fa-trash-alt"></i>
                         Hapus Produk
