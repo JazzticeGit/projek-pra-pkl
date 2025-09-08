@@ -162,7 +162,7 @@ $related_result = mysqli_query($koneksi, $related_query);
         
         <div class="navbg">
             <!-- GAMBAR NAVIGASI -->
-             <a href="index.php"><img src="../../image/AGESA.png" alt="" srcset=""></a>
+             <a href="../index.php"><img src="../../image/AGESA.png" alt="" srcset=""></a>
 
 
              <!-- LINK NAVIGASI -->

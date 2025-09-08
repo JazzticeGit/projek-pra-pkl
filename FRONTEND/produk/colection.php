@@ -301,14 +301,14 @@ $result_jaket = mysqli_query($koneksi, $query_jaket);
                             <?php endif; ?>
                         </div>
                         
-                        <div class="product-actions">
+                        <!-- <div class="product-actions"> -->
                             <!-- <a href="detail-produk.php?id=<?= $produk['produk_id'] ?>" class="view-detail-btn">
                                 <i class="fas fa-eye"></i> Detail
                             </a> -->
-                            <a href="?action=add&id=<?= $produk['produk_id'] ?>" class="quick-add-btn" onclick="return confirm('Tambahkan produk ke keranjang?')">
+                            <!-- <a href="?action=add&id=<?= $produk['produk_id'] ?>" class="quick-add-btn" onclick="return confirm('Tambahkan produk ke keranjang?')">
                                 <i class="fa-solid fa-cart-plus"></i>  Keranjang
                             </a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -353,14 +353,14 @@ $result_jaket = mysqli_query($koneksi, $query_jaket);
                             <?php endif; ?>
                         </div>
                         
-                        <div class="product-actions">
+                        <!-- <div class="product-actions"> -->
                             <!-- <a href="detail-produk.php?id=<?= $produk['produk_id'] ?>" class="view-detail-btn">
                                 <i class="fas fa-eye"></i> Detail
                             </a> -->
-                            <a href="?action=add&id=<?= $produk['produk_id'] ?>" class="quick-add-btn" onclick="return confirm('Tambahkan produk ke keranjang?')">
+                            <!-- <a href="?action=add&id=<?= $produk['produk_id'] ?>" class="quick-add-btn" onclick="return confirm('Tambahkan produk ke keranjang?')">
                                 <i class="fa-solid fa-cart-plus"></i>  Keranjang
                             </a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -404,14 +404,14 @@ $result_jaket = mysqli_query($koneksi, $query_jaket);
                             <?php endif; ?>
                         </div>
                         
-                        <div class="product-actions">
+                        <!-- <div class="product-actions"> -->
                             <!-- <a href="detail-produk.php?id=<?= $produk['produk_id'] ?>" class="view-detail-btn">
                                 <i class="fas fa-eye"></i> Detail
                             </a> -->
-                            <a href="?action=add&id=<?= $produk['produk_id'] ?>" class="quick-add-btn" onclick="return confirm('Tambahkan produk ke keranjang?')">
+                            <!-- <a href="?action=add&id=<?= $produk['produk_id'] ?>" class="quick-add-btn" onclick="return confirm('Tambahkan produk ke keranjang?')">
                                 <i class="fa-solid fa-cart-plus"></i>  Keranjang
                             </a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
