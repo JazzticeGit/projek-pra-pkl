@@ -263,9 +263,9 @@ $stats = mysqli_fetch_assoc($resultStats);
                                         <button class="btn btn-primary" onclick="updateStatus(<?= $row['pembayaran_id'] ?>, '<?= $row['status'] ?>')">
                                             <i class="fas fa-edit"></i> Update
                                         </button>
-                                        <button class="btn btn-info" onclick="lihatDetail(<?= $row['pembayaran_id'] ?>)">
-                                            <i class="fas fa-info"></i> Detail
-                                        </button>
+                                    <a href="detail_verifikasi.php?id=<?= $row['pembayaran_id'] ?>" class="btn btn-info">
+                                        <i class="fas fa-info"></i> Detail
+                                    </a>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>
