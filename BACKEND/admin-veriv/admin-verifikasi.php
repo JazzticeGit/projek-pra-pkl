@@ -1,6 +1,10 @@
 <?php
 session_start();
+include '../session_config.php';
 include '../../koneksi.php';
+
+// Validasi admin session
+validateAdminSession($koneksi);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["pembayaran_id"])) {
     $id = (int) $_POST["pembayaran_id"];
