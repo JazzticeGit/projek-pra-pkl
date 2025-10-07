@@ -1,6 +1,10 @@
 <?php
 session_start();
-include '../koneksi.php';
+include '../../koneksi.php'; 
+include '../session_config.php';
+
+// Validasi admin session
+validateAdminSession($koneksi);
 
 // Inisialisasi error
 $error_message = '';

@@ -1,4 +1,8 @@
-<?php include '../../koneksi.php'; ?>
+<?php include '../../koneksi.php'; 
+include '../session_config.php';
+
+// Validasi admin session
+validateAdminSession($koneksi); ?>
 <?php
 $id_user = intval($_GET['id']);
 $user = $koneksi->query("SELECT * FROM users WHERE id=$id_user")->fetch_assoc();

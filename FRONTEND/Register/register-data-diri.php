@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 if (!isset($_SESSION['email']) || !isset($_SESSION['phone']) || !isset($_SESSION['password'])) {
     header("Location: register.php?error=" . urlencode("Data belum lengkap."));
     exit;

@@ -1,5 +1,9 @@
 <?php
 include '../../koneksi.php'; 
+include '../session_config.php';
+
+// Validasi admin session
+validateAdminSession($koneksi);
 $id = $_GET['id'] ?? null;
 
 if (!$id) {

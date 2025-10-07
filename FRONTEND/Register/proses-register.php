@@ -1,6 +1,10 @@
 <?php
 session_start();
-include '../../koneksi.php';
+include '../../koneksi.php'; 
+include '../session_config.php';
+
+// Validasi admin session
+validateAdminSession($koneksi);
 
 if (!isset($_SESSION['email'], $_SESSION['phone'], $_SESSION['password'], $_POST['username'], $_POST['birth'])) {
     die("Data tidak lengkap.");
