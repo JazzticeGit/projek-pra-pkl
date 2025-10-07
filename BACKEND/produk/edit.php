@@ -1,6 +1,6 @@
 <?php
-include '../../koneksi.php'; 
-include '../session_config.php';
+include '../FRONTEND/session_config.php';
+include '../../koneksi.php';
 
 // Validasi admin session
 validateAdminSession($koneksi);

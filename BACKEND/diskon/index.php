@@ -1,5 +1,9 @@
 <?php
+include '../FRONTEND/session_config.php';
 include '../../koneksi.php';
+
+// Validasi admin session
+validateAdminSession($koneksi);
 include 'end-date.php';
 
 // Proses penambahan diskon

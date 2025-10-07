@@ -1,6 +1,10 @@
 <?php
 session_start();
+include '../FRONTEND/session_config.php';
 include '../../koneksi.php';
+
+// Validasi admin session
+validateAdminSession($koneksi);
 // if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'user') {
 //     header("Location: ../FRONTEND/login.php");
 //     exit;
